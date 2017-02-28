@@ -21,27 +21,27 @@
 		<p>Here is the text : ${message}</p>
 	</div>
 	<div align="center">
-		<form:form action="getStudentData" method="post" commandName="studentForm">
+		<form:form action="getBookData" method="post" commandName="bookForm">
 			<table border="1" style="background-color:  #85c1e9">
 				<tr>
 					<td colspan="2" align="center"><h2>Enter these fields to
 							fetch data</h2></td>
 				</tr>
 				<tr>
-					<td>Student Id :</td>
-					<td><form:input path="student_id" /></td>
+					<td>Course Name:</td>
+					<td><form:input path="courseName" /></td>
 				</tr>
 				<tr>
-					<td>First name:</td>
-					<td><form:input path="first_name" /></td>
+					<td>Session:</td>
+					<td><form:input path="session" /></td>
 				</tr>
 				<tr>
-					<td>Last name:</td>
-					<td><form:input path="last_name" /></td>
+					<td>Year:</td>
+					<td><form:input path="year" /></td>
 				</tr>
 				<tr>
-					<td>Gender :</td>
-					<td><form:input path="gender" /></td>
+					<td>Instructor :</td>
+					<td><form:input path="instructor" /></td>
 				</tr>
 				<tr>
 					<td colspan="2" align="center"><input type="submit" value="Submit" /></td>
@@ -58,19 +58,19 @@
 				style="background-color: #aed6f1 ; color:  #34495e ; font: Arial; border-radius:6px; font-size: 12px">
 				<thead>
 					<tr>
-						<th>Student Id</th>
-						<th>First name</th>
-						<th>Last name</th>
-						<th>Gender name</th>
+						<th>Course Name</th>
+						<th>Session</th>
+						<th>Year</th>
+						<th>Instructor Name</th>
 					</tr>
 				</thead>
 				<tbody>
-					<c:forEach items="${student}" var="current">
+					<c:forEach items="${bookObj}" var="current">
 						<tr>
-							<td><c:out value="${current.student_id}" />
-							<td><c:out value="${current.first_name}" />
-							<td><c:out value="${current.last_name}" />
-							<td><c:out value="${current.gender}" />
+							<td><c:out value="${current.courseName}" />
+							<td><c:out value="${current.session}" />
+							<td><c:out value="${current.year}" />
+							<td><c:out value="${current.instructor}" />
 						</tr>
 					</c:forEach>
 				</tbody>

@@ -5,7 +5,7 @@
 </head>
 <body>${message}
 	<div>
-		<p><a href="<c:url value="fetchStudent"/>">Click here for fetching data from Student</a><p>
+		<p><a href="<c:url value="fetchBook"/>">Click here for fetching data from Book DB</a><p>
 	</div>
 </body>
 </html>

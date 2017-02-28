@@ -11,7 +11,7 @@
  
 	<context:component-scan base-package="com.controller" />
 	
-	<bean id="jdbcDao" class="com.dao.JDBCDao"/>
+	<bean id="xmlDbDao" class="com.dao.XmlDbDao"/>
  
 	<bean id="viewResolver"
 		class="org.springframework.web.servlet.view.UrlBasedViewResolver">
