@@ -18,8 +18,9 @@ public class Vote {
 	private boolean sendRemainder;
 	private boolean isArchived;
 	private boolean isLatest;
-	private Boolen voteDone;
-	public String getVote() {
+	private Boolean voteDone;
+	
+	public boolean getVote() {
 		return voteDone;
 	}
 	
@@ -41,24 +42,7 @@ public class Vote {
 	public void setInstructor(String instructor) {
 		this.instructor = instructor;
 	}
-	public String getBookName() {
-		return bookName;
-	}
-	public void setBookName(String bookName) {
-		this.bookName = bookName;
-	}
-	public String getAuthor() {
-		return author;
-	}
-	public void setAuthor(String author) {
-		this.author = author;
-	}
-	public String getIsbn() {
-		return isbn;
-	}
-	public void setIsbn(String isbn) {
-		this.isbn = isbn;
-	}
+	
 	public String getComments() {
 		return comments;
 	}
@@ -79,11 +63,8 @@ public class Vote {
 	}
 	@Override
 	public String toString() {
-		return "Book [courseName=" + courseName + ", session=" + session
-				+ ", year=" + year + ", instructor=" + instructor
-				+ ", bookName=" + bookName + ", author=" + author + ", isbn="
-				+ isbn + ", comments=" + comments + ", isArchived="
-				+ isArchived + ", isLatest=" + isLatest + "]";
+		return comments;
+		
 	}
 	
 	
