@@ -1,4 +1,4 @@
-package com.controller;
+/*package com.controller;
 
 import java.util.ArrayList;
 
@@ -60,7 +60,7 @@ public class VotingController
 		logger.warn("Inside myVote");
 		ModelAndView modelObj = new ModelAndView("vote");
 		
-		/*Need some re-factoring before adding the code to git. Giving me compilation errors*/
+		Need some re-factoring before adding the code to git. Giving me compilation errors
 		
 		return modelObj;
 		}
@@ -71,3 +71,4 @@ public class VotingController
 		}
 	}
 }
+*/

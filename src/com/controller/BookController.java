@@ -17,12 +17,12 @@ import com.dao.XmlDbDao;
 import com.models.Book;
 
 @Controller
-public class HomeController 
+public class BookController 
 {
 	@Autowired
 	XmlDbDao xmlDbDao;
 	
-	Logger logger= Logger.getLogger(HomeController.class);
+	Logger logger= Logger.getLogger(BookController.class);
 
 	//@RequestMapping("/welcome")
 	public ModelAndView helloWorld() {
