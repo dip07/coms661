@@ -76,4 +76,31 @@ public class BookController
 			return null;
 		}
 	}
+	
+	@RequestMapping("/viewEditBookData")
+	public ModelAndView enterBookData(@ModelAttribute("bookForm") Book book , HttpServletRequest request,HttpServletResponse response,Model model) throws Exception 
+	{
+		try{
+		logger.warn("Inside getBookData");
+		ModelAndView modelObj = new ModelAndView("book");
+		logger.warn("Got value from form :" + book.getBookName());
+		modelObj.addObject("newMessage", "Got details");
+		logger.debug("Debug Inside the logger");
+		logger.warn("Warn Inside the logger");
+		model.addAttribute("studentFormstudentForm", new Book());
+		ArrayList<Book> bookObj=xmlDbDao.getBookDataFromDb(book);
+		for(Book instance:bookObj)
+			logger.warn(instance);
+		model.addAttribute("isDataPresent", true);
+		model.addAttribute("bookObj", bookObj);
+		
+		//return modelObj;
+		return new ModelAndView("editBookData");
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+			return null;
+		}
+	}
 }
