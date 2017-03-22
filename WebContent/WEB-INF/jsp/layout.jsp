@@ -1,9 +1,11 @@
 <!-- Created by Dipanjan Karmakar -->
-<%@ taglib uri="http://tiles.apache.org/tags-tiles" prefix="tiles"%>
 <!DOCTYPE HTML>
+
+<%@ taglib uri="http://tiles.apache.org/tags-tiles" prefix="tiles"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
+
 <tiles:importAttribute name="stylesheets" />
 <tiles:importAttribute name="javascripts" />
 
@@ -16,6 +18,7 @@
 body {
 	/* background-image:
 		url('${pageContext.request.contextPath}/images/background.png'); */
+	
 }
 </style>
 <c:forEach var="css" items="${stylesheets}">
@@ -181,7 +184,7 @@ body {
 							<li class="">
 						</ul></li>
 					<li class=""><a href=""> Undergraduate</a>
-					<ul>
+						<ul>
 							<li class="first"><a
 								href="/undergraduate/prospectiveugrad.php">For Prospective
 									Students</a></li>
@@ -206,7 +209,7 @@ body {
 									Student Groups</a></li>
 						</ul></li>
 					<li class=""><a href=""> Graduate</a>
-					<ul>
+						<ul>
 							<li class="first"><a href="/graduate/prospectivegrad.php">For
 									Prospective Students</a></li>
 							<li class=""><a href="/graduate/cs_ms.php/">MS in
@@ -221,7 +224,7 @@ body {
 									Application</a></li>
 						</ul></li>
 					<li class="last"><a href="">Outreach</a>
-					<ul>
+						<ul>
 							<li class="first"><a href="/outreach/ctc.php">Computational
 									Thinking</a></li>
 							<li class="">
@@ -263,8 +266,13 @@ body {
 					<div id="container">
 						<tiles:insertAttribute name="body" />
 					</div>
-				<!-- Main contents of the page, commented by Dipanjan -->
-				
+					
+					
+					
+					
+					
+					<!-- Main contents of the page, commented by Dipanjan -->
+
 					<%-- <div id="container">
 						<div id="content">
 							<div id="title">

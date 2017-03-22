@@ -36,6 +36,11 @@
 		<put-attribute name="title" value="Enter Book Details" />
 		<put-attribute name="body" value="/WEB-INF/jsp/coursePage.jsp" />
 	</definition>
+	
+	<definition name="vote" extends="base.definition">
+		<put-attribute name="title" value="Voting Details" />
+		<put-attribute name="body" value="/WEB-INF/jsp/votingPage.jsp" />
+	</definition>
 
 	<definition name="welcomeadmin" extends="base.definition">
 		<put-attribute name="title" value="Social App for Seniors" />

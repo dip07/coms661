@@ -1,4 +1,4 @@
-/*package com.controller;
+package com.controller;
 
 import java.util.ArrayList;
 
@@ -25,42 +25,12 @@ public class VotingController
 	
 	Logger logger= Logger.getLogger(VotingController.class);
 
-	//@RequestMapping("/welcome")
-	public ModelAndView helloWorld() {
-
-		String message = "<br><div style='text-align:center;'>"
-				+ "********* This is voting Controller, takes care of everything related to voting  **********</div><br><br>";
-		return new ModelAndView("welcome", "message", message);
-	}
-	@RequestMapping("/welcome")
-	public ModelAndView vhello(HttpServletRequest request,HttpServletResponse response) throws Exception {
-
-		ModelAndView model = new ModelAndView("welcome");
-		model.addObject("message", "Custom message from Controller");
-		logger.debug("Debug Inside the logger");
-		logger.warn("Warn Inside the logger");
-		return model;
-	}
-
-	@RequestMapping("/fetchBook")
-	public ModelAndView voteTopic(HttpServletRequest request,HttpServletResponse response,Model modelObj) throws Exception {
-
-		ModelAndView model = new ModelAndView("vote");
-		model.addObject("message", "From fetchBook function");
-		logger.debug("Debug Inside the logger");
-		logger.warn("Warn Inside the logger");
-		modelObj.addAttribute("bookForm", new Book());
-		return model;
-	}
-
 	@RequestMapping("/myVote")
 	public ModelAndView myVote(@ModelAttribute("Topic") Vote vote , HttpServletRequest request,HttpServletResponse response,Model model) throws Exception 
 	{
 		try{
 		logger.warn("Inside myVote");
 		ModelAndView modelObj = new ModelAndView("vote");
-		
-		Need some re-factoring before adding the code to git. Giving me compilation errors
 		
 		return modelObj;
 		}
@@ -71,4 +41,3 @@ public class VotingController
 		}
 	}
 }
-*/
