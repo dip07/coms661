@@ -128,7 +128,7 @@
 						<label for="student_id_number">Student ID number:</label>
 						<div class="controls">
 							<input id="student_id_number" name="form_param_student_id_number"
-								value="724336641" type="text">
+								value="unknown number" type="text">
 						</div>
 					</div>
 					<div class="group">
