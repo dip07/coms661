@@ -72,4 +72,5 @@
 	</div>
 	<p><a href="${pageContext.request.contextPath}/viewEditBookData">Enter book information</a></p>
 	<p><a href="${pageContext.request.contextPath}/myVote">Voting Detail</a></p>
+	<p><a href="${pageContext.request.contextPath}/adminHome">Admin Page</a></p>
 	</div>

@@ -41,149 +41,17 @@
 		<put-attribute name="title" value="Voting Details" />
 		<put-attribute name="body" value="/WEB-INF/jsp/votingPage.jsp" />
 	</definition>
-
-	<definition name="welcomeadmin" extends="base.definition">
-		<put-attribute name="title" value="Social App for Seniors" />
-		<put-attribute name="menu" value="/WEB-INF/jsp/broadmenu.jsp" />
-		<put-attribute name="body" value="/WEB-INF/jsp/welcome.jsp" />
-		
+	
+	<definition name="adminHome" extends="base.definition">
+		<put-attribute name="title" value="Admin Page" />
+		<put-attribute name="body" value="/WEB-INF/jsp/adminHome.jsp" />
 	</definition>
-	<definition name="student" extends="base.definition">
-		<put-attribute name="title" value="Students" />
-		<put-attribute name="body" value="/WEB-INF/jsp/studentPage.jsp" />
-	</definition>
-	<definition name="subject" extends="base.definition">
-		<put-attribute name="title" value="Subject" />
-		<put-attribute name="body" value="/WEB-INF/jsp/subjectPage.jsp" />
+	
+	<definition name="editCourse" extends="base.definition">
+		<put-attribute name="title" value="Enter Course" />
+		<put-attribute name="body" value="/WEB-INF/jsp/enterCourse.jsp" />
 	</definition>
 
-	<definition name="eventsHome" extends="base.definition">
-		<put-attribute name="title" value="EventsHome" />
-		<put-attribute name="menu" value="/WEB-INF/jsp/eventsMenu.jsp" />
-		<put-attribute name="body" value="/WEB-INF/jsp/eventsHome.jsp" />
-	</definition>
-	<definition name="createEvent" extends="base.definition">
-		<put-attribute name="title" value="EventsHome" />
-		<put-attribute name="menu" value="/WEB-INF/jsp/eventsMenu.jsp" />
-		<put-attribute name="body" value="/WEB-INF/jsp/createEvents.jsp" />
-	</definition>
-	<definition name="eventsDisplay" extends="base.definition">
-		<put-attribute name="title" value="EventsDisplay" />
-		<put-attribute name="menu" value="/WEB-INF/jsp/eventsMenu.jsp" />
-		<put-attribute name="body" value="/WEB-INF/jsp/eventsDisplay.jsp" />
-	</definition>
 	
-	<definition name="editEvent" extends="base.definition">
-		<put-attribute name="title" value="EditEvent" />
-		<put-attribute name="menu" value="/WEB-INF/jsp/eventsMenu.jsp" />
-		<put-attribute name="body" value="/WEB-INF/jsp/editEvent.jsp" />
-	</definition>
-	
-	<definition name="eventsArchivedDisplay" extends="base.definition">
-		<put-attribute name="title" value="EventsDisplay" />
-		<put-attribute name="menu" value="/WEB-INF/jsp/eventsMenu.jsp" />
-		<put-attribute name="body" value="/WEB-INF/jsp/eventsArchivedDisplay.jsp" />
-	</definition>
-<definition name="hello" template="hellopage.jsp">
-<put-list-attribute name="loginstyle">
-			<add-attribute value="/css/logincss.css" />
-		</put-list-attribute> 
-</definition>
-
-<definition name="broad" extends="base.definition">
-		<put-attribute name="title" value="BROADCAST" />
-		<put-attribute name="menu" value="/WEB-INF/jsp/broadmenu.jsp" />
-		<put-attribute name="body" value="/WEB-INF/jsp/broadhome.jsp" />
-		<put-list-attribute name="broadstyle">
-			<add-attribute value="/css/brcss.css" />
-		</put-list-attribute>
-	</definition>
-	<definition name="broaduser" extends="base.definition">
-		<put-attribute name="title" value="View Broadcasts" />
-		
-		<put-attribute name="body" value="/WEB-INF/jsp/broadhome.jsp" />
-		<put-list-attribute name="broadstyle">
-			<add-attribute value="/css/brcss.css" />
-		</put-list-attribute>
-	</definition>
-	<definition name="createbroadcast" extends="base.definition">
-		<put-attribute name="title" value="Create " /> 
-		<put-attribute name="menu" value="/WEB-INF/jsp/broadmenu.jsp" />
-		<put-attribute name="body" value="/WEB-INF/jsp/createbroad.jsp" />
-	</definition>
-	<definition name="editbroad" extends="base.definition">
-		<put-attribute name="title" value="Edit Broadcasts" />
-		<put-attribute name="menu" value="/WEB-INF/jsp/broadmenu.jsp" />
-		<put-attribute name="body" value="/WEB-INF/jsp/editbroad.jsp" />
-		<put-list-attribute name="broadstyle2">
-			<add-attribute value="/css/brcss.css" />
-		</put-list-attribute>
-		</definition>
-
-<definition name="selectbydate" extends="base.definition">
-		<put-attribute name="title" value="Selectbydate" />
-		<put-attribute name="body" value="/WEB-INF/jsp/selectbydate.jsp" />
-	</definition>
-	
-	<definition name="selectbydatefail" extends="base.definition">
-		<put-attribute name="title" value="Selectbydatefail" />
-		<put-attribute name="body" value="/WEB-INF/jsp/selectbydatefail.jsp" />
-	</definition>
-	
-	<definition name="selectbytype" extends="base.definition">
-		<put-attribute name="title" value="Selectbytype" />
-		<put-attribute name="body" value="/WEB-INF/jsp/selectbytype.jsp" />
-	</definition>
-	
-	<definition name="selectbytypefail" extends="base.definition">
-		<put-attribute name="title" value="Selectbytypefail" />
-		<put-attribute name="body" value="/WEB-INF/jsp/selectbytypefail.jsp" />
-	</definition>
-	
-	<definition name="comsubmit" extends="base.definition">
-		<put-attribute name="title" value="Comsubmit" />
-		<put-attribute name="body" value="/WEB-INF/jsp/comsubmit.jsp" />
-	</definition>
-	
-	<definition name="welcome1" extends="base.definition">
-		<put-attribute name="title" value="Welcome1" />
-		<put-attribute name="body" value="/WEB-INF/jsp/welcome1.jsp" />
-	</definition>
-	
-	<definition name="joinin" extends="base.definition">
-		<put-attribute name="title" value="Joinin" />
-		<put-attribute name="body" value="/WEB-INF/jsp/joinin.jsp" />
-	</definition>
-
-	<definition name="discussion" extends="base.definition">
-		<put-attribute name="title" value="Discussion" />
-		<put-attribute name="menu" value="/WEB-INF/jsp/discussion.jsp" />
-		<put-attribute name="body" value="/WEB-INF/jsp/discussionHome.jsp" />
-	</definition>
-	
-	<definition name="addDiscussion" extends="base.definition">
-		<put-attribute name="title" value="Discussion" />
-		<put-attribute name="menu" value="/WEB-INF/jsp/discussion.jsp" />
-		<put-attribute name="body" value="/WEB-INF/jsp/addDiscussion.jsp" />
-	</definition>
-	
-	<definition name="displayDiscussion" extends="base.definition">
-		<put-attribute name="title" value="Discussion" />
-		<put-attribute name="menu" value="/WEB-INF/jsp/discussion.jsp" />
-		<put-attribute name="body" value="/WEB-INF/jsp/displayDiscussion.jsp" />
-	</definition>
-	
-	<definition name="displayDiscussionAdmin" extends="base.definition">
-		<put-attribute name="title" value="Discussion" />
-		<put-attribute name="menu" value="/WEB-INF/jsp/discussion.jsp" />
-		<put-attribute name="body" value="/WEB-INF/jsp/displayDiscussionAdmin.jsp" />
-	</definition>
-	
-	
-	<definition name="responsediscussion" extends="base.definition">
-		<put-attribute name="title" value="Discussion" />
-		<put-attribute name="menu" value="/WEB-INF/jsp/discussion.jsp" />
-		<put-attribute name="body" value="/WEB-INF/jsp/responsediscussion.jsp" />
-	</definition>
 
 </tiles-definitions>
