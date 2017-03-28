@@ -1,4 +1,5 @@
-
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <div class="grids-24">
 
 	<div class="grid-24" id="content" style="margin: 0;">
@@ -2144,6 +2145,23 @@
 								<option value="Fall" selected="selected">Fall</option>
 								<option value="Spring">Spring</option>
 								<option value="Summer">Summer</option>
+							</select>
+
+						</div>
+					</div>
+					
+					<div class="group">
+						<label>Course</label>
+						<div class="controls">
+
+							<%-- <form:select>
+    							<form:options items="${courseList.courses}" />
+							</form:select> --%>
+							
+							<select name="courseName">
+    							<c:forEach items="${courseList.courses}" var="course">
+        							<option value="${course.courseNumber}" selected=${course == selectedCourse ? 'selected' : ''}>${course.courseName}</option>
+    							</c:forEach>
 							</select>
 
 						</div>

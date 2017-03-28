@@ -51,6 +51,11 @@
 		<put-attribute name="title" value="Enter Course" />
 		<put-attribute name="body" value="/WEB-INF/jsp/enterCourse.jsp" />
 	</definition>
+	
+	<definition name="enterBookPage" extends="base.definition">
+		<put-attribute name="title" value="Enter Book" />
+		<put-attribute name="body" value="/WEB-INF/jsp/enterBook.jsp" />
+	</definition>
 
 	
 

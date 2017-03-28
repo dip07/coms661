@@ -13,15 +13,14 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.dao.XmlDbDao;
-import com.models.Book;
+import com.dao.BookXmlDbDao;
 import com.models.Vote;
 
 @Controller
 public class VotingController 
 {
 	@Autowired
-	XmlDbDao xmlDbDao;
+	BookXmlDbDao xmlDbDao;
 	
 	Logger logger= Logger.getLogger(VotingController.class);
 

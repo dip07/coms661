@@ -14,7 +14,7 @@
 		<p>Here is the text : ${message}</p>
 	</div>
 	<div align="center">
-		<form:form action="getBookData" method="post" commandName="bookForm">
+		<form:form action="saveBook" method="post" commandName="bookForm">
 			<table border="1" style="background-color:  #85c1e9">
 				<tr>
 					<td colspan="2" align="center"><h2>Enter these fields to
@@ -73,4 +73,5 @@
 	<p><a href="${pageContext.request.contextPath}/viewEditBookData">Enter book information</a></p>
 	<p><a href="${pageContext.request.contextPath}/myVote">Voting Detail</a></p>
 	<p><a href="${pageContext.request.contextPath}/adminHome">Admin Page</a></p>
+	<p><a href="${pageContext.request.contextPath}/getBook">Enter Book Information</a></p>
 	</div>

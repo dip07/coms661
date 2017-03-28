@@ -1,10 +1,8 @@
+package com.models;
 /**
  * 
  */
-package com.models;
-
 import java.io.File;
-
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
@@ -19,7 +17,7 @@ import javax.xml.bind.annotation.XmlType;
 
 @XmlRootElement
 @XmlType(propOrder={"courseName","bookName","author","instructor","session","year","isbn","comments","archived","latest" })
-public class Book {
+public class BookOld {
 	
 	private String courseName;
 	private String session;
@@ -114,7 +112,7 @@ public class Book {
 	public static void main(String args[])
 	{
 
-		Book book = new Book();
+		BookOld book = new BookOld();
 		book.setSession("Spring");
 		book.setCourseName("Algorithms");
 		book.setAuthor("Coremen");
@@ -125,7 +123,7 @@ public class Book {
 		try {
 
 			File file = new File("book.xml");
-			JAXBContext jaxbContext = JAXBContext.newInstance(Book.class);
+			JAXBContext jaxbContext = JAXBContext.newInstance(BookOld.class);
 			Marshaller jaxbMarshaller = jaxbContext.createMarshaller();
 
 			// output pretty printed

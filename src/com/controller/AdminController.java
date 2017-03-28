@@ -74,7 +74,7 @@ public class AdminController {
 			jaxbMarshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
 
 			jaxbMarshaller.marshal(courseList, file);
-			jaxbMarshaller.marshal(course, System.out);
+			jaxbMarshaller.marshal(courseList, System.out);
 			System.out.println(file.getAbsoluteFile()+" >> " + file.exists());
 		}
 		catch(Exception e)
@@ -87,5 +87,7 @@ public class AdminController {
 		modelObj.addAttribute("courseForm", new Course());
 		return model;
 	}
+	
+	
 
 }
