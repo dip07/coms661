@@ -12,6 +12,10 @@ import org.springframework.beans.factory.annotation.Value;
 import com.models.BookOld;
 import com.models.Course;
 import com.models.CourseList;
+import com.models.Roles;
+import com.models.Roles.Role;
+import com.models.Users;
+import com.models.Users.User;
 
 public class BookXmlDbDao {
 	
@@ -53,6 +57,37 @@ public class BookXmlDbDao {
 			logger.error("Error while fetching courses " +e.getStackTrace());
 		}
 		return courseList;
+	}
+
+	/**
+	 * @param netId
+	 * @param password
+	 * @return
+	 */
+	public Role getRoleForValidUser(String netId, String password) {
+		
+		Users usersList= null;
+		try{
+			JAXBContext jaxbContext = JAXBContext.newInstance(Users.class);
+			Unmarshaller jaxbUnmarshaller = jaxbContext.createUnmarshaller();
+
+			File existingFile= new File(dbFilesLocation +"users.xml");
+			usersList = (Users) jaxbUnmarshaller.unmarshal(existingFile);
+		}
+		catch(Exception e)
+		{
+			logger.error("Error while fetching users list " +e.getMessage());
+			System.out.println(e.getStackTrace());
+		}
+		if(usersList==null)
+			return null;
+		
+		for(User user: usersList.getUserList())
+		{
+			if(netId.compareTo(user.getNetId())==0 && password.compareTo(user.getPassword())==0)
+				return user.getRole();
+		}
+		return null;
 	}
 
 }

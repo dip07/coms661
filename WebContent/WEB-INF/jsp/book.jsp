@@ -74,4 +74,5 @@
 	<p><a href="${pageContext.request.contextPath}/myVote">Voting Detail</a></p>
 	<p><a href="${pageContext.request.contextPath}/adminHome">Admin Page</a></p>
 	<p><a href="${pageContext.request.contextPath}/getBook">Enter Book Information</a></p>
+	<p><a href="${pageContext.request.contextPath}/login">Go to Login Page</a></p>
 	</div>
