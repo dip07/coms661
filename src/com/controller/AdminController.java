@@ -14,12 +14,14 @@ import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
 
 import org.apache.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.dao.BookXmlDbDao;
 import com.models.Course;
 import com.models.CourseList;
 
@@ -29,6 +31,9 @@ import com.models.CourseList;
  */
 @Controller
 public class AdminController {
+	
+	@Autowired
+	BookXmlDbDao xmlDbDao;
 	
 	Logger logger= Logger.getLogger(AdminController.class);
 	
@@ -45,6 +50,15 @@ public class AdminController {
 
 		ModelAndView model = new ModelAndView("editCourse");
 		modelObj.addAttribute("courseForm", new Course());
+		return model;
+	}
+	
+	@RequestMapping("/viewAllCourse")
+	public ModelAndView viewAllCourse(HttpServletRequest request,HttpServletResponse response, Model modelObj) throws Exception {
+
+		ModelAndView model = new ModelAndView("viewAllCourseScreen");
+		ArrayList<Course> courseList= xmlDbDao.getAllCourses();
+		modelObj.addAttribute("courseList", courseList);
 		return model;
 	}
 	@RequestMapping("/saveCourse")
@@ -85,6 +99,14 @@ public class AdminController {
 		
 		ModelAndView model = new ModelAndView("editCourse");
 		modelObj.addAttribute("courseForm", new Course());
+		return model;
+	}
+	
+	@RequestMapping("/adminScreen")
+	public ModelAndView adminScreen(HttpServletRequest request,HttpServletResponse response) throws Exception {
+
+		ModelAndView model = new ModelAndView("adminScreen");
+		logger.debug("Inside adminHome function");
 		return model;
 	}
 	

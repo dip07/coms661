@@ -90,4 +90,26 @@ public class BookXmlDbDao {
 		return null;
 	}
 
+	/**
+	 * @return
+	 */
+	public ArrayList<Course> getAllCourses() {
+		
+		CourseList courseList= null;
+		try{
+		JAXBContext jaxbContext = JAXBContext.newInstance(CourseList.class);
+	    Unmarshaller jaxbUnmarshaller = jaxbContext.createUnmarshaller();
+		
+	    	File existingFile= new File(dbFilesLocation+"course.xml");
+	    	courseList = (CourseList) jaxbUnmarshaller.unmarshal(existingFile);
+	    }
+	    catch(Exception e)
+	    {
+	    	courseList= new CourseList();
+	    	courseList.setCourses(new ArrayList<Course>());
+	    	e.printStackTrace();
+	    }
+		return courseList.getCourses();
+	}
+
 }
