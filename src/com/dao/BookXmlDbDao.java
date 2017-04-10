@@ -12,6 +12,8 @@ import org.springframework.beans.factory.annotation.Value;
 import com.models.BookOld;
 import com.models.Course;
 import com.models.CourseList;
+import com.models.Instructors;
+import com.models.Instructors.Instructor;
 import com.models.Roles;
 import com.models.Roles.Role;
 import com.models.Users;
@@ -105,11 +107,45 @@ public class BookXmlDbDao {
 	    }
 	    catch(Exception e)
 	    {
-	    	courseList= new CourseList();
-	    	courseList.setCourses(new ArrayList<Course>());
+	    	logger.warn("No courses found");
 	    	e.printStackTrace();
 	    }
-		return courseList.getCourses();
+		if(courseList==null)
+			return null;
+		else
+			return courseList.getCourses();
+	}
+
+	/**
+	 * @return
+	 */
+	public ArrayList<Instructor> getInstructorCourseAssignment() {
+		Instructors instructorList= null;
+		try{
+		JAXBContext jaxbContext = JAXBContext.newInstance(Instructors.class);
+	    Unmarshaller jaxbUnmarshaller = jaxbContext.createUnmarshaller();
+		
+	    	File existingFile= new File(dbFilesLocation+"instructors.xml");
+	    	instructorList = (Instructors) jaxbUnmarshaller.unmarshal(existingFile);
+	    }
+	    catch(Exception e)
+	    {
+	    	logger.warn("No existing instructor details");
+	    	e.printStackTrace();
+	    }
+		
+		if(instructorList==null)
+			return null;
+		return instructorList.getInstructorList();
+	}
+
+	/**
+	 * @param net_id
+	 * @return
+	 */
+	public Instructor getInstructorCourseAssignment(Integer net_id) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

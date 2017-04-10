@@ -19,11 +19,13 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.dao.BookXmlDbDao;
 import com.models.Course;
 import com.models.CourseList;
+import com.models.Instructors.Instructor;
 
 /**
  * @author dipanjankarmakar
@@ -106,6 +108,43 @@ public class AdminController {
 	public ModelAndView adminScreen(HttpServletRequest request,HttpServletResponse response) throws Exception {
 
 		ModelAndView model = new ModelAndView("adminScreen");
+		logger.debug("Inside adminHome function");
+		return model;
+	}
+	
+	@RequestMapping("/viewInstructorDetails")
+	public ModelAndView enterEditInstructorDetails(HttpServletRequest request,HttpServletResponse response, Model modelObj) throws Exception {
+
+		ModelAndView model = new ModelAndView("viewInstrCoursAssign");
+		ArrayList<Instructor> instructorList= xmlDbDao.getInstructorCourseAssignment();
+		if(instructorList!=null)
+			modelObj.addAttribute("instructorAssignment", instructorList);
+		else
+			modelObj.addAttribute("noData", true);
+		logger.debug("Inside adminHome function");
+		return model;
+	}
+	
+	@RequestMapping("/editInstructorAssignment")
+	public ModelAndView editInstructorAssignment(@RequestParam(value="net_id") Integer net_id,HttpServletRequest request,HttpServletResponse response, Model modelObj) throws Exception {
+
+		ModelAndView model = new ModelAndView("enterInstrCoursAssign");
+		ArrayList<Course> courseList= xmlDbDao.getAllCourses();
+		if(courseList!=null)	
+			modelObj.addAttribute("courseList",courseList);
+		if(net_id==null)
+		{
+			modelObj.addAttribute("instructorForm", new Instructor());
+		}
+		else
+		{
+			Instructor instructorObj= xmlDbDao.getInstructorCourseAssignment(net_id);
+			if(instructorObj!=null)
+				modelObj.addAttribute("instructorForm", instructorObj);
+			else
+				modelObj.addAttribute("instructorForm", new Instructor());
+				
+		}
 		logger.debug("Inside adminHome function");
 		return model;
 	}

@@ -71,6 +71,11 @@
 		<put-attribute name="title" value="View all Courses!" />
 		<put-attribute name="body" value="/WEB-INF/jsp/viewAllCourseScreen.jsp" />
 	</definition>
+	
+	<definition name="viewInstrCoursAssign" extends="base.definition">
+		<put-attribute name="title" value="View all Instructor Course Assignment" />
+		<put-attribute name="body" value="/WEB-INF/jsp/viewInstructorCourseScreen.jsp" />
+	</definition>
 
 	
 
