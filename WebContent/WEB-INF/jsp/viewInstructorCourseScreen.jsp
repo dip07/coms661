@@ -2,8 +2,9 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <div>
+	<p>hello ${noData}</p>
 	<c:choose>
-		<c:when test="empty noData">
+		<c:when test="${empty noData}">
 			<table border="1"
 				style="background-color: #85c1e9; color: #34495e; font: Arial; border-radius: 6px; font-size: 12px; width: 90%;">
 				<tr>
@@ -17,7 +18,7 @@
 					<tr>
 						<td><p>${instr.netId}</p></td>
 						<td><p>${instr.name}</p></td>
-						<td><p>${instr.instructorForCourse.courseName}</p></td>
+						<td><p>${instr.instructorForCourse}</p></td>
 						<td><a href="${pageContext.request.contextPath}/editInstructorAssignment?net_id=${instr.netId}">Edit this Details</a></td>
 					</tr>
 					<tr>

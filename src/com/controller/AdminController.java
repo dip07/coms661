@@ -23,9 +23,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.dao.BookXmlDbDao;
+import com.models.BookOld;
 import com.models.Course;
 import com.models.CourseList;
 import com.models.Instructors.Instructor;
+import com.models.Users.User;
 
 /**
  * @author dipanjankarmakar
@@ -126,12 +128,26 @@ public class AdminController {
 	}
 	
 	@RequestMapping("/editInstructorAssignment")
-	public ModelAndView editInstructorAssignment(@RequestParam(value="net_id") Integer net_id,HttpServletRequest request,HttpServletResponse response, Model modelObj) throws Exception {
+	public ModelAndView editInstructorAssignment(@RequestParam(value="net_id", required = false) String net_id,HttpServletRequest request,HttpServletResponse response, Model modelObj) throws Exception {
 
 		ModelAndView model = new ModelAndView("enterInstrCoursAssign");
+		try{
+		
 		ArrayList<Course> courseList= xmlDbDao.getAllCourses();
-		if(courseList!=null)	
-			modelObj.addAttribute("courseList",courseList);
+		ArrayList<String> courseNameList = new ArrayList<String>();
+		for(Course course: courseList)
+			courseNameList.add(course.getCourseName());
+		if(!courseNameList.isEmpty())	
+			modelObj.addAttribute("courseNameList",courseNameList);
+		
+		ArrayList<User> userList= xmlDbDao.getAllUsers();
+		ArrayList<String> userNameList = new ArrayList<String>();
+		for(User user: userList)
+			userNameList.add(user.getName());
+		if(!userNameList.isEmpty())	
+			modelObj.addAttribute("userNameList",userNameList);
+		
+		
 		if(net_id==null)
 		{
 			modelObj.addAttribute("instructorForm", new Instructor());
@@ -146,9 +162,21 @@ public class AdminController {
 				
 		}
 		logger.debug("Inside adminHome function");
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
 		return model;
 	}
 	
-	
+	@RequestMapping("/saveEditInstructor")
+	public ModelAndView saveEditInstructor(@ModelAttribute("instructorForm") Instructor instructorForm,HttpServletRequest request,HttpServletResponse response, Model modelObj) throws Exception {
+
+		ModelAndView model = new ModelAndView("redirect:/viewInstructorDetails");
+		Boolean isSaved= xmlDbDao.saveEditInstructorData(instructorForm);
+		logger.debug("Inside adminHome function");
+		return model;
+	}
 
 }

@@ -4,6 +4,8 @@ import java.io.File;
 import java.util.ArrayList;
 
 import javax.xml.bind.JAXBContext;
+import javax.xml.bind.JAXBException;
+import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
 
 import org.apache.log4j.Logger;
@@ -143,8 +145,73 @@ public class BookXmlDbDao {
 	 * @param net_id
 	 * @return
 	 */
-	public Instructor getInstructorCourseAssignment(Integer net_id) {
-		// TODO Auto-generated method stub
+	public Instructor getInstructorCourseAssignment(String net_id) {
+		return null;
+	}
+
+	/**
+	 * @return
+	 */
+	public ArrayList<User> getAllUsers() {
+		Users allUsers= null;
+		try{
+		JAXBContext jaxbContext = JAXBContext.newInstance(Users.class);
+	    Unmarshaller jaxbUnmarshaller = jaxbContext.createUnmarshaller();
+		
+	    	File existingFile= new File(dbFilesLocation+"users.xml");
+	    	allUsers = (Users) jaxbUnmarshaller.unmarshal(existingFile);
+	    }
+	    catch(Exception e)
+	    {
+	    	logger.warn("No existing instructor details");
+	    	e.printStackTrace();
+	    }
+		
+		if(allUsers==null)
+			return null;
+		return allUsers.getUserList();
+	}
+
+	/**
+	 * @param instructorForm
+	 * @return
+	 */
+	public Boolean saveEditInstructorData(Instructor instructorForm) {
+		ArrayList<User> userList= getAllUsers();
+		String netId="";
+		for(User user: userList)
+		{
+			if(user.getName().compareToIgnoreCase(instructorForm.getName())==0)
+			{
+				netId=user.getNetId();
+				instructorForm.setNetId(netId);
+			}
+		}
+		Instructors instructorList= null;
+		try{
+			JAXBContext jaxbContext = JAXBContext.newInstance(Instructors.class);
+			Unmarshaller jaxbUnmarshaller = jaxbContext.createUnmarshaller();
+
+			File existingFile= new File(dbFilesLocation+"instructors.xml");
+			instructorList = (Instructors) jaxbUnmarshaller.unmarshal(existingFile);
+		}
+		catch(Exception e)
+		{
+			instructorList= new Instructors();
+			e.printStackTrace();
+		}
+		instructorList.getInstructorList().add(instructorForm);
+
+		Marshaller jaxbMarshaller;
+		try {
+			JAXBContext jaxbContext = JAXBContext.newInstance(Instructors.class);
+			jaxbMarshaller = jaxbContext.createMarshaller();
+			jaxbMarshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
+			File existingFile= new File(dbFilesLocation+"instructors.xml");
+			jaxbMarshaller.marshal(instructorList, existingFile);
+		} catch (JAXBException e) {
+			e.printStackTrace();
+		}
 		return null;
 	}
 

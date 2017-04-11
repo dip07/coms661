@@ -76,6 +76,11 @@
 		<put-attribute name="title" value="View all Instructor Course Assignment" />
 		<put-attribute name="body" value="/WEB-INF/jsp/viewInstructorCourseScreen.jsp" />
 	</definition>
+	
+	<definition name="enterInstrCoursAssign" extends="base.definition">
+		<put-attribute name="title" value="Enter Instructor Course Assignment" />
+		<put-attribute name="body" value="/WEB-INF/jsp/enterInstrCoursAssignScreen.jsp" />
+	</definition>
 
 	
 
