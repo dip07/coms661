@@ -18,7 +18,6 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.dao.BookXmlDbDao;
 import com.models.BookOld;
-import com.models.Books.Book;
 import com.models.Books;
 import com.models.Course;
 import com.models.CourseList;

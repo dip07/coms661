@@ -105,6 +105,8 @@ public class BookXmlDbDao {
 	    Unmarshaller jaxbUnmarshaller = jaxbContext.createUnmarshaller();
 		
 	    	File existingFile= new File(dbFilesLocation+"course.xml");
+	    	if(!existingFile.exists())
+	    		return null;
 	    	courseList = (CourseList) jaxbUnmarshaller.unmarshal(existingFile);
 	    }
 	    catch(Exception e)
@@ -212,6 +214,84 @@ public class BookXmlDbDao {
 		} catch (JAXBException e) {
 			e.printStackTrace();
 		}
+		return null;
+	}
+
+	/**
+	 * @param course
+	 */
+	public void saveCourse(Course course) {
+		try{
+			JAXBContext jaxbContext = JAXBContext.newInstance(CourseList.class);
+			Unmarshaller jaxbUnmarshaller = jaxbContext.createUnmarshaller();
+
+			CourseList courseList= null;
+			File existingFile= new File(dbFilesLocation+"course.xml");
+			if(existingFile.exists())
+			{
+				courseList = (CourseList) jaxbUnmarshaller.unmarshal(existingFile);
+			}
+			else
+			{
+				courseList= new CourseList();
+				courseList.setCourses(new ArrayList<Course>());
+			}
+			boolean isCoursePresent=false;
+			for(Course courseItem: courseList.getCourses())
+			{
+				if(courseItem.getCourseNumber().compareTo(course.getCourseNumber())==0)
+				{
+					courseItem.setCourseName(course.getCourseName());
+					courseItem.setIsArchived(course.getIsArchived());
+					isCoursePresent=true;
+				}
+			}
+			if(!isCoursePresent)
+				courseList.getCourses().add(course);
+
+			File file = new File(dbFilesLocation+"course.xml");
+			Marshaller jaxbMarshaller = jaxbContext.createMarshaller();
+
+			// output pretty printed
+			jaxbMarshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
+
+			jaxbMarshaller.marshal(courseList, file);
+			//jaxbMarshaller.marshal(courseList, System.out);
+			//System.out.println(file.getAbsoluteFile()+" >> " + file.exists());
+		}
+		catch(Exception e)
+		{
+			logger.error("Exception while saving courses : " + e.getStackTrace());
+			e.printStackTrace();
+		}
+	}
+
+	/**
+	 * @param course_number
+	 * @return
+	 */
+	public Course getCourseDetails(String course_number) {
+		CourseList courseList= null;
+		try{
+			JAXBContext jaxbContext = JAXBContext.newInstance(CourseList.class);
+			Unmarshaller jaxbUnmarshaller = jaxbContext.createUnmarshaller();
+
+			File existingFile= new File(dbFilesLocation+"course.xml");
+			if(!existingFile.exists())
+				return null;
+			courseList = (CourseList) jaxbUnmarshaller.unmarshal(existingFile);
+			for(Course course: courseList.getCourses())
+			{
+				if(course.getCourseNumber().compareTo(course_number)==0)
+					return course;
+			}
+		}
+		catch(Exception e)
+		{
+			logger.warn("No courses found");
+			e.printStackTrace();
+		}
+
 		return null;
 	}
 

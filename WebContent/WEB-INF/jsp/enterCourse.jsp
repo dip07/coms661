@@ -15,6 +15,13 @@
 				<td><form:input path="courseNumber" required='true' /></td>
 			</tr>
 			<tr>
+				<td>Is Archived:</td>
+				<td><form:select path="isArchived">
+						<form:option selected="true" value="false" label="NO" />
+						<form:option value="true" label="YES" />
+					</form:select></td>
+			</tr>
+			<tr>
 				<td colspan="2" style="text-align: center"><input type="submit"
 					value="Submit" class="submitBtn" /></td>
 			</tr>

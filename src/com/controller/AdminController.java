@@ -56,53 +56,31 @@ public class AdminController {
 		modelObj.addAttribute("courseForm", new Course());
 		return model;
 	}
+	@RequestMapping("/editCourse")
+	public ModelAndView editCourse(@ModelAttribute("course_number")String course_number,HttpServletRequest request,HttpServletResponse response, Model modelObj) throws Exception {
+
+		ModelAndView model = new ModelAndView("editCourse");
+		Course course= xmlDbDao.getCourseDetails(course_number);
+		modelObj.addAttribute("courseForm", course);
+		return model;
+	}
 	
 	@RequestMapping("/viewAllCourse")
 	public ModelAndView viewAllCourse(HttpServletRequest request,HttpServletResponse response, Model modelObj) throws Exception {
 
 		ModelAndView model = new ModelAndView("viewAllCourseScreen");
 		ArrayList<Course> courseList= xmlDbDao.getAllCourses();
-		modelObj.addAttribute("courseList", courseList);
+		if(courseList!=null)
+			modelObj.addAttribute("courseList", courseList);
+		else
+			modelObj.addAttribute("noData", true);
 		return model;
 	}
 	@RequestMapping("/saveCourse")
 	public ModelAndView saveCourse(HttpServletRequest request,HttpServletResponse response, Model modelObj,@ModelAttribute("courseForm") Course course) throws Exception {
 
-		JAXBContext jaxbContext = JAXBContext.newInstance(CourseList.class);
-	    Unmarshaller jaxbUnmarshaller = jaxbContext.createUnmarshaller();
-	     
-	    CourseList courseList= null;
-	    try{
-	    	File existingFile= new File("/Users/dipanjankarmakar/Documents/Isu Google Drive/Isu Studies Google Drive/4th Sem/661/course.xml");
-	    	courseList = (CourseList) jaxbUnmarshaller.unmarshal(existingFile);
-	    }
-	    catch(Exception e)
-	    {
-	    	courseList= new CourseList();
-	    	courseList.setCourses(new ArrayList<Course>());
-	    	e.printStackTrace();
-	    }
-	    
-		courseList.getCourses().add(course);
-		try{
-			File file = new File("/Users/dipanjankarmakar/Documents/Isu Google Drive/Isu Studies Google Drive/4th Sem/661/course.xml");
-			Marshaller jaxbMarshaller = jaxbContext.createMarshaller();
-
-			// output pretty printed
-			jaxbMarshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
-
-			jaxbMarshaller.marshal(courseList, file);
-			jaxbMarshaller.marshal(courseList, System.out);
-			System.out.println(file.getAbsoluteFile()+" >> " + file.exists());
-		}
-		catch(Exception e)
-		{
-			logger.error("Exception while saving courses : " + e.getStackTrace());
-			e.printStackTrace();
-		}
-		
-		ModelAndView model = new ModelAndView("editCourse");
-		modelObj.addAttribute("courseForm", new Course());
+		xmlDbDao.saveCourse(course);
+		ModelAndView model = new ModelAndView("redirect:/viewAllCourse");
 		return model;
 	}
 	
