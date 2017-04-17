@@ -1,7 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <instructors>
     <instructor>
-        <instructorForCourse>Big Data Algorithm</instructorForCourse>
+        <instructorForCourse>535</instructorForCourse>
+        <name>dipanjan</name>
+        <netId>dipanjan</netId>
+    </instructor>
+    <instructor>
+        <instructorForCourse>511</instructorForCourse>
         <name>Gaugau</name>
         <netId>gau</netId>
     </instructor>

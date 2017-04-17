@@ -6,6 +6,8 @@ package com.controller;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -96,7 +98,20 @@ public class AdminController {
 	public ModelAndView enterEditInstructorDetails(HttpServletRequest request,HttpServletResponse response, Model modelObj) throws Exception {
 
 		ModelAndView model = new ModelAndView("viewInstrCoursAssign");
+		ArrayList<Course> courseList= xmlDbDao.getAllCourses();
+		Map<String,String> courseNumNameMap=new HashMap<String,String>();
+		for(Course course : courseList)
+		{
+			courseNumNameMap.put(course.getCourseNumber(), course.getCourseName());
+		}
 		ArrayList<Instructor> instructorList= xmlDbDao.getInstructorCourseAssignment();
+		if(instructorList != null)
+		{
+			for(Instructor ins : instructorList)
+			{
+				ins.setInstructorForCourse(ins.getInstructorForCourse() + "-"+ courseNumNameMap.get(ins.getInstructorForCourse()));
+			}
+		}
 		if(instructorList!=null)
 			modelObj.addAttribute("instructorAssignment", instructorList);
 		else
@@ -106,17 +121,18 @@ public class AdminController {
 	}
 	
 	@RequestMapping("/editInstructorAssignment")
-	public ModelAndView editInstructorAssignment(@RequestParam(value="net_id", required = false) String net_id,HttpServletRequest request,HttpServletResponse response, Model modelObj) throws Exception {
+	public ModelAndView editInstructorAssignment(@RequestParam(value="course_id", required = false) String course_id,HttpServletRequest request,HttpServletResponse response, Model modelObj) throws Exception {
 
 		ModelAndView model = new ModelAndView("enterInstrCoursAssign");
 		try{
 		
 		ArrayList<Course> courseList= xmlDbDao.getAllCourses();
-		ArrayList<String> courseNameList = new ArrayList<String>();
+		Map<String,String> courseNameList = new HashMap<String,String>();
 		for(Course course: courseList)
-			courseNameList.add(course.getCourseName());
+			courseNameList.put(course.getCourseNumber(),course.getCourseName());
 		if(!courseNameList.isEmpty())	
 			modelObj.addAttribute("courseNameList",courseNameList);
+		//modelObj.addAttribute("courseList", courseList);
 		
 		ArrayList<User> userList= xmlDbDao.getAllUsers();
 		ArrayList<String> userNameList = new ArrayList<String>();
@@ -126,13 +142,13 @@ public class AdminController {
 			modelObj.addAttribute("userNameList",userNameList);
 		
 		
-		if(net_id==null)
+		if(course_id==null)
 		{
 			modelObj.addAttribute("instructorForm", new Instructor());
 		}
 		else
 		{
-			Instructor instructorObj= xmlDbDao.getInstructorCourseAssignment(net_id);
+			Instructor instructorObj= xmlDbDao.getInstructorCourseAssignment(course_id);
 			if(instructorObj!=null)
 				modelObj.addAttribute("instructorForm", instructorObj);
 			else

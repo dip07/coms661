@@ -130,12 +130,14 @@ public class BookXmlDbDao {
 	    Unmarshaller jaxbUnmarshaller = jaxbContext.createUnmarshaller();
 		
 	    	File existingFile= new File(dbFilesLocation+"instructors.xml");
-	    	instructorList = (Instructors) jaxbUnmarshaller.unmarshal(existingFile);
+	    	if(existingFile.exists())
+	    		instructorList = (Instructors) jaxbUnmarshaller.unmarshal(existingFile);
 	    }
 	    catch(Exception e)
 	    {
 	    	logger.warn("No existing instructor details");
 	    	e.printStackTrace();
+	    	System.out.println("Error : " + e.getMessage() +"\n"+ e.getStackTrace());
 	    }
 		
 		if(instructorList==null)
