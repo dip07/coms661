@@ -19,6 +19,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.dao.BookXmlDbDao;
 import com.models.BookOld;
 import com.models.Books;
+import com.models.Books.Book;
 import com.models.Course;
 import com.models.CourseList;
 
@@ -131,7 +132,7 @@ public class BookController
 		logger.debug("Debug Inside the logger");
 		logger.warn("Warn Inside the logger");
 		Books.Book bookObj= new Books.Book();
-		bookObj.setCourseName("Introduction to Algo");
+		bookObj.setCourseNumber("535");
 		bookObj.setInstructorName("Gaurav Bhatt");
 		bookObj.setSession("Spring");
 		bookObj.setYear(2017);
@@ -146,6 +147,40 @@ public class BookController
 		model.addObject("message", "Custom message from Controller");
 		logger.warn("Warn Inside the logger");
 		logger.warn("Book information > " + book.toString());
+		return model;
+	}
+	
+	@RequestMapping("/showAllBookDetails")
+	public ModelAndView showAllBookDetails(HttpServletRequest request,HttpServletResponse response, Model modelObj) throws Exception {
+		
+		ModelAndView model = new ModelAndView("showAllBookDetailsPage");
+		ArrayList<Book> bookList= xmlDbDao.getAllBookDetails();
+		if(bookList!=null)
+			modelObj.addAttribute("courseBooks", bookList);
+		else
+			modelObj.addAttribute("noData", true);
+		model.addObject("message", "Custom message from Controller");
+		logger.warn("Warn Inside the logger");
+		return model;
+	}
+	
+	@RequestMapping("/addNewBookDetails")
+	public ModelAndView addNewBookDetails(HttpServletRequest request,HttpServletResponse response, Model modelObj) throws Exception {
+		
+		ModelAndView model = new ModelAndView("addNewCourseBook");
+		model.addObject("message", "Custom message from Controller");
+		logger.warn("Warn Inside the logger");
+		modelObj.addAttribute("bookForm", new Books.Book());
+		return model;
+	}
+	@RequestMapping("/saveCourseBook")
+	public ModelAndView saveCourseBook(@ModelAttribute("bookForm")Book book ,HttpServletRequest request,HttpServletResponse response, Model modelObj) throws Exception {
+		
+		ModelAndView model = new ModelAndView("addNewCourseBook");
+		model.addObject("message", "Custom message from Controller");
+		logger.warn("Received book info " + book.toString());
+		xmlDbDao.saveCourseBookInfo(book);
+		modelObj.addAttribute("bookForm", new Books.Book());
 		return model;
 	}
 }

@@ -12,6 +12,8 @@ import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Value;
 
 import com.models.BookOld;
+import com.models.Books;
+import com.models.Books.Book;
 import com.models.Course;
 import com.models.CourseList;
 import com.models.Instructors;
@@ -297,4 +299,91 @@ public class BookXmlDbDao {
 		return null;
 	}
 
+	/**
+	 * @return
+	 */
+	public ArrayList<Book> getAllBookDetails() {
+		Books books= null;
+		try{
+			JAXBContext jaxbContext = JAXBContext.newInstance(Books.class);
+			Unmarshaller jaxbUnmarshaller = jaxbContext.createUnmarshaller();
+
+			File existingFile= new File(dbFilesLocation+"books.xml");
+			if(!existingFile.exists())
+				return null;
+			books = (Books) jaxbUnmarshaller.unmarshal(existingFile);
+		}
+		catch(Exception e)
+		{
+			logger.warn("No courses found");
+			e.printStackTrace();
+		}
+		ArrayList<Book> validBooks= null;
+		if(books!=null && books.getBookList().size()>0)
+		{
+			validBooks= new ArrayList<Book>();
+			for(Book book: books.getBookList())
+			{
+				if(!book.getIsArchived())
+					validBooks.add(book);
+			}
+		}
+		return validBooks;
+	}
+
+	/**
+	 * @param book
+	 */
+	public void saveCourseBookInfo(Book book) {
+		try{
+			JAXBContext jaxbContext = JAXBContext.newInstance(Books.class);
+			Unmarshaller jaxbUnmarshaller = jaxbContext.createUnmarshaller();
+
+			Books books= null;
+			File existingFile= new File(dbFilesLocation+"books.xml");
+			if(existingFile.exists())
+			{
+				books = (Books) jaxbUnmarshaller.unmarshal(existingFile);
+			}
+			else
+			{
+				books= new Books();
+				books.setBookList(new ArrayList<Books.Book>());
+			}
+			boolean isBookPresent=false;
+			for(Book bookItem: books.getBookList())
+			{
+				if( bookItem.getCourseNumber().compareTo(book.getCourseNumber())==0
+						&& (bookItem.getYear()==book.getYear())
+						&& (bookItem.getSession().compareTo(book.getSession())==0)) 
+				{
+					bookItem.setBookName(book.getBookName());
+					bookItem.setAuthor(book.getAuthor());
+					bookItem.setISBN(book.getISBN());
+					bookItem.setInstructorName(book.getInstructorName());
+					bookItem.setComments(book.getComments());
+					isBookPresent=true;
+				}
+			}
+			if(!isBookPresent)
+				books.getBookList().add(book);
+
+			File file = new File(dbFilesLocation+"books.xml");
+			Marshaller jaxbMarshaller = jaxbContext.createMarshaller();
+
+			// output pretty printed
+			jaxbMarshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
+
+			jaxbMarshaller.marshal(books, file);
+			//jaxbMarshaller.marshal(courseList, System.out);
+			//System.out.println(file.getAbsoluteFile()+" >> " + file.exists());
+		}
+		catch(Exception e)
+		{
+			logger.error("Exception while saving courses : " + e.getStackTrace(),e);
+			e.printStackTrace();
+			System.out.println("Exception " + e.getMessage() + e.getStackTrace());
+		}
+		
+	}
 }

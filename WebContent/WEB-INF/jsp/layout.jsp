@@ -126,7 +126,7 @@ body {
 			<div class="grids-24">
 				<div class="grid-12">
 					<h2 class="site-title">
-						<a href="" http://www.las.iastate.edu/" target="blank"">College
+						<a href="http://www.las.iastate.edu/" target="blank"">College
 							of Liberal Arts & Sciences <br>Department of Computer
 							Science
 						</a>

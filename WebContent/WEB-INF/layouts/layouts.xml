@@ -4,17 +4,19 @@
 	<definition name="base.definition" template="/WEB-INF/jsp/layout.jsp">
 		<put-attribute name="title" value="" />
 		<put-attribute name="body" value="" />
-		
+
 		<put-list-attribute name="javascripts">
 			<add-attribute value="https://code.jquery.com/jquery-1.12.3.js" />
 			<add-attribute value="https://code.jquery.com/ui/1.12.1/jquery-ui.js" />
-			<add-attribute value="https://cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js" />
+			<add-attribute
+				value="https://cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js" />
 			<add-attribute value="/scripts/scripts.js" />
 			<add-attribute value="/scripts/jquery.datetimepicker.full.min.js" />
 			<add-attribute value="/scripts/chosen.jquery.min.js" />
 		</put-list-attribute>
 		<put-list-attribute name="stylesheets">
-			<add-attribute value="https://cdn.datatables.net/1.10.12/css/jquery.dataTables.min.css" />
+			<add-attribute
+				value="https://cdn.datatables.net/1.10.12/css/jquery.dataTables.min.css" />
 			<add-attribute value="/css/jquery.datetimepicker.css" />
 			<add-attribute value="/css/custom-webforms.css" />
 			<add-attribute value="/css/base.css" />
@@ -25,63 +27,79 @@
 		<put-attribute name="title" value="Voting App for CS Dept" />
 		<put-attribute name="body" value="/WEB-INF/jsp/welcome.jsp" />
 	</definition>
-	
-	
+
+
 	<definition name="book" extends="base.definition">
 		<put-attribute name="title" value="Enter Book Details" />
 		<put-attribute name="body" value="/WEB-INF/jsp/book.jsp" />
 	</definition>
-	
+
 	<definition name="editBookData" extends="base.definition">
 		<put-attribute name="title" value="Enter Book Details" />
 		<put-attribute name="body" value="/WEB-INF/jsp/coursePage.jsp" />
 	</definition>
-	
+
 	<definition name="vote" extends="base.definition">
 		<put-attribute name="title" value="Voting Details" />
 		<put-attribute name="body" value="/WEB-INF/jsp/votingPage.jsp" />
 	</definition>
-	
+
 	<definition name="adminHome" extends="base.definition">
 		<put-attribute name="title" value="Admin Page" />
 		<put-attribute name="body" value="/WEB-INF/jsp/adminHome.jsp" />
 	</definition>
-	
+
 	<definition name="editCourse" extends="base.definition">
 		<put-attribute name="title" value="Enter Course" />
 		<put-attribute name="body" value="/WEB-INF/jsp/enterCourse.jsp" />
 	</definition>
-	
+
 	<definition name="enterBookPage" extends="base.definition">
 		<put-attribute name="title" value="Enter Book" />
 		<put-attribute name="body" value="/WEB-INF/jsp/enterBook.jsp" />
 	</definition>
-	
+
 	<definition name="login" extends="base.definition">
 		<put-attribute name="title" value="Please Login" />
 		<put-attribute name="body" value="/WEB-INF/jsp/loginPage.jsp" />
 	</definition>
-	
+
 	<definition name="adminScreen" extends="base.definition">
 		<put-attribute name="title" value="Welcome Admin!" />
 		<put-attribute name="body" value="/WEB-INF/jsp/adminScreen.jsp" />
 	</definition>
-	
+
 	<definition name="viewAllCourseScreen" extends="base.definition">
 		<put-attribute name="title" value="View all Courses!" />
-		<put-attribute name="body" value="/WEB-INF/jsp/viewAllCourseScreen.jsp" />
-	</definition>
-	
-	<definition name="viewInstrCoursAssign" extends="base.definition">
-		<put-attribute name="title" value="View all Instructor Course Assignment" />
-		<put-attribute name="body" value="/WEB-INF/jsp/viewInstructorCourseScreen.jsp" />
-	</definition>
-	
-	<definition name="enterInstrCoursAssign" extends="base.definition">
-		<put-attribute name="title" value="Enter Instructor Course Assignment" />
-		<put-attribute name="body" value="/WEB-INF/jsp/enterInstrCoursAssignScreen.jsp" />
+		<put-attribute name="body"
+			value="/WEB-INF/jsp/viewAllCourseScreen.jsp" />
 	</definition>
 
+	<definition name="viewInstrCoursAssign" extends="base.definition">
+		<put-attribute name="title"
+			value="View all Instructor Course Assignment" />
+		<put-attribute name="body"
+			value="/WEB-INF/jsp/viewInstructorCourseScreen.jsp" />
+	</definition>
+
+	<definition name="enterInstrCoursAssign" extends="base.definition">
+		<put-attribute name="title" value="Enter Instructor Course Assignment" />
+		<put-attribute name="body"
+			value="/WEB-INF/jsp/enterInstrCoursAssignScreen.jsp" />
+	</definition>
 	
+	<definition name="showAllBookDetailsPage" extends="base.definition">
+		<put-attribute name="title" value="Show info for all books" />
+		<put-attribute name="body"
+			value="/WEB-INF/jsp/showAllBookDetailsPage.jsp" />
+	</definition>
+	
+	<definition name="addNewCourseBook" extends="base.definition">
+		<put-attribute name="title" value="Add details for Course" />
+		<put-attribute name="body"
+			value="/WEB-INF/jsp/addCourseBook.jsp" />
+	</definition>
+
+
 
 </tiles-definitions>

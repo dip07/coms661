@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<books>
+    <book>
+        <author>Gaurav Bhatt</author>
+        <bookName>Intro to Swimming</bookName>
+        <comments>Great book,, yeah !</comments>
+        <courseNumber>711</courseNumber>
+        <ISBN>420420</ISBN>
+        <instructorName>Gaurav Bhatt</instructorName>
+        <isArchived>false</isArchived>
+        <session>Fall</session>
+        <year>2017</year>
+    </book>
+    <book>
+        <author>NA</author>
+        <bookName>NA</bookName>
+        <comments>Lecture slides to be provided in class</comments>
+        <courseNumber>309</courseNumber>
+        <ISBN>NA</ISBN>
+        <instructorName>Simanta Mitra</instructorName>
+        <isArchived>false</isArchived>
+        <session>Spring</session>
+        <year>2017</year>
+    </book>
+    <book>
+        <author>Shashi Gadia</author>
+        <bookName>Database</bookName>
+        <comments></comments>
+        <courseNumber>622</courseNumber>
+        <ISBN>1011</ISBN>
+        <instructorName>Shashi Gadia</instructorName>
+        <isArchived>false</isArchived>
+        <session>Spring</session>
+        <year>2017</year>
+    </book>
+</books>

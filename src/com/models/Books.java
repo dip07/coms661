@@ -5,12 +5,21 @@ package com.models;
 
 import java.util.ArrayList;
 
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
+
 /**
  * @author dipanjankarmakar
  *
  */
+
+@XmlAccessorType(XmlAccessType.FIELD)
+@XmlRootElement(name="books")
 public class Books {
 	
+	@XmlElement(name = "book", type = Book.class)
 	private ArrayList<Book> bookList= new ArrayList<Book>();
 	
 	
@@ -25,8 +34,8 @@ public class Books {
 	public static class Book
 	{
 		private Integer entryId;
-		private String courseName;
-		private String Session;
+		private String courseNumber;
+		private String session;
 		private Integer year;
 		private String instructorName;
 		private String bookName;
@@ -40,17 +49,18 @@ public class Books {
 		public void setEntryId(Integer entryId) {
 			this.entryId = entryId;
 		}
-		public String getCourseName() {
-			return courseName;
+		
+		public String getCourseNumber() {
+			return courseNumber;
 		}
-		public void setCourseName(String courseName) {
-			this.courseName = courseName;
+		public void setCourseNumber(String courseNumber) {
+			this.courseNumber = courseNumber;
 		}
 		public String getSession() {
-			return Session;
+			return session;
 		}
 		public void setSession(String session) {
-			Session = session;
+			this.session = session;
 		}
 		public Integer getYear() {
 			return year;
@@ -96,15 +106,13 @@ public class Books {
 		}
 		@Override
 		public String toString() {
-			return "Book [entryId=" + entryId + ", courseName=" + courseName
-					+ ", Session=" + Session + ", year=" + year
+			return "Book [entryId=" + entryId + ", courseNumber="
+					+ courseNumber + ", session=" + session + ", year=" + year
 					+ ", instructorName=" + instructorName + ", bookName="
 					+ bookName + ", author=" + author + ", ISBN=" + ISBN
 					+ ", comments=" + comments + ", isArchived=" + isArchived
 					+ "]";
 		}
-		
-		
 		
 	}
 
