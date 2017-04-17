@@ -1,0 +1,33 @@
+.myButton {
+  font: bold 11px Arial;
+  text-decoration: none;
+  background-color: #EEEEEE;
+  color: #333333;
+  padding: 2px 6px 2px 6px;
+  border-top: 2px solid #CCCCCC;
+  border-right: 2px solid #333333;
+  border-bottom: 2px solid #333333;
+  border-left: 2px solid #CCCCCC;
+  font-size: 16px;
+  text-shadow: black;
+  size: auto;
+}
+
+.myButton2 {
+    background-color: #4CAF50; /* Green */
+    border: medium;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: block;
+    font-size: 16px;
+    text-shadow: black;
+    size: auto;
+}
+
+.red1 { background:hsl(8,59%,59%); color:rgba(255,255,255,0.95); text-shadow:-1px -1px 1px rgba(0,0,0,0.1); }
+.orange1 { background:hsl(41,76%,65%); }
+.yellow1 { background:hsl(50,81%,65%); }
+.green1 { background:hsl(104,51%,62%); }
+.blue1 { background:hsl(176,59%,59%); }

@@ -33,4 +33,15 @@
         <session>Spring</session>
         <year>2017</year>
     </book>
+    <book>
+        <author>Cormen</author>
+        <bookName>Introduction to Algorithms</bookName>
+        <comments>Awesome book</comments>
+        <courseNumber>511</courseNumber>
+        <ISBN>23421</ISBN>
+        <instructorName>Baca</instructorName>
+        <isArchived>false</isArchived>
+        <session>Fall</session>
+        <year>2015</year>
+    </book>
 </books>

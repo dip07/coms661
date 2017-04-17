@@ -176,7 +176,7 @@ public class BookController
 	@RequestMapping("/saveCourseBook")
 	public ModelAndView saveCourseBook(@ModelAttribute("bookForm")Book book ,HttpServletRequest request,HttpServletResponse response, Model modelObj) throws Exception {
 		
-		ModelAndView model = new ModelAndView("addNewCourseBook");
+		ModelAndView model = new ModelAndView("redirect:/showAllBookDetails");
 		model.addObject("message", "Custom message from Controller");
 		logger.warn("Received book info " + book.toString());
 		xmlDbDao.saveCourseBookInfo(book);
