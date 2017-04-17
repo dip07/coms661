@@ -3,7 +3,7 @@
  */
 package com.models;
 
-/**
+/*
  * @author Gaurav Bhatt
  *
  */
@@ -63,8 +63,7 @@ public class Vote {
 	}
 	@Override
 	public String toString() {
-		return comments;
-		
+		return comments;	
 	}
 	
 	

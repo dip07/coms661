@@ -19,6 +19,7 @@
 			<add-attribute value="/css/custom-webforms.css" />
 			<add-attribute value="/css/base.css" />
 			<add-attribute value="/css/taapp.min.css" />
+			<add-attribute value="/css/vote.css" />
 		</put-list-attribute>
 	</definition>
 	<definition name="welcome" extends="base.definition">
@@ -40,6 +41,16 @@
 	<definition name="vote" extends="base.definition">
 		<put-attribute name="title" value="Voting Details" />
 		<put-attribute name="body" value="/WEB-INF/jsp/votingPage.jsp" />
+	</definition>
+	
+	<definition name="voteAdmin" extends="base.definition">
+		<put-attribute name="title" value="Voting Details" />
+		<put-attribute name="body" value="/WEB-INF/jsp/votingAdminPage.jsp" />
+	</definition>
+	
+	<definition name="newVote" extends="base.definition">
+		<put-attribute name="title" value="Create Vote" />
+		<put-attribute name="body" value="/WEB-INF/jsp/newVote.jsp" />
 	</definition>
 	
 	<definition name="adminHome" extends="base.definition">

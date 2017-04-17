@@ -39,4 +39,36 @@ public class VotingController
 			return null;
 		}
 	}
+	
+	@RequestMapping("/voteAdmin")
+	public ModelAndView voteAdmin(@ModelAttribute("Topic") Vote voteAdmin , HttpServletRequest request,HttpServletResponse response,Model model) throws Exception 
+	{
+		try{
+		logger.warn("Inside myVoteAdmin");
+		ModelAndView modelObj = new ModelAndView("voteAdmin");
+		
+		return modelObj;
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+			return null;
+		}
+	}
+	
+	@RequestMapping("/newVote")
+	public ModelAndView createVote(@ModelAttribute("Topic") Vote newVote , HttpServletRequest request,HttpServletResponse response,Model model) throws Exception 
+	{
+		try{
+		logger.warn("Inside newVote");
+		ModelAndView modelObj = new ModelAndView("newVote");
+		
+		return modelObj;
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+			return null;
+		}
+	}
 }
