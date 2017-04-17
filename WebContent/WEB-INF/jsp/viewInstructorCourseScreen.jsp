@@ -1,6 +1,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <div>
 	<p>hello ${noData}</p>
 	<c:choose>
@@ -15,11 +16,13 @@
 
 				</tr>
 				<c:forEach items="${instructorAssignment}" var="instr">
+				<c:set var="courseParts" value="${fn:split(instr.instructorForCourse, '-')}" />
+				<c:set var="courseId" value="${courseParts[0]}"/>
 					<tr>
 						<td><p>${instr.netId}</p></td>
 						<td><p>${instr.name}</p></td>
 						<td><p>${instr.instructorForCourse}</p></td>
-						<td><a href="${pageContext.request.contextPath}/editInstructorAssignment?net_id=${instr.netId}">Edit this Details</a></td>
+						<td><a href="${pageContext.request.contextPath}/editInstructorAssignment?course_id=${courseId}">Edit this Details</a></td>
 					</tr>
 					<tr>
 						<td colspan="4" style="background-color: orange; height: 10px"></td>
@@ -31,4 +34,5 @@
 			<p><a href="${pageContext.request.contextPath}/editInstructorAssignment" class="mainPageButton">No Information Present. Enter Instructor Details</a></p>
 		</c:otherwise>
 	</c:choose>
+		<p><a href="${pageContext.request.contextPath}/editInstructorAssignment" class="mainPageButton">Enter new Instructor Details</a></p>
 </div>

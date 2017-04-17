@@ -6,6 +6,8 @@ package com.controller;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -56,53 +58,31 @@ public class AdminController {
 		modelObj.addAttribute("courseForm", new Course());
 		return model;
 	}
+	@RequestMapping("/editCourse")
+	public ModelAndView editCourse(@ModelAttribute("course_number")String course_number,HttpServletRequest request,HttpServletResponse response, Model modelObj) throws Exception {
+
+		ModelAndView model = new ModelAndView("editCourse");
+		Course course= xmlDbDao.getCourseDetails(course_number);
+		modelObj.addAttribute("courseForm", course);
+		return model;
+	}
 	
 	@RequestMapping("/viewAllCourse")
 	public ModelAndView viewAllCourse(HttpServletRequest request,HttpServletResponse response, Model modelObj) throws Exception {
 
 		ModelAndView model = new ModelAndView("viewAllCourseScreen");
 		ArrayList<Course> courseList= xmlDbDao.getAllCourses();
-		modelObj.addAttribute("courseList", courseList);
+		if(courseList!=null)
+			modelObj.addAttribute("courseList", courseList);
+		else
+			modelObj.addAttribute("noData", true);
 		return model;
 	}
 	@RequestMapping("/saveCourse")
 	public ModelAndView saveCourse(HttpServletRequest request,HttpServletResponse response, Model modelObj,@ModelAttribute("courseForm") Course course) throws Exception {
 
-		JAXBContext jaxbContext = JAXBContext.newInstance(CourseList.class);
-	    Unmarshaller jaxbUnmarshaller = jaxbContext.createUnmarshaller();
-	     
-	    CourseList courseList= null;
-	    try{
-	    	File existingFile= new File("/Users/dipanjankarmakar/Documents/Isu Google Drive/Isu Studies Google Drive/4th Sem/661/course.xml");
-	    	courseList = (CourseList) jaxbUnmarshaller.unmarshal(existingFile);
-	    }
-	    catch(Exception e)
-	    {
-	    	courseList= new CourseList();
-	    	courseList.setCourses(new ArrayList<Course>());
-	    	e.printStackTrace();
-	    }
-	    
-		courseList.getCourses().add(course);
-		try{
-			File file = new File("/Users/dipanjankarmakar/Documents/Isu Google Drive/Isu Studies Google Drive/4th Sem/661/course.xml");
-			Marshaller jaxbMarshaller = jaxbContext.createMarshaller();
-
-			// output pretty printed
-			jaxbMarshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
-
-			jaxbMarshaller.marshal(courseList, file);
-			jaxbMarshaller.marshal(courseList, System.out);
-			System.out.println(file.getAbsoluteFile()+" >> " + file.exists());
-		}
-		catch(Exception e)
-		{
-			logger.error("Exception while saving courses : " + e.getStackTrace());
-			e.printStackTrace();
-		}
-		
-		ModelAndView model = new ModelAndView("editCourse");
-		modelObj.addAttribute("courseForm", new Course());
+		xmlDbDao.saveCourse(course);
+		ModelAndView model = new ModelAndView("redirect:/viewAllCourse");
 		return model;
 	}
 	
@@ -118,7 +98,20 @@ public class AdminController {
 	public ModelAndView enterEditInstructorDetails(HttpServletRequest request,HttpServletResponse response, Model modelObj) throws Exception {
 
 		ModelAndView model = new ModelAndView("viewInstrCoursAssign");
+		ArrayList<Course> courseList= xmlDbDao.getAllCourses();
+		Map<String,String> courseNumNameMap=new HashMap<String,String>();
+		for(Course course : courseList)
+		{
+			courseNumNameMap.put(course.getCourseNumber(), course.getCourseName());
+		}
 		ArrayList<Instructor> instructorList= xmlDbDao.getInstructorCourseAssignment();
+		if(instructorList != null)
+		{
+			for(Instructor ins : instructorList)
+			{
+				ins.setInstructorForCourse(ins.getInstructorForCourse() + "-"+ courseNumNameMap.get(ins.getInstructorForCourse()));
+			}
+		}
 		if(instructorList!=null)
 			modelObj.addAttribute("instructorAssignment", instructorList);
 		else
@@ -128,17 +121,18 @@ public class AdminController {
 	}
 	
 	@RequestMapping("/editInstructorAssignment")
-	public ModelAndView editInstructorAssignment(@RequestParam(value="net_id", required = false) String net_id,HttpServletRequest request,HttpServletResponse response, Model modelObj) throws Exception {
+	public ModelAndView editInstructorAssignment(@RequestParam(value="course_id", required = false) String course_id,HttpServletRequest request,HttpServletResponse response, Model modelObj) throws Exception {
 
 		ModelAndView model = new ModelAndView("enterInstrCoursAssign");
 		try{
 		
 		ArrayList<Course> courseList= xmlDbDao.getAllCourses();
-		ArrayList<String> courseNameList = new ArrayList<String>();
+		Map<String,String> courseNameList = new HashMap<String,String>();
 		for(Course course: courseList)
-			courseNameList.add(course.getCourseName());
+			courseNameList.put(course.getCourseNumber(),course.getCourseName());
 		if(!courseNameList.isEmpty())	
 			modelObj.addAttribute("courseNameList",courseNameList);
+		//modelObj.addAttribute("courseList", courseList);
 		
 		ArrayList<User> userList= xmlDbDao.getAllUsers();
 		ArrayList<String> userNameList = new ArrayList<String>();
@@ -148,13 +142,13 @@ public class AdminController {
 			modelObj.addAttribute("userNameList",userNameList);
 		
 		
-		if(net_id==null)
+		if(course_id==null)
 		{
 			modelObj.addAttribute("instructorForm", new Instructor());
 		}
 		else
 		{
-			Instructor instructorObj= xmlDbDao.getInstructorCourseAssignment(net_id);
+			Instructor instructorObj= xmlDbDao.getInstructorCourseAssignment(course_id);
 			if(instructorObj!=null)
 				modelObj.addAttribute("instructorForm", instructorObj);
 			else
