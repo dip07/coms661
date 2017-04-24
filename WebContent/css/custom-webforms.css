@@ -61,3 +61,12 @@ Button for main page
     margin: auto;
     width: 80%;
 }
+
+em {
+  font-style: normal;         /* Removes italics */
+  text-decoration: underline; /* Makes underline */
+}
+
+.tableCenter {
+    margin:auto;
+  }

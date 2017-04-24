@@ -58,6 +58,11 @@ public class LoginController {
 			else
 			{
 				request.getSession().setAttribute("role", roleForValidUser.getRoleName());
+				request.getSession().setAttribute("bookUserNetId", loginForm.getNetId());
+				String userName=xmlDbDao.getUserName(loginForm.getNetId());
+				if(userName!=null){
+					request.getSession().setAttribute("bookUserName", userName);
+				}
 			}
 			ModelAndView model = new ModelAndView("redirect:/welcome");
 			//model.addObject("message", "from checkLogin function");

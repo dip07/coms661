@@ -21,7 +21,7 @@
 		<p><input type="button"  class="myButton" onclick="location.href='/userHome'" value="Enter As Instructor" ></p> -->
 		
 		<p><a href="${pageContext.request.contextPath}/adminScreen" class="mainPageButton">Login As Admin</a></p>
-		<p><a href="${pageContext.request.contextPath}/showAllBookDetails" class="mainPageButton">Login As Instuctor</a></p>
+		<p><a href="${pageContext.request.contextPath}/getInstructorHomePage" class="mainPageButton">Login As Instuctor</a></p>
 	</div>
 	
 	

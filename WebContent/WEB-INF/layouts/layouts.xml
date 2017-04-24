@@ -110,6 +110,17 @@
 		<put-attribute name="body"
 			value="/WEB-INF/jsp/addCourseBook.jsp" />
 	</definition>
+	
+	<definition name="instructorHomePage" extends="base.definition">
+		<put-attribute name="title" value="Add details for Course" />
+		<put-attribute name="body"
+			value="/WEB-INF/jsp/instructorHomePage.jsp" />
+	</definition>
+	<definition name="oldCourseBookPage" extends="base.definition">
+		<put-attribute name="title" value="Add details for Course" />
+		<put-attribute name="body"
+			value="/WEB-INF/jsp/oldCourseBookPage.jsp" />
+	</definition>
 
 
 

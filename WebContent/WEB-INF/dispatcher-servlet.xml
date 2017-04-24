@@ -10,6 +10,7 @@
         http://www.springframework.org/schema/context/spring-context.xsd">
  
 	<context:component-scan base-package="com.controller" />
+	<context:component-scan base-package="com.service" />
 	
 	<bean id="xmlDbDao" class="com.dao.BookXmlDbDao"/>
  
@@ -25,6 +26,7 @@
 	<mvc:resources mapping="/css/**" location="/css/" />
 	<mvc:annotation-driven />
 	
+
 	<bean id="viewResolver"
 		class="org.springframework.web.servlet.view.tiles3.TilesViewResolver" />
 	
@@ -36,6 +38,24 @@
 			</list>
 		</property>
 	</bean>
+	
+	<bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
+		<property name="host" value="smtp.gmail.com" />
+		<property name="port" value="587" />
+		<property name="username" value="" />
+		<property name="password" value="" />
+ 
+		<!-- The name of the property, following JavaBean naming conventions -->
+		<property name="javaMailProperties">
+			<props>
+				<prop key="mail.transport.protocol">smtp</prop>
+				<prop key="mail.smtp.auth">true</prop>
+				<prop key="mail.smtp.starttls.enable">true</prop>
+				<prop key="mail.debug">true</prop>
+			</props>
+		</property>
+	</bean>
+	
 	
 	<context:property-placeholder location="classpath:application.properties"
 		ignore-unresolvable="true" ignore-resource-not-found="true" />

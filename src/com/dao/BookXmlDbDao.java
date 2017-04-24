@@ -18,7 +18,6 @@ import com.models.Course;
 import com.models.CourseList;
 import com.models.Instructors;
 import com.models.Instructors.Instructor;
-import com.models.Roles;
 import com.models.Roles.Role;
 import com.models.Users;
 import com.models.Users.User;
@@ -353,6 +352,8 @@ public class BookXmlDbDao {
 			boolean isBookPresent=false;
 			for(Book bookItem: books.getBookList())
 			{
+				if(bookItem.getIsArchived())
+					continue;
 				if( bookItem.getCourseNumber().compareTo(book.getCourseNumber())==0
 						&& (bookItem.getYear()==book.getYear())
 						&& (bookItem.getSession().compareTo(book.getSession())==0)) 
@@ -385,5 +386,106 @@ public class BookXmlDbDao {
 			System.out.println("Exception " + e.getMessage() + e.getStackTrace());
 		}
 		
+	}
+
+	/**
+	 * @param courseNumber
+	 * @return
+	 */
+	public Book getCourseBookInfo(String courseNumber) {
+		
+		Books bookList= null;
+		try{
+		JAXBContext jaxbContext = JAXBContext.newInstance(Books.class);
+	    Unmarshaller jaxbUnmarshaller = jaxbContext.createUnmarshaller();
+		
+	    	File existingFile= new File(dbFilesLocation+"books.xml");
+	    	if(existingFile.exists())
+	    		bookList = (Books) jaxbUnmarshaller.unmarshal(existingFile);
+	    }
+	    catch(Exception e)
+	    {
+	    	logger.warn("No existing course book details");
+	    	e.printStackTrace();
+	    	System.out.println("Error : " + e.getMessage() +"\n"+ e.getStackTrace());
+	    }
+		
+		if(bookList==null)
+			return null;
+		for(Book book : bookList.getBookList()){
+			if(book.getIsArchived())
+				continue;
+			if(book.getCourseNumber().compareToIgnoreCase(courseNumber) == 0)
+				return book;
+		}
+		return null;
+	}
+
+	/**
+	 * @param parseInt
+	 * @param session
+	 * @return
+	 */
+	public ArrayList<Book> getOldCourseBook(int year, String session) 
+	{
+		
+		Books bookList= null;
+		ArrayList<Book> oldBookList = null;
+		try{
+		JAXBContext jaxbContext = JAXBContext.newInstance(Books.class);
+	    Unmarshaller jaxbUnmarshaller = jaxbContext.createUnmarshaller();
+		
+	    	File existingFile= new File(dbFilesLocation+"books.xml");
+	    	if(existingFile.exists())
+	    		bookList = (Books) jaxbUnmarshaller.unmarshal(existingFile);
+	    }
+	    catch(Exception e)
+	    {
+	    	logger.warn("No existing course book details");
+	    	e.printStackTrace();
+	    	System.out.println("Error : " + e.getMessage() +"\n"+ e.getStackTrace());
+	    }
+		
+		if(bookList==null)
+			return null;
+		for(Book book : bookList.getBookList()){
+			if(!book.getIsArchived())
+				continue;
+			if(book.getYear() == year && book.getSession().compareToIgnoreCase(session)==0){
+				if(oldBookList == null)
+					oldBookList= new ArrayList<Books.Book>();
+				oldBookList.add(book);
+			}
+		}
+		return oldBookList;
+	}
+
+	/**
+	 * @param netId
+	 * @return
+	 */
+	public String getUserName(String netId) {
+
+		Users allUsers= null;
+		try{
+		JAXBContext jaxbContext = JAXBContext.newInstance(Users.class);
+	    Unmarshaller jaxbUnmarshaller = jaxbContext.createUnmarshaller();
+		
+	    	File existingFile= new File(dbFilesLocation+"users.xml");
+	    	allUsers = (Users) jaxbUnmarshaller.unmarshal(existingFile);
+	    }
+	    catch(Exception e)
+	    {
+	    	logger.warn("No existing instructor details");
+	    	e.printStackTrace();
+	    }
+		
+		if(allUsers==null)
+			return null;
+		for(User user : allUsers.getUserList()){
+			if(user.getNetId().compareToIgnoreCase(netId) == 0)
+				return user.getName();
+		}
+		return null;
 	}
 }

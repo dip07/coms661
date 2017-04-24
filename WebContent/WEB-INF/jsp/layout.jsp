@@ -262,13 +262,10 @@ body {
         <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
 <![endif]-->
 
-				<div id="login">
+				<div style="padding: 0 0 0 30px; width: 100%" id="login">
 					<div id="container">
 						<tiles:insertAttribute name="body" />
 					</div>
-					
-					
-					
 					
 					
 					<!-- Main contents of the page, commented by Dipanjan -->

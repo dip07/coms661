@@ -1,8 +1,8 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
-<div>
+<div style="padding: 30px 0 0 0">
 
 	<form:form action="saveCourseBook" method="post" commandName="bookForm">
-		<table class="rwd-table">
+		<table  class="tableCenter">
 			<tr>
 				<td colspan="2"><h2>Enter the Course Book</h2></td>
 			</tr>
