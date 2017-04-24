@@ -20,7 +20,7 @@
 			</tr>
 			<tr>
 				<td>Enter Instructor Name :</td>
-				<td><form:input path="instructorName" required='true' /></td>
+				<td><form:input path="instructorName" disabled="true" value="${sessionScope.bookUserName}" /></td>
 			</tr>
 			<tr>
 				<td>Enter Book Name :</td>

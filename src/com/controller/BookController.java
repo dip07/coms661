@@ -306,4 +306,15 @@ public class BookController
 			modelObj.addAttribute("oldBooksList", oldCourseBookList);
 		return model;
 	}
+	
+	@RequestMapping("/archiveAllCourseBook")
+	public ModelAndView archiveAllCourseBook(HttpServletRequest request,HttpServletResponse response, Model modelObj) throws Exception {
+		
+		ModelAndView model = new ModelAndView("redirect:/adminScreen");
+		Boolean done = xmlDbDao.archiveAllCourseBook();
+		if(done!=null && done){
+			return new ModelAndView("redirect:/adminScreen?archived=t");
+		}
+		return model;
+	}
 }

@@ -488,4 +488,43 @@ public class BookXmlDbDao {
 		}
 		return null;
 	}
+
+	/**
+	 * @return
+	 */
+	public Boolean archiveAllCourseBook() {
+		
+
+		Books books= null;
+		try{
+			JAXBContext jaxbContext = JAXBContext.newInstance(Books.class);
+			Unmarshaller jaxbUnmarshaller = jaxbContext.createUnmarshaller();
+
+			File existingFile= new File(dbFilesLocation+"books.xml");
+			if(!existingFile.exists())
+				return null;
+			books = (Books) jaxbUnmarshaller.unmarshal(existingFile);
+		
+		for(Book book : books.getBookList()){
+			if(book.getIsArchived())
+				continue;
+			book.setIsArchived(true);
+		}
+		File file = new File(dbFilesLocation+"books.xml");
+		Marshaller jaxbMarshaller = jaxbContext.createMarshaller();
+
+		// output pretty printed
+		jaxbMarshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
+
+		jaxbMarshaller.marshal(books, file);
+		return true;
+		}
+		catch(Exception e){
+			logger.warn("No courses found");
+			e.printStackTrace();
+			return false;
+		}
+		
+	
+	}
 }

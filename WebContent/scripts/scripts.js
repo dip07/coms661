@@ -60,3 +60,7 @@ $(document).ready(function(){
 	     }	
 	  });
 });
+
+$(document).ready(function() {
+	  $('#messageDiv').fadeOut(5000); // 5 seconds x 1000 milisec = 5000 milisec
+	});
