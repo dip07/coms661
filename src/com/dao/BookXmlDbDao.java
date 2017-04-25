@@ -22,6 +22,8 @@ import com.models.Roles.Role;
 import com.models.Users;
 import com.models.Users.User;
 
+import constants.CourseBookMessages;
+
 public class BookXmlDbDao {
 	
 	@Value("${dbFiles.location}")
@@ -526,5 +528,82 @@ public class BookXmlDbDao {
 		}
 		
 	
+	}
+
+	/**
+	 * @param userNetId
+	 * @param userName
+	 * @return
+	 */
+	public String getAuthorizedCourseInfo(String userNetId, String userName) {
+
+		// check if the instructor has been assigned to any course or not 
+		Instructors instructorList= null;
+		try{
+			JAXBContext jaxbContext = JAXBContext.newInstance(Instructors.class);
+			Unmarshaller jaxbUnmarshaller = jaxbContext.createUnmarshaller();
+
+			File existingFile= new File(dbFilesLocation+"instructors.xml");
+			if(existingFile.exists())
+				instructorList = (Instructors) jaxbUnmarshaller.unmarshal(existingFile);
+		}
+		catch(Exception e)
+		{
+			logger.warn("No existing instructor details");
+			e.printStackTrace();
+			System.out.println("Error : " + e.getMessage() +"\n"+ e.getStackTrace());
+			return CourseBookMessages.NO_INSTRUCTOR_INFO_ASSIGNED.toString();
+		}
+		ArrayList<String> courseNoList=null;
+		for(Instructor  instr : instructorList.getInstructorList())
+		{
+			if(instr.getNetId().compareToIgnoreCase(userNetId) == 0)
+			{
+				if(courseNoList==null)
+					courseNoList = new ArrayList<String>();
+				courseNoList.add(instr.getInstructorForCourse());
+			}
+		}
+		if(courseNoList == null)
+			return CourseBookMessages.NO_COURSE_ASSIGNED.toString();
+
+		// check if that course info is already filled
+
+		CourseList courseList= null;
+		try{
+			JAXBContext jaxbContext = JAXBContext.newInstance(CourseList.class);
+			Unmarshaller jaxbUnmarshaller = jaxbContext.createUnmarshaller();
+
+			File existingFile= new File(dbFilesLocation+"course.xml");
+			if(!existingFile.exists())
+				throw new Exception("No Course exists");
+			courseList = (CourseList) jaxbUnmarshaller.unmarshal(existingFile);
+		}
+		catch(Exception e)
+		{
+			logger.warn("No courses found");
+			e.printStackTrace();
+		}
+
+		if(courseList !=null)
+		{
+			for(Course course : courseList.getCourses())
+			{
+				if(course.getIsArchived())
+					continue;
+				if(courseNoList!=null && courseNoList.contains(course.getCourseNumber()))
+					courseNoList.remove(course.getCourseNumber());
+			}
+		}
+		if(courseNoList.isEmpty())
+			return CourseBookMessages.COURSE_INFO_ALREADY_FILLED.toString();
+
+		// if course are not filled return a string of all course numbers delimited by |
+		StringBuffer sb = new StringBuffer();
+		for(String courseNo : courseNoList){
+			sb.append(courseNo).append("-");
+		}
+		sb.delete(sb.length()-1, sb.length());
+		return sb.toString();
 	}
 }

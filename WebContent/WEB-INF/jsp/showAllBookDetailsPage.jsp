@@ -48,15 +48,15 @@ Hi, This page will show book info for all courses
 			</table>
 		</c:when>
 		<c:otherwise>
-			<p><a href="${pageContext.request.contextPath}/enterUpdateCourse" class="mainPageButton">No Information Present. Enter Course Details</a></p>
+			<p>No Information Present.</p>
 		</c:otherwise>
 	</c:choose>
 	<br>
-			<p><a href="${pageContext.request.contextPath}/enterUpdateCourse" class="mainPageButton">Enter new Course Information</a></p>
+			<p align="center"><a href="${pageContext.request.contextPath}/addNewBookDetails" class="mainPageButton">Enter new Course Information</a></p>
 	
 
 
 
 
-<p><a href="${pageContext.request.contextPath}/addNewBookDetails">Add new Information</a></p>
+<%-- <p><a href="${pageContext.request.contextPath}/addNewBookDetails">Add new Information</a></p> --%>
 </div>

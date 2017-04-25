@@ -66,4 +66,14 @@
         <session>Fall</session>
         <year>2017</year>
     </book>
+    <book>
+        <author>NA</author>
+        <bookName>No</bookName>
+        <comments>Notes will be provided in class</comments>
+        <courseNumber>535</courseNumber>
+        <ISBN>NA</ISBN>
+        <isArchived>false</isArchived>
+        <session>Fall</session>
+        <year>2017</year>
+    </book>
 </books>

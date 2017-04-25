@@ -6,6 +6,6 @@
 	<p align="center"><a href="${pageContext.request.contextPath}/viewInstructorDetails" class="mainPageButton">Enter/Edit Instructor Details</a></p>
 	<p align="center"><a href="${pageContext.request.contextPath}/archiveAllCourseBook" class="mainPageButton">Archive all existing course book (after end of sem)</a></p>
 	<c:if test="${(not empty param.archived) && (param.archived == 't')}">
-		<div id="messageDiv" style="font-weight: bold  ; text-align:center ; font-size: 16px ; color: red">Successfully archived all courses</div>
+		<div id="popupMessageDiv" style="font-weight: bold  ; text-align:center ; font-size: 16px ; color: red">Successfully archived all courses</div>
 	</c:if>
 </div>

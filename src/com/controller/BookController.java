@@ -5,6 +5,7 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
@@ -38,6 +39,8 @@ import com.models.Books;
 import com.models.Books.Book;
 import com.models.Course;
 import com.models.CourseList;
+
+import constants.CourseBookMessages;
 
 @Controller
 public class BookController 
@@ -256,8 +259,28 @@ public class BookController
 	public ModelAndView addNewBookDetails(HttpServletRequest request,HttpServletResponse response, Model modelObj) throws Exception {
 		
 		ModelAndView model = new ModelAndView("addNewCourseBook");
-		model.addObject("message", "Custom message from Controller");
+		//model.addObject("message", "Custom message from Controller");
 		logger.warn("Warn Inside the logger");
+		String userNetId = request.getSession().getAttribute("bookUserNetId").toString();
+		String userName = request.getSession().getAttribute("bookUserName").toString();
+		String status = xmlDbDao.getAuthorizedCourseInfo(userNetId,userName);
+		
+		logger.warn("status is "+ status);
+		
+		if(status.equalsIgnoreCase(CourseBookMessages.NO_INSTRUCTOR_INFO_ASSIGNED.toString()))
+			modelObj.addAttribute("message", CourseBookMessages.NO_INSTRUCTOR_INFO_ASSIGNED.toString());
+		
+		else if (status.equalsIgnoreCase(CourseBookMessages.NO_COURSE_ASSIGNED.toString()))
+			modelObj.addAttribute("message", CourseBookMessages.NO_COURSE_ASSIGNED.toString());
+		
+		else if (status.equalsIgnoreCase(CourseBookMessages.COURSE_INFO_ALREADY_FILLED.toString()))
+			modelObj.addAttribute("message", CourseBookMessages.COURSE_INFO_ALREADY_FILLED.toString());
+		else
+		{
+			String courseNumbers[] = status.split("-");
+			ArrayList<String> courseNumLis = new ArrayList<String>(Arrays.asList(courseNumbers));
+			modelObj.addAttribute("courseNumLis", courseNumLis);
+		}
 		modelObj.addAttribute("bookForm", new Books.Book());
 		return model;
 	}
