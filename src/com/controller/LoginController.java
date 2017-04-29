@@ -73,5 +73,15 @@ public class LoginController {
 			return new ModelAndView("login");
 		}
 	}
+	
+	@RequestMapping("/logout")
+	public ModelAndView logout(HttpServletRequest request,HttpServletResponse response, Model modelObj) throws Exception {
+
+		ModelAndView model = new ModelAndView("redirect:/");
+		request.getSession().removeAttribute("bookUserName");
+		request.getSession().removeAttribute("bookUserNetId");
+		request.getSession().removeAttribute("role");
+		return model;
+	}
 
 }

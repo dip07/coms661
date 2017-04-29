@@ -100,7 +100,7 @@ public class BookXmlDbDao {
 	/**
 	 * @return
 	 */
-	public ArrayList<Course> getAllCourses() {
+	public ArrayList<Course> getAllUnarchivedCourses() {
 		
 		CourseList courseList= null;
 		try{
@@ -119,8 +119,13 @@ public class BookXmlDbDao {
 	    }
 		if(courseList==null)
 			return null;
-		else
-			return courseList.getCourses();
+		else{
+			ArrayList<Course> validCourseList = new ArrayList<Course>();
+			for(Course item : courseList.getCourses())
+				if(!item.getIsArchived())
+					validCourseList.add(item);
+			return validCourseList;
+		}
 	}
 
 	/**
@@ -153,6 +158,28 @@ public class BookXmlDbDao {
 	 * @return
 	 */
 	public Instructor getInstructorCourseAssignment(String net_id) {
+		Instructors instructors= null;
+		try{
+		JAXBContext jaxbContext = JAXBContext.newInstance(Instructors.class);
+	    Unmarshaller jaxbUnmarshaller = jaxbContext.createUnmarshaller();
+		
+	    	File existingFile= new File(dbFilesLocation+"instructors.xml");
+	    	if(existingFile.exists())
+	    		instructors = (Instructors) jaxbUnmarshaller.unmarshal(existingFile);
+	    }
+	    catch(Exception e)
+	    {
+	    	logger.warn("No existing instructor details");
+	    	e.printStackTrace();
+	    }
+		
+		if(instructors==null)
+			return null;
+		for(Instructor item : instructors.getInstructorList())
+		{
+			if(!item.getIsArchived() && item.getNetId().equals(net_id))
+				return item;
+		}
 		return null;
 	}
 
@@ -224,8 +251,9 @@ public class BookXmlDbDao {
 
 	/**
 	 * @param course
+	 * @param allowSaving 
 	 */
-	public void saveCourse(Course course) {
+	public String saveCourse(Course course, boolean allowOverwrite) {
 		try{
 			JAXBContext jaxbContext = JAXBContext.newInstance(CourseList.class);
 			Unmarshaller jaxbUnmarshaller = jaxbContext.createUnmarshaller();
@@ -244,8 +272,11 @@ public class BookXmlDbDao {
 			boolean isCoursePresent=false;
 			for(Course courseItem: courseList.getCourses())
 			{
-				if(courseItem.getCourseNumber().compareTo(course.getCourseNumber())==0)
+				if(courseItem.getCourseNumber().compareTo(course.getCourseNumber())==0 && !courseItem.getIsArchived())
 				{
+					if(!allowOverwrite)
+						return CourseBookMessages.COURSE_INFO_ALREADY_FILLED.toString();
+					
 					courseItem.setCourseName(course.getCourseName());
 					courseItem.setIsArchived(course.getIsArchived());
 					isCoursePresent=true;
@@ -263,11 +294,13 @@ public class BookXmlDbDao {
 			jaxbMarshaller.marshal(courseList, file);
 			//jaxbMarshaller.marshal(courseList, System.out);
 			//System.out.println(file.getAbsoluteFile()+" >> " + file.exists());
+			return CourseBookMessages.SUCCESS_TRANSACTION.toString();
 		}
 		catch(Exception e)
 		{
 			logger.error("Exception while saving courses : " + e.getStackTrace());
 			e.printStackTrace();
+			return CourseBookMessages.FAILED_TRANSACTION.toString();
 		}
 	}
 
@@ -605,5 +638,70 @@ public class BookXmlDbDao {
 		}
 		sb.delete(sb.length()-1, sb.length());
 		return sb.toString();
+	}
+
+	/**
+	 * @return
+	 */
+	public ArrayList<Course> getAllUnAssignedCourses() {
+
+		
+		CourseList courseList= null;
+		ArrayList<Course> validCourseList = new ArrayList<Course>();
+		try{
+		JAXBContext jaxbContext = JAXBContext.newInstance(CourseList.class);
+	    Unmarshaller jaxbUnmarshaller = jaxbContext.createUnmarshaller();
+		
+	    	File existingFile= new File(dbFilesLocation+"course.xml");
+	    	if(!existingFile.exists())
+	    		return null;
+	    	courseList = (CourseList) jaxbUnmarshaller.unmarshal(existingFile);
+	    }
+	    catch(Exception e)
+	    {
+	    	logger.warn("No courses found");
+	    	e.printStackTrace();
+	    }
+		if(courseList==null)
+			return null;
+		else{
+			for(Course item : courseList.getCourses())
+				if(!item.getIsArchived())
+					validCourseList.add(item);
+			// now we have to remove the course that are already assigned
+			//return validCourseList;
+		}
+		
+		Instructors instructorList= null;
+		try{
+		JAXBContext jaxbContext = JAXBContext.newInstance(Instructors.class);
+	    Unmarshaller jaxbUnmarshaller = jaxbContext.createUnmarshaller();
+		
+	    	File existingFile= new File(dbFilesLocation+"instructors.xml");
+	    	if(existingFile.exists())
+	    		instructorList = (Instructors) jaxbUnmarshaller.unmarshal(existingFile);
+	    }
+	    catch(Exception e)
+	    {
+	    	logger.warn("No existing instructor details");
+	    	e.printStackTrace();
+	    	System.out.println("Error : " + e.getMessage() +"\n"+ e.getStackTrace());
+	    }
+		
+		ArrayList<String> assignedCourseList = new ArrayList<String>();
+		if(instructorList!=null)
+		{
+			for(Instructor item : instructorList.getInstructorList())
+			{
+				assignedCourseList.add(item.getInstructorForCourse());
+			}
+		}
+		ArrayList<Course> unAssignedCourse = new ArrayList<Course>(validCourseList);
+		for(Course item : validCourseList)
+		{
+			if(assignedCourseList.contains(item.getCourseNumber()))
+				unAssignedCourse.remove(item);
+		}
+		return unAssignedCourse;
 	}
 }

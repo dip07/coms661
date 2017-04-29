@@ -261,7 +261,10 @@ body {
 				<!--[if lt IE 9]>
         <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
 <![endif]-->
-
+				
+				<div style="padding: 0 20px 0 0; background-color: #ddd ; height: 30px">
+					<tiles:insertAttribute name="logout" />
+				</div>
 				<div style="padding: 0 0 0 30px; width: 100%" id="login">
 					<div id="container">
 						<tiles:insertAttribute name="body" />

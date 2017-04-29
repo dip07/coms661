@@ -3,6 +3,7 @@
 <tiles-definitions>
 	<definition name="base.definition" template="/WEB-INF/jsp/layout.jsp">
 		<put-attribute name="title" value="" />
+		<put-attribute name="logout" value="/WEB-INF/jsp/logoutPage.jsp" />
 		<put-attribute name="body" value="" />
 
 		<put-list-attribute name="javascripts">

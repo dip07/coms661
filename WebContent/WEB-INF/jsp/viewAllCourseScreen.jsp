@@ -10,7 +10,7 @@
 				<tr>
 					<th><p>Course Name</p></th>
 					<th><p>Course Number</p></th>
-					<th><p>Is Archived</p></th>
+					<!-- <th><p>Is Archived</p></th> -->
 					<th><p>Edit Course</p></th>
 
 				</tr>
@@ -18,7 +18,7 @@
 					<tr>
 						<td><p>${course.courseName}</p></td>
 						<td><p>${course.courseNumber}</p></td>
-						<td><p>${course.isArchived}</p></td>
+						<%-- <td><p>${course.isArchived}</p></td> --%>
 						<td><a
 							href="${pageContext.request.contextPath}/editCourse?course_number=${course.courseNumber}">Edit
 								this Course</a></td>

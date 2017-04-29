@@ -16,6 +16,8 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 import com.models.Roles.Role;
 
+import constants.UserRoles;
+
 /**
  * @author dipanjankarmakar
  *
@@ -92,7 +94,7 @@ public class Users {
 		user.setNetId("dipanjan");
 		user.setPassword("pass1");
 		Role role= new Role();
-		role.setRoleName("student");
+		role.setRoleName(UserRoles.admin.toString());
 		user.setRole(role);
 		
 		users.setUserList(new ArrayList<Users.User>());
@@ -103,7 +105,7 @@ public class Users {
 		user.setNetId("gau");
 		user.setPassword("pass2");
 		role= new Role();
-		role.setRoleName("instructor");
+		role.setRoleName(UserRoles.instructor.toString());
 		user.setRole(role);
 		users.getUserList().add(user);
 		

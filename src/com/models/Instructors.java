@@ -35,6 +35,7 @@ public class Instructors {
 		private String netId;
 		private String name;
 		private String instructorForCourse;
+		private Boolean isArchived;
 		
 		public String getNetId() {
 			return netId;
@@ -54,5 +55,18 @@ public class Instructors {
 		public void setInstructorForCourse(String instructorForCourse) {
 			this.instructorForCourse = instructorForCourse;
 		}
+		public Boolean getIsArchived() {
+			return isArchived;
+		}
+		public void setIsArchived(Boolean isArchived) {
+			this.isArchived = isArchived;
+		}
+		@Override
+		public String toString() {
+			return "Instructor [netId=" + netId + ", name=" + name
+					+ ", instructorForCourse=" + instructorForCourse
+					+ ", isArchived=" + isArchived + "]";
+		}
+		
 	}
 }
