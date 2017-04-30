@@ -68,5 +68,21 @@ public class Instructors {
 					+ ", isArchived=" + isArchived + "]";
 		}
 		
+		
+		/* (non-Javadoc)
+		 * @see java.lang.Object#equals(java.lang.Object)
+		 */
+		@Override
+		public boolean equals(Object obj) {
+			if (obj == null) {
+		        return false;
+		    }
+			if (obj instanceof 	Instructor) 
+			{
+				Instructor other = (Instructor) obj;
+				return other.getNetId().equals(netId);
+			}
+			return false;
+		}
 	}
 }

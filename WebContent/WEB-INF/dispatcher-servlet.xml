@@ -68,6 +68,11 @@
         </mvc:interceptor> 
 	</mvc:interceptors>
 	
+	<bean id="messageSource" class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
+     	<property name="basename" value="classpath:messages" />
+     	<property name="defaultEncoding" value="UTF-8"/>
+ 	</bean>
+	
 	<context:property-placeholder location="classpath:application.properties"
 		ignore-unresolvable="true" ignore-resource-not-found="true" />
  

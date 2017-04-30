@@ -12,12 +12,16 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.dao.BookXmlDbDao;
 import com.models.Course;
@@ -39,6 +43,18 @@ public class AdminController {
 	
 	@Autowired
 	EmailAPI emailAPI;
+	
+	@Value("${server.url}")
+	String serverUrl;
+	
+	@Value("${emailText}")
+	String emailText;
+	
+	@Value("${from.address}")
+	String fromAddress;
+	
+	@Autowired
+	protected ApplicationContext context;
 	
 	Logger logger= Logger.getLogger(AdminController.class);
 	
@@ -194,9 +210,10 @@ public class AdminController {
 	}
 	
 	@RequestMapping("/sendReminderEmail")
-	public ModelAndView sendReminderEmail(HttpServletRequest request,HttpServletResponse response, Model modelObj) throws Exception {
+	public ModelAndView sendReminderEmail(HttpServletRequest request,HttpServletResponse response, Model modelObj, RedirectAttributes redir) throws Exception {
 
 		ModelAndView model = new ModelAndView("redirect:/adminScreen");
+		/*
 		String toAddr = "dipanjan@iastate.edu";
 		String fromAddr = "dipanjan@iastate.edu";
 		// email subject
@@ -204,6 +221,24 @@ public class AdminController {
 		// email body
 		String body = "There you go.. You got an email.. Let's understand details on how Spring MVC works -- By Dipanjan Email Admin";
 		emailAPI.adminReadyToSendEmail(toAddr, null ,fromAddr, subject, body);
+		*/
+		
+		boolean emailSent = true;
+		String netIdToEmail[] = null;
+		try{
+		netIdToEmail = xmlDbDao.getUsersToEmail();
+		String emailMessage = context.getMessage("email.text", new Object[] {serverUrl}, StringUtils.parseLocaleString("en")); 
+		String emailSubject = context.getMessage("email.subject", null, StringUtils.parseLocaleString("en")); 
+		logger.debug("Email text : " + emailMessage);
+			emailAPI.adminReadyToSendEmail(netIdToEmail, null ,fromAddress, emailSubject, emailMessage);
+		}
+		catch(Exception e)
+		{
+			logger.error("Error while sending reminder email " + e.getMessage() , e);
+			emailSent = false;
+		}
+		if(netIdToEmail!=null && netIdToEmail.length > 0 && emailSent)
+			redir.addFlashAttribute("status", "Email sent successfully");
 		return model;
 	}
 

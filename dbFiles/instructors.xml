@@ -2,13 +2,13 @@
 <instructors>
     <instructor>
         <instructorForCourse>535</instructorForCourse>
-        <isArchived>true</isArchived>
+        <isArchived>false</isArchived>
         <name>dipanjan</name>
         <netId>dipanjan</netId>
     </instructor>
     <instructor>
         <instructorForCourse>511</instructorForCourse>
-        <isArchived>true</isArchived>
+        <isArchived>false</isArchived>
         <name>dipanjan</name>
         <netId>dipanjan</netId>
     </instructor>

@@ -24,7 +24,7 @@ public class EmailTest {
  
 		// @Service("crunchifyEmail") <-- same annotation you specified in CrunchifyEmailAPI.java
 		EmailAPI emailAPI = (EmailAPI) context.getBean("adminEmail");
-		String toAddr = "dipanjan@iastate.edu";
+		String toAddr[] = new String[]{"dipanjan@iastate.edu"};
 		String fromAddr = "dipanjan.online@gmail.com";
  
 		// email subject

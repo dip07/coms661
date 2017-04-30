@@ -2,6 +2,8 @@ package com.dao;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
@@ -726,5 +728,38 @@ public class BookXmlDbDao {
 				unAssignedCourse.remove(item);
 		}
 		return unAssignedCourse;
+	}
+
+	/**
+	 * @return
+	 */
+	public String[] getUsersToEmail() 
+	{
+		ArrayList<Instructor> instructorList = getInstructorCourseAssignment(); 
+		ArrayList<Instructor> instructorToEmail = new ArrayList<Instructor>(instructorList);
+		ArrayList<Book> unarchivedBooks = getAllBookDetails();
+		ArrayList<String> courseNumList = null;
+		
+		for(Book book  : unarchivedBooks)
+		{
+			if(courseNumList == null)
+				courseNumList = new ArrayList<String>();
+			courseNumList.add(book.getCourseNumber());
+		}
+		
+		if(courseNumList!=null && !courseNumList.isEmpty())
+		{
+			for(Instructor ins : instructorList)
+			{
+				if(courseNumList.contains(ins.getInstructorForCourse()))
+					instructorToEmail.remove(ins);
+			}
+		}
+		ArrayList<String> emailIds = new ArrayList<String>();
+		for(Instructor ins : instructorList)
+		{
+			emailIds.add(ins.getNetId() + "@iastate.edu");
+		}
+		return emailIds.toArray(new String[1]);
 	}
 }

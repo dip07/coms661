@@ -1,6 +1,6 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%-- <p>Hello : ${param.archived}</p> --%>
-<div>
+<div style="padding-top: 30px">
 	<p align="center"><a href="${pageContext.request.contextPath}/welcome" class="mainPageButton">Back to Home</a></p>
 	<p align="center"><a href="${pageContext.request.contextPath}/viewAllCourse" class="mainPageButton">Enter/Edit Course Details</a></p>
 	<p align="center"><a href="${pageContext.request.contextPath}/viewInstructorDetails" class="mainPageButton">Enter/Edit Instructor Details</a></p>
@@ -9,5 +9,9 @@
 	
 	<c:if test="${(not empty param.archived) && (param.archived == 't')}">
 		<div id="popupMessageDiv" style="font-weight: bold  ; text-align:center ; font-size: 16px ; color: red">Successfully archived all courses</div>
+	</c:if>
+	<%-- <p>status : ${status}</p> --%>
+	<c:if test="${(not empty status) && (status == 'Email sent successfully')}">
+		<div id="popupMessageDiv" style="font-weight: bold  ; text-align:center ; font-size: 16px ; color: red">Successfully sent reminder email</div>
 	</c:if>
 </div>

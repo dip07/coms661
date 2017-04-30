@@ -103,7 +103,6 @@
 							<includes>
 								<include>**/*.xml</include>
 								<include>**/*.properties</include>
-								<!-- include any other file types you want to filter -->
 							</includes>
 						</resource>
 					</webResources>
