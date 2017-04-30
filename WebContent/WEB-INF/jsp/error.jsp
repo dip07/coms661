@@ -9,6 +9,8 @@
 <body>
 	<p align="center" style ="color: red ; font-style: italic; font-size: 18px;"> Something went wrong. Please contact System Administrator</p>
 	
+	<p align="center"><a href="${pageContext.request.contextPath}" style="font-size: 16px; color: red; font-weight: bold">Lets go back!</a></p>
+	
 	<p align="center"><img alt="ImageIcon" style="height: 320px;width: 100%;" src="${pageContext.request.contextPath}/images/oops.jpg"></p>
 </body>
 </html>
