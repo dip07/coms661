@@ -15,10 +15,12 @@ public class EmailAPI {
 	@Autowired
 	private MailSender isumail;
 	
-	public void adminReadyToSendEmail(String toAddress, String fromAddress, String subject, String msgBody) {
+	public void adminReadyToSendEmail(String toAddress, String ccAddress, String fromAddress, String subject, String msgBody) {
 		 
 		SimpleMailMessage emailMsg = new SimpleMailMessage();
 		emailMsg.setFrom(fromAddress);
+		if(ccAddress!=null && !ccAddress.isEmpty())
+			emailMsg.setCc(ccAddress);
 		emailMsg.setTo(toAddress);
 		emailMsg.setSubject(subject);
 		emailMsg.setText(msgBody);

@@ -42,7 +42,7 @@
 	<bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
 		<property name="host" value="smtp.gmail.com" />
 		<property name="port" value="587" />
-		<property name="username" value="" />
+		<property name="username" value="dipanjan@iastate.edu" />
 		<property name="password" value="" />
  
 		<!-- The name of the property, following JavaBean naming conventions -->
@@ -67,9 +67,6 @@
             <bean class="com.interceptor.LoggingInterceptor"/>
         </mvc:interceptor> 
 	</mvc:interceptors>
-	
-	
-	
 	
 	<context:property-placeholder location="classpath:application.properties"
 		ignore-unresolvable="true" ignore-resource-not-found="true" />

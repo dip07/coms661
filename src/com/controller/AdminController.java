@@ -23,6 +23,7 @@ import com.dao.BookXmlDbDao;
 import com.models.Course;
 import com.models.Instructors.Instructor;
 import com.models.Users.User;
+import com.service.EmailAPI;
 
 import constants.CourseBookMessages;
 
@@ -35,6 +36,9 @@ public class AdminController {
 	
 	@Autowired
 	BookXmlDbDao xmlDbDao;
+	
+	@Autowired
+	EmailAPI emailAPI;
 	
 	Logger logger= Logger.getLogger(AdminController.class);
 	
@@ -186,6 +190,20 @@ public class AdminController {
 		ModelAndView model = new ModelAndView("redirect:/viewInstructorDetails");
 		Boolean isSaved= xmlDbDao.saveEditInstructorData(instructorForm);
 		logger.debug("Inside saveEditInstructor. Value of isSaved is : " + isSaved);
+		return model;
+	}
+	
+	@RequestMapping("/sendReminderEmail")
+	public ModelAndView sendReminderEmail(HttpServletRequest request,HttpServletResponse response, Model modelObj) throws Exception {
+
+		ModelAndView model = new ModelAndView("redirect:/adminScreen");
+		String toAddr = "dipanjan@iastate.edu";
+		String fromAddr = "dipanjan@iastate.edu";
+		// email subject
+		String subject = "Reminder: Please fill the course book in the system";
+		// email body
+		String body = "There you go.. You got an email.. Let's understand details on how Spring MVC works -- By Dipanjan Email Admin";
+		emailAPI.adminReadyToSendEmail(toAddr, null ,fromAddr, subject, body);
 		return model;
 	}
 

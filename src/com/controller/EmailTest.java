@@ -24,7 +24,7 @@ public class EmailTest {
  
 		// @Service("crunchifyEmail") <-- same annotation you specified in CrunchifyEmailAPI.java
 		EmailAPI emailAPI = (EmailAPI) context.getBean("adminEmail");
-		String toAddr = "gbhatt@iastate.edu";
+		String toAddr = "dipanjan@iastate.edu";
 		String fromAddr = "dipanjan.online@gmail.com";
  
 		// email subject
@@ -32,7 +32,7 @@ public class EmailTest {
  
 		// email body
 		String body = "There you go.. You got an email.. Let's understand details on how Spring MVC works -- By Dipanjan Email Admin";
-		emailAPI.adminReadyToSendEmail(toAddr, fromAddr, subject, body);
+		emailAPI.adminReadyToSendEmail(toAddr, null ,fromAddr, subject, body);
 	}
 
 }
