@@ -302,6 +302,8 @@ public class BookController
 		logger.warn("Received courseNumber " + courseNumber);
 		Book book = xmlDbDao.getCourseBookInfo(courseNumber);
 		modelObj.addAttribute("bookForm", book);
+		ArrayList<String> courseNumLis = new ArrayList<String>(Arrays.asList(courseNumber));
+		modelObj.addAttribute("courseNumLis", courseNumLis);
 		return model;
 	}
 	

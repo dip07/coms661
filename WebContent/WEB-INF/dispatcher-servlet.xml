@@ -56,6 +56,20 @@
 		</property>
 	</bean>
 	
+	<mvc:interceptors>
+        <mvc:interceptor>
+            <mvc:mapping path="/**"/>
+            	<mvc:exclude-mapping path="/login/**"/>
+            	<mvc:exclude-mapping path="/checkLogin/**"/>
+            	<mvc:exclude-mapping path="/css/**" />
+            	<mvc:exclude-mapping path="/scripts/**" />
+            	<mvc:exclude-mapping path="/images/**" />
+            <bean class="com.interceptor.LoggingInterceptor"/>
+        </mvc:interceptor> 
+	</mvc:interceptors>
+	
+	
+	
 	
 	<context:property-placeholder location="classpath:application.properties"
 		ignore-unresolvable="true" ignore-resource-not-found="true" />

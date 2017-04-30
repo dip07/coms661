@@ -1,5 +1,5 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<p>Hello : ${param.archived}</p>
+<%-- <p>Hello : ${param.archived}</p> --%>
 <div>
 	<p align="center"><a href="${pageContext.request.contextPath}/welcome" class="mainPageButton">Back to Home</a></p>
 	<p align="center"><a href="${pageContext.request.contextPath}/viewAllCourse" class="mainPageButton">Enter/Edit Course Details</a></p>

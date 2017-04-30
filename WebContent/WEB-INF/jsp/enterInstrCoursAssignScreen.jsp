@@ -1,13 +1,14 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%-- <p>Message : ${status}</p> --%>
-<div>
+<div class="centered" style="padding-top: 30px">
+<p><a href="${pageContext.request.contextPath}/welcome" class="mainPageButton">Back to Home</a></p>
 	<c:choose>
 	<c:when test="${empty status}">
 	<form:form action="saveEditInstructor" method="post" commandName="instructorForm">
-		<table class="rwd-table">
+		<table align="center">
 			<tr>
-				<td colspan="2"><h2>Enter the required details</h2></td>
+				<th colspan="2"><h2>Enter the required details :</h2></th>
 			</tr>
 			<tr>
 				<td>Select Course Number</td>
@@ -18,7 +19,6 @@
 					<c:otherwise>
 
 						<td><form:select path="instructorForCourse">
-								<form:option value="NONE" label="--- Select ---" />
 								<form:options items="${courseNameList}" />
 							</form:select></td>
 					</c:otherwise>
@@ -28,7 +28,6 @@
 				<td>Select Instructor Name</td>
 				<td>
 					<form:select path="name">
-						<form:option value="NONE" label="--- Select ---"/>
 	    				<form:options items="${userNameList}" />
 					</form:select>
 				</td>
@@ -44,13 +43,13 @@
 			
 			<tr>
 				<td colspan="2" style="text-align: center"><input type="submit"
-					value="Submit" class="submitBtn" /></td>
+					value="Submit" class="mainPageButton" /></td>
 			</tr>
 		</table>
 	</form:form>
 	</c:when>
 	<c:otherwise>
-		<p>All courses already assigned.</p>
+		<p align="center"><span style="color: red; font-size: 16px ; font-weight: bold">All courses already assigned.</span></p>
 	</c:otherwise>
 	</c:choose>
 </div>

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<books>
+    <book>
+        <author>NA</author>
+        <bookName>-NA-</bookName>
+        <comments>Notes will be provided in class</comments>
+        <courseNumber>535</courseNumber>
+        <ISBN>NA</ISBN>
+        <instructorName>dipanjan</instructorName>
+        <isArchived>false</isArchived>
+        <session>Fall</session>
+        <year>2016</year>
+    </book>
+    <book>
+        <author>Coremen</author>
+        <bookName>Introduction to Algorithm</bookName>
+        <comments>Course materials also provided in class</comments>
+        <courseNumber>511</courseNumber>
+        <ISBN>100100100</ISBN>
+        <instructorName>gaurav</instructorName>
+        <isArchived>true</isArchived>
+        <session>Spring</session>
+        <year>2017</year>
+    </book>
+</books>

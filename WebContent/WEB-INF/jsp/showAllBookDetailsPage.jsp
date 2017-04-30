@@ -2,10 +2,10 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <div>
-Hi, This page will show book info for all courses
-<p>Logged User Name :${sessionScope.bookUserName} </p>
-<p><a href="${pageContext.request.contextPath}/exportToExcel">Export to Excel</a></p>
-<p><a href="${pageContext.request.contextPath}/welcome">Back to Home</a></p>
+<span style="font-size: 16px">Here you will be able to view all course book details </span>
+<%-- <p>Logged User Name :${sessionScope.bookUserName} </p> --%>
+<p><a href="${pageContext.request.contextPath}/welcome" class="mainPageButton">Back to Home</a></p>
+<p><a href="${pageContext.request.contextPath}/exportToExcel" class="mainPageButton">Export to Excel</a></p>
 	<c:choose>
 		<c:when test="${empty noData}">
 			<table border="1"
@@ -18,7 +18,7 @@ Hi, This page will show book info for all courses
 					<th><p>Book Name</p></th>
 					<th><p>Author Name</p></th>
 					<th><p>ISBN</p></th>
-					<th><p>Comments</p></th>
+					<th style="width:130px"><p>Comments</p></th>
 					<th><p>Edit Info</p></th>
 				</tr>
 				<c:forEach items="${courseBooks}" var="courseBook">
@@ -30,7 +30,7 @@ Hi, This page will show book info for all courses
 						<td><p>${courseBook.bookName}</p></td>
 						<td><p>${courseBook.author}</p></td>
 						<td><p>${courseBook.ISBN}</p></td>
-						<td><p style="width: 100px">${courseBook.comments}</p></td>
+						<td style="width:130px"><p>${courseBook.comments}</p></td>
 						<c:set var="loggedUserName"  value="${sessionScope.bookUserName}"/>
 						<c:choose>
 						<c:when test="${(not empty loggedUserName) && (loggedUserName eq courseBook.instructorName)}">
@@ -48,7 +48,7 @@ Hi, This page will show book info for all courses
 			</table>
 		</c:when>
 		<c:otherwise>
-			<p>No Information Present.</p>
+			<p><span style="color: red ; font-size: 16px; font-weight: bold;">No Information Present</span>.</p>
 		</c:otherwise>
 	</c:choose>
 	<br>

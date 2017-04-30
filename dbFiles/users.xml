@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<users>
+    <user>
+        <emailId>dipanjan@iastate.edu</emailId>
+        <netId>dipanjan</netId>
+        <password>pass1</password>
+        <name>dipanjan</name>
+        <role>
+            <roleName>admin</roleName>
+        </role>
+    </user>
+    <user>
+        <emailId>gaurav@iastate.edu</emailId>
+        <netId>gau</netId>
+        <password>pass2</password>
+        <name>gaurav</name>
+        <role>
+            <roleName>instructor</roleName>
+        </role>
+    </user>
+    <user>
+        <emailId>gaurav@iastate.edu</emailId>
+        <netId>gaurav</netId>
+        <password>pass3</password>
+        <name>gaurav</name>
+        <role>
+            <roleName>student</roleName>
+        </role>
+    </user>
+</users>

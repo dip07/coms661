@@ -1,10 +1,11 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <div style="padding: 30px 0 0 0">
-<p>User : ${sessionScope.bookUserNetId}</p>
+<%-- <p>User : ${sessionScope.bookUserNetId}</p> --%>
+
+<p><a href="${pageContext.request.contextPath}/welcome" class="mainPageButton">Back to Home</a></p>
 <c:choose>
 		<c:when test="${empty noData}">
-			<table border="1"
-				style="background-color: #85c1e9; color: #34495e; font: Arial; border-radius: 6px; font-size: 12px; width: 90%;">
+			<table>
 				<tr>
 					<th><p>Course Number</p></th>
 					<th><p>Year</p></th>
@@ -33,7 +34,7 @@
 			</table>
 		</c:when>
 		<c:otherwise>
-			<p>No Information Present . Check current course details or contact admin</p>
+			<p align="center"><span style="color: red; font-size: 12 ; font-weight: bold;">No Information Present . Check current course details or contact admin</span></p>
 		</c:otherwise>
 	</c:choose>
 

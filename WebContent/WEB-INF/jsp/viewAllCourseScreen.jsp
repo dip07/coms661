@@ -2,13 +2,12 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <div class="centered">
-<p><a href="${pageContext.request.contextPath}/welcome">Back to Home</a></p>
+<p><a href="${pageContext.request.contextPath}/welcome" class="mainPageButton">Back to Home</a></p>
 	<c:choose>
 		<c:when test="${empty noData}">
-			<table border="1"
-				style="background-color: #85c1e9; color: #34495e; font: Arial; border-radius: 6px; font-size: 12px; width: 90%;">
+			<table border="1" style="background-color: #ddd; color: #34495e;font-size: 16px ;font-family : Trebuchet MS,Arial,Helvetica,sans-serif; border-radius: 6px; font-size: 12px; width: 90%;">
 				<tr>
-					<th><p>Course Name</p></th>
+					<th style="background-color: #4caf50; font"><p>Course Name</p></th>
 					<th><p>Course Number</p></th>
 					<!-- <th><p>Is Archived</p></th> -->
 					<th><p>Edit Course</p></th>
@@ -17,23 +16,21 @@
 				<c:forEach items="${courseList}" var="course">
 					<tr>
 						<td><p>${course.courseName}</p></td>
-						<td><p>${course.courseNumber}</p></td>
+						<td align="center"><p>${course.courseNumber}</p></td>
 						<%-- <td><p>${course.isArchived}</p></td> --%>
-						<td><a
-							href="${pageContext.request.contextPath}/editCourse?course_number=${course.courseNumber}">Edit
-								this Course</a></td>
+						<td><a href="${pageContext.request.contextPath}/editCourse?course_number=${course.courseNumber}"><u>Edit this Course</u></a></td>
 					</tr>
-					<tr>
+					<!-- <tr>
 						<td colspan="4" style="background-color: orange; height: 10px"></td>
-					</tr>
+					</tr> -->
 				</c:forEach>
 			</table>
 		</c:when>
 		<c:otherwise>
-			<p><a href="${pageContext.request.contextPath}/enterUpdateCourse" class="mainPageButton">No Information Present. Enter Course Details</a></p>
+			<p align="center"><a href="${pageContext.request.contextPath}/enterUpdateCourse" class="mainPageButton">No Information Present</a></p>
 		</c:otherwise>
 	</c:choose>
 	<br>
-			<p><a href="${pageContext.request.contextPath}/enterUpdateCourse" class="mainPageButton">Enter new Course Information</a></p>
+			<p align="center"><a href="${pageContext.request.contextPath}/enterUpdateCourse" class="mainPageButton">Enter new Course Information</a></p>
 	
 </div>

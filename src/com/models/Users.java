@@ -93,6 +93,7 @@ public class Users {
 		user.setEmailId("dipanjan@iastate.edu");
 		user.setNetId("dipanjan");
 		user.setPassword("pass1");
+		user.setName("Dipanjan");
 		Role role= new Role();
 		role.setRoleName(UserRoles.admin.toString());
 		user.setRole(role);
@@ -104,6 +105,7 @@ public class Users {
 		user.setEmailId("gaurav@iastate.edu");
 		user.setNetId("gau");
 		user.setPassword("pass2");
+		user.setName("Gaurav");
 		role= new Role();
 		role.setRoleName(UserRoles.instructor.toString());
 		user.setRole(role);

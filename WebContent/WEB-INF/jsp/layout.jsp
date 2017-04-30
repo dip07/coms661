@@ -13,6 +13,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="shortcut icon" href="http://www.cs.iastate.edu/sites/all/themes/suitcase/images/favicon.ico"/>
 <title><tiles:insertAttribute name="title" ignore="true" /></title>
 <style type="text/css">
 body {
@@ -262,7 +263,7 @@ body {
         <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
 <![endif]-->
 				
-				<div style="padding: 0 20px 0 0; background-color: #ddd ; height: 30px">
+				<div style="padding: 10px 20px 0 0; background-color: #ddd ; height: 60px">
 					<tiles:insertAttribute name="logout" />
 				</div>
 				<div style="padding: 0 0 0 30px; width: 100%" id="login">

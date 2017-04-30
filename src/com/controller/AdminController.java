@@ -185,7 +185,7 @@ public class AdminController {
 
 		ModelAndView model = new ModelAndView("redirect:/viewInstructorDetails");
 		Boolean isSaved= xmlDbDao.saveEditInstructorData(instructorForm);
-		logger.debug("Inside adminHome function");
+		logger.debug("Inside saveEditInstructor. Value of isSaved is : " + isSaved);
 		return model;
 	}
 

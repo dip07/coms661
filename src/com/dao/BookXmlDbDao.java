@@ -150,7 +150,11 @@ public class BookXmlDbDao {
 		
 		if(instructorList==null)
 			return null;
-		return instructorList.getInstructorList();
+		ArrayList<Instructor> unArchinstructorList = new ArrayList<Instructor>();
+		for(Instructor item : instructorList.getInstructorList())
+			if(!item.getIsArchived())
+				unArchinstructorList.add(item);
+		return unArchinstructorList;
 	}
 
 	/**
@@ -227,14 +231,32 @@ public class BookXmlDbDao {
 			Unmarshaller jaxbUnmarshaller = jaxbContext.createUnmarshaller();
 
 			File existingFile= new File(dbFilesLocation+"instructors.xml");
-			instructorList = (Instructors) jaxbUnmarshaller.unmarshal(existingFile);
+			if(existingFile.exists())
+				instructorList = (Instructors) jaxbUnmarshaller.unmarshal(existingFile);
+			else
+				instructorList= new Instructors();
 		}
 		catch(Exception e)
 		{
 			instructorList= new Instructors();
 			e.printStackTrace();
 		}
-		instructorList.getInstructorList().add(instructorForm);
+		boolean isPresent = false;
+		for(Instructor item : instructorList.getInstructorList())
+		{
+			if (item.getIsArchived())
+				continue;
+			if (item.getInstructorForCourse().compareTo(instructorForm.getInstructorForCourse()) == 0)
+			{
+				item.setNetId(instructorForm.getNetId());
+				item.setName(instructorForm.getName());
+				item.setInstructorForCourse(instructorForm.getInstructorForCourse());
+				item.setIsArchived(instructorForm.getIsArchived());
+				isPresent = true;
+			}
+		}
+		if(!isPresent)
+			instructorList.getInstructorList().add(instructorForm);
 
 		Marshaller jaxbMarshaller;
 		try {
@@ -389,15 +411,16 @@ public class BookXmlDbDao {
 			{
 				if(bookItem.getIsArchived())
 					continue;
-				if( bookItem.getCourseNumber().compareTo(book.getCourseNumber())==0
-						&& (bookItem.getYear()==book.getYear())
-						&& (bookItem.getSession().compareTo(book.getSession())==0)) 
+				if( bookItem.getCourseNumber().compareTo(book.getCourseNumber())==0 ) 
 				{
 					bookItem.setBookName(book.getBookName());
 					bookItem.setAuthor(book.getAuthor());
 					bookItem.setISBN(book.getISBN());
 					bookItem.setInstructorName(book.getInstructorName());
 					bookItem.setComments(book.getComments());
+					bookItem.setYear(book.getYear());
+					bookItem.setSession(book.getSession());
+					bookItem.setIsArchived(book.getIsArchived());
 					isBookPresent=true;
 				}
 			}
@@ -602,15 +625,14 @@ public class BookXmlDbDao {
 
 		// check if that course info is already filled
 
-		CourseList courseList= null;
+		Books bookList= null;
 		try{
-			JAXBContext jaxbContext = JAXBContext.newInstance(CourseList.class);
+			JAXBContext jaxbContext = JAXBContext.newInstance(Books.class);
 			Unmarshaller jaxbUnmarshaller = jaxbContext.createUnmarshaller();
 
-			File existingFile= new File(dbFilesLocation+"course.xml");
-			if(!existingFile.exists())
-				throw new Exception("No Course exists");
-			courseList = (CourseList) jaxbUnmarshaller.unmarshal(existingFile);
+			File existingFile= new File(dbFilesLocation+"books.xml");
+			if(existingFile.exists())
+				bookList= (Books) jaxbUnmarshaller.unmarshal(existingFile);
 		}
 		catch(Exception e)
 		{
@@ -618,14 +640,14 @@ public class BookXmlDbDao {
 			e.printStackTrace();
 		}
 
-		if(courseList !=null)
+		if(bookList !=null)
 		{
-			for(Course course : courseList.getCourses())
+			for(Book book : bookList.getBookList())
 			{
-				if(course.getIsArchived())
+				if(book.getIsArchived())
 					continue;
-				if(courseNoList!=null && courseNoList.contains(course.getCourseNumber()))
-					courseNoList.remove(course.getCourseNumber());
+				if(courseNoList!=null && courseNoList.contains(book.getCourseNumber()))
+					courseNoList.remove(book.getCourseNumber());
 			}
 		}
 		if(courseNoList.isEmpty())
@@ -693,7 +715,8 @@ public class BookXmlDbDao {
 		{
 			for(Instructor item : instructorList.getInstructorList())
 			{
-				assignedCourseList.add(item.getInstructorForCourse());
+				if(!item.getIsArchived())
+					assignedCourseList.add(item.getInstructorForCourse());
 			}
 		}
 		ArrayList<Course> unAssignedCourse = new ArrayList<Course>(validCourseList);
