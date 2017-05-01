@@ -18,7 +18,7 @@
         <courseNumber>511</courseNumber>
         <ISBN>100100100</ISBN>
         <instructorName>true</instructorName>
-        <isArchived>false</isArchived>
+        <isArchived>true</isArchived>
         <session>Spring</session>
         <year>2017</year>
     </book>

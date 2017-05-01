@@ -14,7 +14,7 @@
 </c:choose>
 <div>
 	<form:form action="${formAction}" method="post" commandName="courseForm">
-		<table class="rwd-table">
+		<table>
 			<tr>
 				<td colspan="2"><h2>Enter the Course Details :</h2></td>
 			</tr>

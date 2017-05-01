@@ -62,8 +62,6 @@ public class AdminController {
 	public ModelAndView adminHome(HttpServletRequest request,HttpServletResponse response) throws Exception {
 
 		ModelAndView model = new ModelAndView("adminHome");
-		logger.debug("Inside adminHome function");
-		model.addObject("message", "Custom message from Admin Controller");
 		return model;
 	}
 	@RequestMapping("/enterUpdateCourse")
@@ -125,7 +123,6 @@ public class AdminController {
 	public ModelAndView adminScreen(HttpServletRequest request,HttpServletResponse response) throws Exception {
 
 		ModelAndView model = new ModelAndView("adminScreen");
-		logger.debug("Inside adminHome function");
 		return model;
 	}
 	
@@ -151,7 +148,6 @@ public class AdminController {
 			modelObj.addAttribute("instructorAssignment", instructorList);
 		else
 			modelObj.addAttribute("noData", true);
-		logger.debug("Inside adminHome function");
 		return model;
 	}
 	

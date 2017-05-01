@@ -27,9 +27,6 @@
 						<td><p>${courseBook.ISBN}</p></td>
 						<td><p style="width: 100px">${courseBook.comments}</p></td>
 					</tr>
-					<tr>
-						<td colspan="9" style="background-color: orange; height: 10px"></td>
-					</tr>
 				</c:forEach>
 			</table>
 		</c:when>

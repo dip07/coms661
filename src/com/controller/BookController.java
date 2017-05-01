@@ -63,9 +63,6 @@ public class BookController
 	public ModelAndView hello(HttpServletRequest request,HttpServletResponse response) throws Exception {
 
 		ModelAndView model = new ModelAndView("welcome");
-		model.addObject("message", "Custom message from Controller");
-		logger.debug("Debug Inside the logger");
-		logger.warn("Warn Inside the logger");
 		return model;
 	}
 
@@ -74,8 +71,6 @@ public class BookController
 
 		ModelAndView model = new ModelAndView("book");
 		model.addObject("message", "From fetchBook function");
-		logger.debug("Debug Inside the logger");
-		logger.warn("Warn Inside the logger");
 		modelObj.addAttribute("bookForm", new BookOld());
 		return model;
 	}
@@ -84,12 +79,9 @@ public class BookController
 	public ModelAndView getBookData(@ModelAttribute("bookForm") BookOld book , HttpServletRequest request,HttpServletResponse response,Model model) throws Exception 
 	{
 		try{
-		logger.warn("Inside getBookData");
 		ModelAndView modelObj = new ModelAndView("book");
-		logger.warn("Got value from form :" + book.getBookName());
+		logger.debug("Got value from form :" + book.getBookName());
 		modelObj.addObject("newMessage", "Got details");
-		logger.debug("Debug Inside the logger");
-		logger.warn("Warn Inside the logger");
 		model.addAttribute("studentFormstudentForm", new BookOld());
 		ArrayList<BookOld> bookObj=xmlDbDao.getBookDataFromDb(book);
 		for(BookOld instance:bookObj)
@@ -109,12 +101,9 @@ public class BookController
 	public ModelAndView enterBookData(@ModelAttribute("bookForm") BookOld book , HttpServletRequest request,HttpServletResponse response,Model model) throws Exception 
 	{
 		try{
-		logger.warn("Inside getBookData");
 		ModelAndView modelObj = new ModelAndView("book");
-		logger.warn("Got value from form :" + book.getBookName());
+		//logger.warn("Got value from form :" + book.getBookName());
 		modelObj.addObject("newMessage", "Got details");
-		logger.debug("Debug Inside the logger");
-		logger.warn("Warn Inside the logger");
 		model.addAttribute("studentFormstudentForm", new BookOld());
 		ArrayList<BookOld> bookObj=xmlDbDao.getBookDataFromDb(book);
 		for(BookOld instance:bookObj)
@@ -127,7 +116,7 @@ public class BookController
 	     
 	    CourseList courseList= null;
 	    try{
-	    	File existingFile= new File("/Users/dipanjankarmakar/Documents/Isu Google Drive/Isu Studies Google Drive/4th Sem/661/course.xml");
+	    	File existingFile= new File(dbFilesLocation+"course.xml");
 	    	courseList = (CourseList) jaxbUnmarshaller.unmarshal(existingFile);
 	    }
 	    catch(Exception e)
@@ -137,7 +126,6 @@ public class BookController
 	    	e.printStackTrace();
 	    }
 	    model.addAttribute("courseList", courseList);
-		//return modelObj;
 		return new ModelAndView("editBookData");
 		}
 		catch(Exception e)
@@ -150,9 +138,6 @@ public class BookController
 	public ModelAndView getBookInformation(HttpServletRequest request,HttpServletResponse response, Model modelObj) throws Exception {
 		
 		ModelAndView model = new ModelAndView("enterBookPage");
-		model.addObject("message", "Custom message from Controller");
-		logger.debug("Debug Inside the logger");
-		logger.warn("Warn Inside the logger");
 		Books.Book bookObj= new Books.Book();
 		bookObj.setCourseNumber("535");
 		bookObj.setInstructorName("Gaurav Bhatt");
@@ -166,9 +151,6 @@ public class BookController
 	public ModelAndView saveBookInforation(@ModelAttribute("bookForm") Books.Book book,HttpServletRequest request,HttpServletResponse response, Model modelObj) throws Exception {
 		
 		ModelAndView model = new ModelAndView("enterBookPage");
-		model.addObject("message", "Custom message from Controller");
-		logger.warn("Warn Inside the logger");
-		logger.warn("Book information > " + book.toString());
 		return model;
 	}
 	
@@ -181,8 +163,6 @@ public class BookController
 			modelObj.addAttribute("courseBooks", bookList);
 		else
 			modelObj.addAttribute("noData", true);
-		model.addObject("message", "Custom message from Controller");
-		logger.warn("Warn Inside the logger");
 		return model;
 	}
 	
@@ -259,13 +239,11 @@ public class BookController
 	public ModelAndView addNewBookDetails(HttpServletRequest request,HttpServletResponse response, Model modelObj) throws Exception {
 		
 		ModelAndView model = new ModelAndView("addNewCourseBook");
-		//model.addObject("message", "Custom message from Controller");
-		logger.warn("Warn Inside the logger");
 		String userNetId = request.getSession().getAttribute("bookUserNetId").toString();
 		String userName = request.getSession().getAttribute("bookUserName").toString();
 		String status = xmlDbDao.getAuthorizedCourseInfo(userNetId,userName);
 		
-		logger.warn("status is "+ status);
+		logger.debug("status is "+ status);
 		
 		if(status.equalsIgnoreCase(CourseBookMessages.NO_INSTRUCTOR_INFO_ASSIGNED.toString()))
 			modelObj.addAttribute("message", CourseBookMessages.NO_INSTRUCTOR_INFO_ASSIGNED.toString());
@@ -289,7 +267,7 @@ public class BookController
 		
 		ModelAndView model = new ModelAndView("redirect:/showAllBookDetails");
 		model.addObject("message", "Custom message from Controller");
-		logger.warn("Received book info " + book.toString());
+		logger.debug("Received book info " + book.toString());
 		xmlDbDao.saveCourseBookInfo(book);
 		modelObj.addAttribute("bookForm", new Books.Book());
 		return model;
@@ -299,7 +277,7 @@ public class BookController
 	public ModelAndView editCourseBook(@RequestParam(value="courseNumber") String courseNumber,HttpServletRequest request,HttpServletResponse response, Model modelObj) throws Exception {
 		
 		ModelAndView model = new ModelAndView("addNewCourseBook");
-		logger.warn("Received courseNumber " + courseNumber);
+		logger.debug("Received courseNumber " + courseNumber);
 		Book book = xmlDbDao.getCourseBookInfo(courseNumber);
 		modelObj.addAttribute("bookForm", book);
 		ArrayList<String> courseNumLis = new ArrayList<String>(Arrays.asList(courseNumber));
@@ -323,7 +301,7 @@ public class BookController
 	public ModelAndView getOldCourseBookInfo(@RequestParam(value="year") String year,@RequestParam(value="session") String session,HttpServletRequest request,HttpServletResponse response, Model modelObj) throws Exception {
 		
 		ModelAndView model = new ModelAndView("oldCourseBookPage");
-		logger.warn("Received year " + year  + " session " + session);
+		logger.debug("Received year " + year  + " session " + session);
 		ArrayList<Book> oldCourseBookList = xmlDbDao.getOldCourseBook(Integer.parseInt(year),session);
 		if(oldCourseBookList == null || oldCourseBookList.isEmpty())
 			modelObj.addAttribute("noData", true);
