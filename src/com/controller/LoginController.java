@@ -31,7 +31,7 @@ public class LoginController {
 	@Autowired
 	BookXmlDbDao xmlDbDao;
 	/**
-	 * 
+	 * Main login page
 	 * @param request : HTTP servlet request 
 	 * @param response : HTTP servlet response
 	 * @param modelObj : Interface that defines a holder for model attribute
@@ -48,7 +48,7 @@ public class LoginController {
 	}
 	
 	/**
-	 * 
+	 * Login authentication
 	 * @param loginForm : Object of class LoginForm
 	 * @param request : HTTP servlet request 
 	 * @param response : HTTP servlet response
@@ -91,7 +91,7 @@ public class LoginController {
 	}
 	
 	/**
-	 * 
+	 * LOGOUT
 	 * @param request : HTTP servlet request 
 	 * @param response : HTTP servlet response
 	 * @param modelObj : Interface that defines a holder for model attribute

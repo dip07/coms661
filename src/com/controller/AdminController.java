@@ -58,12 +58,28 @@ public class AdminController {
 	
 	Logger logger= Logger.getLogger(AdminController.class);
 	
+	/**
+	 * Admin's Home page
+	 * @param request : HTTP servlet request.
+	 * @param response : HTTP servlet response.
+	 * @return
+	 * @throws Exception : Any Exception that may occur.
+	 */
 	@RequestMapping("/adminHome")
 	public ModelAndView adminHome(HttpServletRequest request,HttpServletResponse response) throws Exception {
 
 		ModelAndView model = new ModelAndView("adminHome");
 		return model;
 	}
+	
+	/**
+	 * This is used to update the course details.
+	 * @param request : HTTP servlet request.
+	 * @param response : HTTP servlet response.
+	 * @param modelObj : Interface that defines a holder for model attribute.
+	 * @return
+	 * @throws Exception : Any Exception that may occur.
+	 */
 	@RequestMapping("/enterUpdateCourse")
 	public ModelAndView enterUpdateCourse(HttpServletRequest request,HttpServletResponse response, Model modelObj) throws Exception {
 
@@ -71,6 +87,16 @@ public class AdminController {
 		modelObj.addAttribute("courseForm", new Course());
 		return model;
 	}
+	
+	/**
+	 * This page is used to edit the course details
+	 * @param course_number : Takes course number as a String
+	 * @param request : HTTP servlet request 
+	 * @param response : HTTP servlet response
+	 * @param modelObj : Interface that defines a holder for model attribute
+	 * @return
+	 * @throws Exception : Any Exception that may occur.
+	 */
 	@RequestMapping("/editCourse")
 	public ModelAndView editCourse(@ModelAttribute("course_number")String course_number,HttpServletRequest request,HttpServletResponse response, Model modelObj) throws Exception {
 
@@ -80,6 +106,14 @@ public class AdminController {
 		return model;
 	}
 	
+	/**
+	 * The purpose of this page is to view details of all courses created.
+	 * @param request : HTTP servlet request 
+	 * @param response : HTTP servlet response
+	 * @param modelObj : Interface that defines a holder for model attribute
+	 * @return
+	 * @throws Exception : Any Exception that may occur.
+	 */
 	@RequestMapping("/viewAllCourse")
 	public ModelAndView viewAllCourse(HttpServletRequest request,HttpServletResponse response, Model modelObj) throws Exception {
 
@@ -91,6 +125,16 @@ public class AdminController {
 			modelObj.addAttribute("noData", true);
 		return model;
 	}
+	
+	/**
+	 * This page will store the saved details of courses.
+	 * @param request : HTTP servlet request 
+	 * @param response : HTTP servlet response
+	 * @param modelObj : Interface that defines a holder for model attribute
+	 * @param course : object of Class Course.
+	 * @return
+	 * @throws Exception : Any Exception that may occur.
+	 */
 	@RequestMapping("/saveCourse")
 	public ModelAndView saveCourse(HttpServletRequest request,HttpServletResponse response, Model modelObj,@ModelAttribute("courseForm") Course course) throws Exception {
 
@@ -104,6 +148,16 @@ public class AdminController {
 		}
 		return model;
 	}
+	
+	/**
+	 * This is used to save the edited information for a course
+	 * @param request : HTTP servlet request 
+	 * @param response : HTTP servlet response
+	 * @param modelObj : Interface that defines a holder for model attribute
+	 * @param course : object of Class Course.
+	 * @return
+	 * @throws Exception : Any exception that may occur.
+	 */
 	
 	@RequestMapping("/saveEditedCourse")
 	public ModelAndView saveEditedCourse(HttpServletRequest request,HttpServletResponse response, Model modelObj,@ModelAttribute("courseForm") Course course) throws Exception {
@@ -119,6 +173,13 @@ public class AdminController {
 		return model;
 	}
 	
+	/**
+	 * Admin's page
+	 * @param request : HTTP servlet request 
+	 * @param response : HTTP servlet response
+	 * @return
+	 * @throws Exception : Any exception that may occur.
+	 */
 	@RequestMapping("/adminScreen")
 	public ModelAndView adminScreen(HttpServletRequest request,HttpServletResponse response) throws Exception {
 
@@ -126,6 +187,14 @@ public class AdminController {
 		return model;
 	}
 	
+	/**
+	 * This page is used to view all the instructor's details.
+	 * @param request : HTTP servlet request 
+	 * @param response : HTTP servlet response
+	 * @param modelObj : Interface that defines a holder for model attribute
+	 * @return
+	 * @throws Exception : Any exception that may occur.
+	 */
 	@RequestMapping("/viewInstructorDetails")
 	public ModelAndView enterEditInstructorDetails(HttpServletRequest request,HttpServletResponse response, Model modelObj) throws Exception {
 
@@ -156,6 +225,15 @@ public class AdminController {
 		return model;
 	}
 	
+	/**
+	 * This page is used to edit the instructor's current assignment
+	 * @param course_id : course ID as a String
+	 * @param request : HTTP servlet request 
+	 * @param response : HTTP servlet response
+	 * @param modelObj : Interface that defines a holder for model attribute
+	 * @return
+	 * @throws Exception : Any exception that may occur.
+	 */
 	@RequestMapping("/editInstructorAssignment")
 	public ModelAndView editInstructorAssignment(@RequestParam(value="course_id", required = false) String course_id,HttpServletRequest request,HttpServletResponse response, Model modelObj) throws Exception {
 
@@ -211,6 +289,15 @@ public class AdminController {
 		return model;
 	}
 	
+	/**
+	 * This is used to save the edited information of any instructor
+	 * @param instructorForm : object of Class Instructor.
+	 * @param request : HTTP servlet request 
+	 * @param response : HTTP servlet response
+	 * @param modelObj : Interface that defines a holder for model attribute
+	 * @return
+	 * @throws Exception : Any exception that may occur.
+	 */
 	@RequestMapping("/saveEditInstructor")
 	public ModelAndView saveEditInstructor(@ModelAttribute("instructorForm") Instructor instructorForm,HttpServletRequest request,HttpServletResponse response, Model modelObj) throws Exception {
 
@@ -220,6 +307,15 @@ public class AdminController {
 		return model;
 	}
 	
+	/**
+	 * The purpose of this page is to send email remainders to the users
+	 * @param request : HTTP servlet request 
+	 * @param response : HTTP servlet response
+	 * @param modelObj : Interface that defines a holder for model attribute
+	 * @param redir : redirect attribute.
+	 * @return
+	 * @throws Exception : Any exception that may occur.
+	 */
 	@RequestMapping("/sendReminderEmail")
 	public ModelAndView sendReminderEmail(HttpServletRequest request,HttpServletResponse response, Model modelObj, RedirectAttributes redir) throws Exception {
 

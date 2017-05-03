@@ -34,7 +34,7 @@ public class VotingController
 	Logger logger= Logger.getLogger(VotingController.class);
 
 	/**
-	 * 
+	 * Used to create a vote
 	 * @param vote : Object of class Vote
 	 * @param request : HTTP servlet request 
 	 * @param response : HTTP servlet response
@@ -59,7 +59,7 @@ public class VotingController
 	}
 	
 	/**
-	 * 
+	 * Admin's main view page
 	 * @param voteAdmin : object of Class Vote
 	 * @param request : HTTP servlet request 
 	 * @param response : HTTP servlet response
@@ -84,7 +84,7 @@ public class VotingController
 	
 	
 	/**
-	 * 
+	 * Used to create new Vote details
 	 * @param request : HTTP servlet request 
 	 * @param response : HTTP servlet response
 	 * @param modelObj : Interface that defines a holder for model attribute
@@ -109,7 +109,7 @@ public class VotingController
 	}
 	
 	/**
-	 * 
+	 * This will be used to save vote data
 	 * @param newVoteForm : object of Class VoteFrom
 	 * @param request : HTTP servlet request 
 	 * @param response : HTTP servlet response
@@ -128,7 +128,7 @@ public class VotingController
 	}
 	
 	/**
-	 * 
+	 * Used to get vote details
 	 * @param newVoteForm : Object of Class VoteForms
 	 * @param request : HTTP servlet request 
 	 * @param response : HTTP servlet response
@@ -167,7 +167,7 @@ public class VotingController
 	}
 	
 	/**
-	 * 
+	 * Get details of a user's vote
 	 * @param request : HTTP servlet request 
 	 * @param response : HTTP servlet response
 	 * @param modelObj : Interface that defines a holder for model attribute

@@ -61,7 +61,7 @@ public class BookController
 	}
 	
 	/**
-	 * 
+	 * welcome screen
 	 * @param request : HTTP servlet request 
 	 * @param response : HTTP servlet response
 	 * @return
@@ -75,7 +75,7 @@ public class BookController
 	}
 
 	/**
-	 * 
+	 * This page is used to fetch book details.
 	 * @param request : HTTP servlet request 
 	 * @param response : HTTP servlet response
 	 * @param modelObj : Interface that defines a holder for model attribute
@@ -92,7 +92,7 @@ public class BookController
 	}
 
 	/**
-	 * 
+	 * This is used to get all the details regarding a book
 	 * @param book : object of class BookOld.
 	 * @param request : HTTP servlet request 
 	 * @param response : HTTP servlet response
@@ -123,7 +123,7 @@ public class BookController
 	}
 	
 	/**
-	 * 
+	 * This is used to get the edited details of any book
 	 * @param book : Object of Class BookOld
 	 * @param request : HTTP servlet request 
 	 * @param response : HTTP servlet response
@@ -170,7 +170,7 @@ public class BookController
 	}
 	
 	/**
-	 * 
+	 * this is used to get all details of a book
 	 * @param request : HTTP servlet request 
 	 * @param response : HTTP servlet response
 	 * @param modelObj : Interface that defines a holder for model attribute
@@ -191,7 +191,7 @@ public class BookController
 	}
 	
 	/**
-	 * 
+	 * This is used to store the book information
 	 * @param book : Object of Class Book
 	 * @param request : HTTP servlet request 
 	 * @param response : HTTP servlet response
@@ -207,7 +207,7 @@ public class BookController
 	}
 	
 	/**
-	 * 
+	 * This is used to display all book details
 	 * @param request : HTTP servlet request 
 	 * @param response : HTTP servlet response
 	 * @param modelObj : Interface that defines a holder for model attribute
@@ -227,7 +227,7 @@ public class BookController
 	}
 	
 	/**
-	 * 
+	 * Utility to export data to an excel file
 	 * @param request : HTTP servlet request 
 	 * @param response : HTTP servlet response
 	 * @return
@@ -303,7 +303,7 @@ public class BookController
 	}
 	
 	/**
-	 * 
+	 * This is used to add new book details
 	 * @param request : HTTP servlet request 
 	 * @param response : HTTP servlet response
 	 * @param modelObj : Interface that defines a holder for model attribute
@@ -339,7 +339,7 @@ public class BookController
 	}
 	
 	/**
-	 * 
+	 * This is used to save details of a course book
 	 * @param book : Object of Class Book
 	 * @param request : HTTP servlet request 
 	 * @param response : HTTP servlet response
@@ -359,7 +359,7 @@ public class BookController
 	}
 	
 	/**
-	 * 
+	 * This is used to edit book information
 	 * @param courseNumber : course number as a string
 	 * @param request : HTTP servlet request 
 	 * @param response : HTTP servlet response
@@ -380,7 +380,7 @@ public class BookController
 	}
 	
 	/**
-	 * 
+	 * Instructor's home page
 	 * @param request : HTTP servlet request 
 	 * @param response : HTTP servlet response
 	 * @param modelObj : Interface that defines a holder for model attribute
@@ -400,7 +400,7 @@ public class BookController
 	}
 	
 	/**
-	 * 
+	 * This is used to get old book details
 	 * @param year : Year information as a String
 	 * @param session : Session information as a String
 	 * @param request : HTTP servlet request 
@@ -423,7 +423,7 @@ public class BookController
 	}
 	
 	/**
-	 * 
+	 * This will be used to archive all book details
 	 * @param request : HTTP servlet request 
 	 * @param response : HTTP servlet response
 	 * @param modelObj : Interface that defines a holder for model attribute
