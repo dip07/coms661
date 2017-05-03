@@ -59,6 +59,14 @@ public class BookController
 		String message = "<br><div style='text-align:center;'><h3>Hello Message</div><br><br>";
 		return new ModelAndView("welcome", "message", message);
 	}
+	
+	/**
+	 * welcome screen
+	 * @param request : HTTP servlet request 
+	 * @param response : HTTP servlet response
+	 * @return
+	 * @throws Exception : Any exception that may occur.
+	 */
 	@RequestMapping("/welcome")
 	public ModelAndView hello(HttpServletRequest request,HttpServletResponse response) throws Exception {
 
@@ -66,6 +74,14 @@ public class BookController
 		return model;
 	}
 
+	/**
+	 * This page is used to fetch book details.
+	 * @param request : HTTP servlet request 
+	 * @param response : HTTP servlet response
+	 * @param modelObj : Interface that defines a holder for model attribute
+	 * @return
+	 * @throws Exception : Any exception that may occur.
+	 */
 	@RequestMapping("/fetchBook")
 	public ModelAndView fetchBook(HttpServletRequest request,HttpServletResponse response,Model modelObj) throws Exception {
 
@@ -75,6 +91,15 @@ public class BookController
 		return model;
 	}
 
+	/**
+	 * This is used to get all the details regarding a book
+	 * @param book : object of class BookOld.
+	 * @param request : HTTP servlet request 
+	 * @param response : HTTP servlet response
+	 * @param modelObj : Interface that defines a holder for model attribute
+	 * @return
+	 * @throws Exception : Any exception that may occur.
+	 */
 	@RequestMapping("/getBookData")
 	public ModelAndView getBookData(@ModelAttribute("bookForm") BookOld book , HttpServletRequest request,HttpServletResponse response,Model model) throws Exception 
 	{
@@ -97,6 +122,15 @@ public class BookController
 		}
 	}
 	
+	/**
+	 * This is used to get the edited details of any book
+	 * @param book : Object of Class BookOld
+	 * @param request : HTTP servlet request 
+	 * @param response : HTTP servlet response
+	 * @param modelObj : Interface that defines a holder for model attribute
+	 * @return
+	 * @throws Exception : Any exception that may occur.
+	 */
 	@RequestMapping("/viewEditBookData")
 	public ModelAndView enterBookData(@ModelAttribute("bookForm") BookOld book , HttpServletRequest request,HttpServletResponse response,Model model) throws Exception 
 	{
@@ -134,6 +168,15 @@ public class BookController
 			return null;
 		}
 	}
+	
+	/**
+	 * this is used to get all details of a book
+	 * @param request : HTTP servlet request 
+	 * @param response : HTTP servlet response
+	 * @param modelObj : Interface that defines a holder for model attribute
+	 * @return
+	 * @throws Exception : Any exception that may occur.
+	 */
 	@RequestMapping("/getBook")
 	public ModelAndView getBookInformation(HttpServletRequest request,HttpServletResponse response, Model modelObj) throws Exception {
 		
@@ -147,6 +190,15 @@ public class BookController
 		return model;
 	}
 	
+	/**
+	 * This is used to store the book information
+	 * @param book : Object of Class Book
+	 * @param request : HTTP servlet request 
+	 * @param response : HTTP servlet response
+	 * @param modelObj : Interface that defines a holder for model attribute
+	 * @return
+	 * @throws Exception : Any exception that may occur.
+	 */
 	@RequestMapping("/saveBook")
 	public ModelAndView saveBookInforation(@ModelAttribute("bookForm") Books.Book book,HttpServletRequest request,HttpServletResponse response, Model modelObj) throws Exception {
 		
@@ -154,6 +206,14 @@ public class BookController
 		return model;
 	}
 	
+	/**
+	 * This is used to display all book details
+	 * @param request : HTTP servlet request 
+	 * @param response : HTTP servlet response
+	 * @param modelObj : Interface that defines a holder for model attribute
+	 * @return
+	 * @throws Exception : Any exception that may occur.
+	 */
 	@RequestMapping("/showAllBookDetails")
 	public ModelAndView showAllBookDetails(HttpServletRequest request,HttpServletResponse response, Model modelObj) throws Exception {
 		
@@ -166,6 +226,13 @@ public class BookController
 		return model;
 	}
 	
+	/**
+	 * Utility to export data to an excel file
+	 * @param request : HTTP servlet request 
+	 * @param response : HTTP servlet response
+	 * @return
+	 * @throws Exception : Any exception that may occur.
+	 */
 	@RequestMapping("/exportToExcel")
 	public ModelAndView exportToExcel(HttpServletRequest request,HttpServletResponse response) throws Exception {
 		
@@ -235,6 +302,14 @@ public class BookController
 		return new ModelAndView("redirect:/showAllBookDetails");
 	}
 	
+	/**
+	 * This is used to add new book details
+	 * @param request : HTTP servlet request 
+	 * @param response : HTTP servlet response
+	 * @param modelObj : Interface that defines a holder for model attribute
+	 * @return
+	 * @throws Exception : Any exception that may occur.
+	 */
 	@RequestMapping("/addNewBookDetails")
 	public ModelAndView addNewBookDetails(HttpServletRequest request,HttpServletResponse response, Model modelObj) throws Exception {
 		
@@ -262,6 +337,16 @@ public class BookController
 		modelObj.addAttribute("bookForm", new Books.Book());
 		return model;
 	}
+	
+	/**
+	 * This is used to save details of a course book
+	 * @param book : Object of Class Book
+	 * @param request : HTTP servlet request 
+	 * @param response : HTTP servlet response
+	 * @param modelObj : Interface that defines a holder for model attribute
+	 * @return
+	 * @throws Exception : Any exception that may occur.
+	 */
 	@RequestMapping("/saveCourseBook")
 	public ModelAndView saveCourseBook(@ModelAttribute("bookForm")Book book ,HttpServletRequest request,HttpServletResponse response, Model modelObj) throws Exception {
 		
@@ -273,6 +358,15 @@ public class BookController
 		return model;
 	}
 	
+	/**
+	 * This is used to edit book information
+	 * @param courseNumber : course number as a string
+	 * @param request : HTTP servlet request 
+	 * @param response : HTTP servlet response
+	 * @param modelObj : Interface that defines a holder for model attribute
+	 * @return
+	 * @throws Exception : Any exception that may occur.
+	 */
 	@RequestMapping("/editCourseBookInfo")
 	public ModelAndView editCourseBook(@RequestParam(value="courseNumber") String courseNumber,HttpServletRequest request,HttpServletResponse response, Model modelObj) throws Exception {
 		
@@ -285,6 +379,14 @@ public class BookController
 		return model;
 	}
 	
+	/**
+	 * Instructor's home page
+	 * @param request : HTTP servlet request 
+	 * @param response : HTTP servlet response
+	 * @param modelObj : Interface that defines a holder for model attribute
+	 * @return
+	 * @throws Exception : Any exception that may occur.
+	 */
 	@RequestMapping("/getInstructorHomePage")
 	public ModelAndView instuctorHomePage(HttpServletRequest request,HttpServletResponse response, Model modelObj) throws Exception {
 		
@@ -297,6 +399,16 @@ public class BookController
 		return model;
 	}
 	
+	/**
+	 * This is used to get old book details
+	 * @param year : Year information as a String
+	 * @param session : Session information as a String
+	 * @param request : HTTP servlet request 
+	 * @param response : HTTP servlet response
+	 * @param modelObj : Interface that defines a holder for model attribute
+	 * @return
+	 * @throws Exception : Any exception that may occur.
+	 */
 	@RequestMapping("/getOldCourseBookInfo")
 	public ModelAndView getOldCourseBookInfo(@RequestParam(value="year") String year,@RequestParam(value="session") String session,HttpServletRequest request,HttpServletResponse response, Model modelObj) throws Exception {
 		
@@ -310,6 +422,14 @@ public class BookController
 		return model;
 	}
 	
+	/**
+	 * This will be used to archive all book details
+	 * @param request : HTTP servlet request 
+	 * @param response : HTTP servlet response
+	 * @param modelObj : Interface that defines a holder for model attribute
+	 * @return
+	 * @throws Exception : Any exception that may occur.
+	 */
 	@RequestMapping("/archiveAllCourseBook")
 	public ModelAndView archiveAllCourseBook(HttpServletRequest request,HttpServletResponse response, Model modelObj) throws Exception {
 		

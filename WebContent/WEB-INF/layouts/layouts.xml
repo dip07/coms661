@@ -41,9 +41,14 @@
 		<put-attribute name="body" value="/WEB-INF/jsp/coursePage.jsp" />
 	</definition>
 
-	<definition name="vote" extends="base.definition">
-		<put-attribute name="title" value="Voting Details" />
+	<definition name="myVote" extends="base.definition">
+		<put-attribute name="title" value="My Voting Details" />
 		<put-attribute name="body" value="/WEB-INF/jsp/votingPage.jsp" />
+	</definition>
+	
+	<definition name="myVoteDetails" extends="base.definition">
+		<put-attribute name="title" value="My Voting Details" />
+		<put-attribute name="body" value="/WEB-INF/jsp/myVotingDetails.jsp" />
 	</definition>
 	
 	<definition name="voteAdmin" extends="base.definition">
@@ -51,7 +56,7 @@
 		<put-attribute name="body" value="/WEB-INF/jsp/votingAdminPage.jsp" />
 	</definition>
 	
-	<definition name="newVote" extends="base.definition">
+	<definition name="newVoteView" extends="base.definition">
 		<put-attribute name="title" value="Create Vote" />
 		<put-attribute name="body" value="/WEB-INF/jsp/newVote.jsp" />
 	</definition>

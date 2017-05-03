@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<VoteForms>
+    <VoteForm>
+        <adminEmail>bhatt.gaurav89@gmail.com</adminEmail>
+        <adminNO>515</adminNO>
+        <adminName>gaurav</adminName>
+    </VoteForm>
+    <VoteForm>
+        <adminEmail>gbhatt</adminEmail>
+        <adminNO>100</adminNO>
+        <adminName>G</adminName>
+        <topic>YO</topic>
+        <voteOption>yes</voteOption>
+        <voteOption>no</voteOption>
+    </VoteForm>
+    <VoteForm>
+        <adminEmail>gbhatt@iastate.edu</adminEmail>
+        <adminNO>515-735-6474</adminNO>
+        <adminName>Gaurav Bhatt</adminName>
+        <topic>Will you attend Gadia's lecture tomorrow?</topic>
+        <voteOption>yes</voteOption>
+        <voteOption>no</voteOption>
+        <voteOption>mayBe</voteOption>
+    </VoteForm>
+    <VoteForm>
+        <adminEmail>coms@iastate.edu</adminEmail>
+        <adminNO>9999999999</adminNO>
+        <adminName>Department of COM S</adminName>
+        <topic>How do you rate COMS 661?</topic>
+        <voteOption>good</voteOption>
+        <voteOption>poor</voteOption>
+        <voteOption>excellent</voteOption>
+    </VoteForm>
+    <VoteForm>
+        <adminEmail>test</adminEmail>
+        <adminNO>1234</adminNO>
+        <adminName>12121</adminName>
+        <topic>rate coms661</topic>
+        <voteOption>excellent</voteOption>
+    </VoteForm>
+    <VoteForm>
+        <adminEmail>gbhatt0729@gmail.com</adminEmail>
+        <adminNO>515-735-6474</adminNO>
+        <adminName>G</adminName>
+        <topic>Do you fuck with the war</topic>
+        <voteOption>yes</voteOption>
+        <voteOption>no</voteOption>
+    </VoteForm>
+    <VoteForm>
+        <adminEmail>abc</adminEmail>
+        <adminNO></adminNO>
+        <adminName></adminName>
+        <participants>dip.online@gmail.com, all-coms@iastate.edu</participants>
+        <topic>Yo?</topic>
+        <voteOption>yes</voteOption>
+        <voteOption>no</voteOption>
+    </VoteForm>
+    <VoteForm>
+        <adminEmail>cena</adminEmail>
+        <adminNO>515</adminNO>
+        <adminName>gaurav</adminName>
+        <participants>gbhatt@iastate.edu, asdsa@ass.com</participants>
+        <topic>asdsad</topic>
+        <voteID>875646e9-3cb6-416f-9c0b-e88828306d19</voteID>
+        <voteOption>yes</voteOption>
+        <voteOption>no</voteOption>
+    </VoteForm>
+    <VoteForm>
+        <adminEmail>test</adminEmail>
+        <adminNO>111</adminNO>
+        <adminName>gaurav</adminName>
+        <participants>gbhatt@iastate.edu, dope@sope.com</participants>
+        <topic>test2</topic>
+        <voteID>43b5b119-b3dc-440c-a79c-804ca6c620ce</voteID>
+    </VoteForm>
+    <VoteForm>
+        <adminEmail>test@abc.com</adminEmail>
+        <adminNO>9999999999</adminNO>
+        <adminName>Department of COM S</adminName>
+        <participants>coms661@iastate.edu</participants>
+        <topic>How do you rate COMS 661</topic>
+        <voteID>5e008ed4-054d-4805-aef2-51750659f396</voteID>
+        <voteOption>excellent</voteOption>
+    </VoteForm>
+</VoteForms>

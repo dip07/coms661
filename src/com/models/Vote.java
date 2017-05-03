@@ -3,69 +3,68 @@
  */
 package com.models;
 
-/*
- * @author Gaurav Bhatt
- *
- */
-public class Vote {
+import java.util.ArrayList;
+
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
+
+@XmlAccessorType(XmlAccessType.FIELD)
+@XmlRootElement(name="Vote")
+public class Vote{
+
+	public ArrayList<MyVoteForm> getMyVoteFormList() {
+		return myVoteFormList;
+	}
+
+	public void setMyVoteFormList(ArrayList<MyVoteForm> myVoteFormList) {
+		this.myVoteFormList = myVoteFormList;
+	}
+
+	@XmlElement(name = "MyVoteForm", type = MyVoteForm.class)
+	private ArrayList<MyVoteForm> myVoteFormList= new ArrayList<MyVoteForm>();
 	
-	private String voterID;
-	private String email;
-	private int timeout;
-	private String instructor;
-	private String isConfidential;
-	private String comments;
-	private boolean sendRemainder;
-	private boolean isArchived;
-	private boolean isLatest;
-	private Boolean voteDone;
-	
-	public boolean getVote() {
-		return voteDone;
+	public static class MyVoteForm
+	{
+		String voteID;
+		String userName;
+		static String voteUserID;
+		
+		String voteOption;
+		String comment;
+		
+		public String getUserName() {
+			return userName;
+		}
+		public void setUserName(String userName) {
+			this.userName = userName;
+		}
+		public static String getVoteUserID() {
+			return voteUserID;
+		}
+		public void setVoteUserID(String voteUserID) {
+			this.voteUserID = voteUserID;
+		}
+		public String getVoteOption() {
+			return voteOption;
+		}
+		public void setVoteOption(String voteOption) {
+			this.voteOption = voteOption;
+		}
+		public String getComment() {
+			return comment;
+		}
+		public void setComment(String comment) {
+			this.comment = comment;
+		}
+		
+		@Override
+		public String toString() {
+			return "MyVoteForm [userName=" + userName + ", userID=" + voteUserID + ", voteOption=" + voteOption
+					+ ", comment=" + comment + "]";
+		}
+		
 	}
-	
-	public String getVoterId() {
-		return voterID;
-	}
-	public void setVoterId(String ID) {
-		this.voterID = ID;
-	}
-	public String getEmail() {
-		return email;
-	}
-	public void setEmail(String email) {
-		this.email = email;
-	}
-	public String getInstructor() {
-		return instructor;
-	}
-	public void setInstructor(String instructor) {
-		this.instructor = instructor;
-	}
-	
-	public String getComments() {
-		return comments;
-	}
-	public void setComments(String comments) {
-		this.comments = comments;
-	}
-	public boolean isArchived() {
-		return isArchived;
-	}
-	public void setArchived(boolean isArchived) {
-		this.isArchived = isArchived;
-	}
-	public boolean isLatest() {
-		return isLatest;
-	}
-	public void setLatest(boolean isLatest) {
-		this.isLatest = isLatest;
-	}
-	@Override
-	public String toString() {
-		return comments;	
-	}
-	
-	
 
 }
