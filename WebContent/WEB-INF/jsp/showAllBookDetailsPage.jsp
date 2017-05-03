@@ -2,9 +2,10 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <div>
-Hi, This page will show book info for all courses
-
-<p><a href="${pageContext.request.contextPath}/welcome">Back to Home</a></p>
+<span style="font-size: 16px">Here you will be able to view all course book details </span>
+<%-- <p>Logged User Name :${sessionScope.bookUserName} </p> --%>
+<p><a href="${pageContext.request.contextPath}/welcome" class="mainPageButton">Back to Home</a></p>
+<p><a href="${pageContext.request.contextPath}/exportToExcel" class="mainPageButton">Export to Excel</a></p>
 	<c:choose>
 		<c:when test="${empty noData}">
 			<table border="1"
@@ -17,35 +18,45 @@ Hi, This page will show book info for all courses
 					<th><p>Book Name</p></th>
 					<th><p>Author Name</p></th>
 					<th><p>ISBN</p></th>
-					<th><p>Comments</p></th>
+					<th style="width:130px"><p>Comments</p></th>
+					<th><p>Edit Info</p></th>
 				</tr>
 				<c:forEach items="${courseBooks}" var="courseBook">
 					<tr>
-						<td><p>${courseBook.courseNumber}</p></td>
+						<td><p align="center">${courseBook.courseNumber}</p></td>
 						<td><p>${courseBook.year}</p></td>
 						<td><p>${courseBook.session}</p></td>
 						<td><p>${courseBook.instructorName}</p></td>
 						<td><p>${courseBook.bookName}</p></td>
 						<td><p>${courseBook.author}</p></td>
 						<td><p>${courseBook.ISBN}</p></td>
-						<td><p>${courseBook.comments}</p></td>
+						<td style="width:130px"><p>${courseBook.comments}</p></td>
+						<c:set var="loggedUserName"  value="${sessionScope.bookUserName}"/>
+						<c:choose>
+						<c:when test="${(not empty loggedUserName) && (loggedUserName eq courseBook.instructorName)}">
+							<td><p><a href="${pageContext.request.contextPath}/editCourseBookInfo?courseNumber=${courseBook.courseNumber}"><em>Edit Info</em></a></p></td>
+						</c:when>
+						<c:otherwise>
+							<td><p>Not Allowed</p></td>
+						</c:otherwise>
+						</c:choose>
 					</tr>
 					<tr>
-						<td colspan="8" style="background-color: orange; height: 10px"></td>
+						<td colspan="9" style="background-color: orange; height: 10px"></td>
 					</tr>
 				</c:forEach>
 			</table>
 		</c:when>
 		<c:otherwise>
-			<p><a href="${pageContext.request.contextPath}/enterUpdateCourse" class="mainPageButton">No Information Present. Enter Course Details</a></p>
+			<p><span style="color: red ; font-size: 16px; font-weight: bold;">No Information Present</span>.</p>
 		</c:otherwise>
 	</c:choose>
 	<br>
-			<p><a href="${pageContext.request.contextPath}/enterUpdateCourse" class="mainPageButton">Enter new Course Information</a></p>
+			<p align="center"><a href="${pageContext.request.contextPath}/addNewBookDetails" class="mainPageButton">Enter new Course Information</a></p>
 	
 
 
 
 
-<p><a href="${pageContext.request.contextPath}/addNewBookDetails">Add new Information</a></p>
+<%-- <p><a href="${pageContext.request.contextPath}/addNewBookDetails">Add new Information</a></p> --%>
 </div>

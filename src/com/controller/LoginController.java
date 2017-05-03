@@ -58,6 +58,11 @@ public class LoginController {
 			else
 			{
 				request.getSession().setAttribute("role", roleForValidUser.getRoleName());
+				request.getSession().setAttribute("bookUserNetId", loginForm.getNetId());
+				String userName=xmlDbDao.getUserName(loginForm.getNetId());
+				if(userName!=null){
+					request.getSession().setAttribute("bookUserName", userName);
+				}
 			}
 			ModelAndView model = new ModelAndView("redirect:/welcome");
 			//model.addObject("message", "from checkLogin function");
@@ -67,6 +72,16 @@ public class LoginController {
 			logger.error("Error in LoginController >> " + e.getStackTrace());
 			return new ModelAndView("login");
 		}
+	}
+	
+	@RequestMapping("/logout")
+	public ModelAndView logout(HttpServletRequest request,HttpServletResponse response, Model modelObj) throws Exception {
+
+		ModelAndView model = new ModelAndView("redirect:/");
+		request.getSession().removeAttribute("bookUserName");
+		request.getSession().removeAttribute("bookUserNetId");
+		request.getSession().removeAttribute("role");
+		return model;
 	}
 
 }

@@ -3,6 +3,7 @@
 <tiles-definitions>
 	<definition name="base.definition" template="/WEB-INF/jsp/layout.jsp">
 		<put-attribute name="title" value="" />
+		<put-attribute name="logout" value="/WEB-INF/jsp/logoutPage.jsp" />
 		<put-attribute name="body" value="" />
 
 		<put-list-attribute name="javascripts">
@@ -114,6 +115,17 @@
 		<put-attribute name="title" value="Add details for Course" />
 		<put-attribute name="body"
 			value="/WEB-INF/jsp/addCourseBook.jsp" />
+	</definition>
+	
+	<definition name="instructorHomePage" extends="base.definition">
+		<put-attribute name="title" value="Add details for Course" />
+		<put-attribute name="body"
+			value="/WEB-INF/jsp/instructorHomePage.jsp" />
+	</definition>
+	<definition name="oldCourseBookPage" extends="base.definition">
+		<put-attribute name="title" value="View previous course book info" />
+		<put-attribute name="body"
+			value="/WEB-INF/jsp/oldCourseBookPage.jsp" />
 	</definition>
 
 

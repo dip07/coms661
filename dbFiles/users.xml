@@ -3,17 +3,62 @@
     <user>
         <emailId>dipanjan@iastate.edu</emailId>
         <netId>dipanjan</netId>
-        <name>dipanjan</name>
         <password>pass1</password>
+        <name>Dipanjan Karmakar</name>
+        <role>
+            <roleName>admin</roleName>
+        </role>
+    </user>
+    <user>
+        <emailId>dipanjan@iastate.edu</emailId>
+        <netId>gaurav</netId>
+        <password>pass2</password>
+        <name>Gaurav Bhatt</name>
+        <role>
+            <roleName>instructor</roleName>
+        </role>
+    </user>
+    <user>
+        <emailId>dipanjan@iastate.edu</emailId>
+        <netId>gadia</netId>
+        <password>pass3</password>
+        <name>Shashi Gadia</name>
+        <role>
+            <roleName>instructor</roleName>
+        </role>
+    </user>
+    <user>
+        <emailId>dipanjan.online@gmail.com</emailId>
+        <netId>fernande</netId>
+        <password>pass4</password>
+        <name>David Fernandez-Baca</name>
+        <role>
+            <roleName>instructor</roleName>
+        </role>
+    </user>
+    <user>
+        <emailId>adas@iastate.edu</emailId>
+        <netId>pavan</netId>
+        <password>pass5</password>
+        <name>Pavan Aduri</name>
+        <role>
+            <roleName>instructor</roleName>
+        </role>
+    </user>
+    <user>
+        <emailId>dipanjan@iastate.edu</emailId>
+        <netId>pcdesai</netId>
+        <password>pass6</password>
+        <name>Prasanna Desai</name>
         <role>
             <roleName>student</roleName>
         </role>
     </user>
     <user>
-        <emailId>gaurav@iastate.edu</emailId>
-        <netId>gau</netId>
-        <name>Gaugau</name>
-        <password>pass2</password>
+        <emailId>dipanjan@iastate.edu</emailId>
+        <netId>smitra</netId>
+        <password>pass7</password>
+        <name>Simanta Mitra</name>
         <role>
             <roleName>instructor</roleName>
         </role>

@@ -13,6 +13,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="shortcut icon" href="http://www.cs.iastate.edu/sites/all/themes/suitcase/images/favicon.ico"/>
 <title><tiles:insertAttribute name="title" ignore="true" /></title>
 <style type="text/css">
 body {
@@ -263,12 +264,10 @@ body {
 <![endif]-->
 
 				<div id="login" style="padding:30px; width:80%">
+
 					<div id="container">
 						<tiles:insertAttribute name="body" />
 					</div>
-					
-					
-					
 					
 					
 					<!-- Main contents of the page, commented by Dipanjan -->

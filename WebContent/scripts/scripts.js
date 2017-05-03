@@ -50,3 +50,17 @@ $(document).ready(function () {
         }
     })
 });
+
+$(document).ready(function(){
+	 $("#statusArchive").change(function(){
+	     var status = this.value;
+	     //alert(status);
+	     if(status == 'true'){
+	    	 alert("Please note that once you select to archive, you won't be able to see it");
+	     }	
+	  });
+});
+
+$(document).ready(function() {
+	  $('#popupMessageDiv').fadeOut(5000); // 5 seconds x 1000 milisec = 5000 milisec
+	});

@@ -3,33 +3,33 @@
  */
 package com.controller;
 
-import java.io.File;
-import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.xml.bind.JAXBContext;
-import javax.xml.bind.Marshaller;
-import javax.xml.bind.Unmarshaller;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.dao.BookXmlDbDao;
-import com.models.BookOld;
 import com.models.Course;
-import com.models.CourseList;
 import com.models.Instructors.Instructor;
 import com.models.Users.User;
+import com.service.EmailAPI;
+
+import constants.CourseBookMessages;
 
 /**
  * @author dipanjankarmakar
@@ -41,14 +41,27 @@ public class AdminController {
 	@Autowired
 	BookXmlDbDao xmlDbDao;
 	
+	@Autowired
+	EmailAPI emailAPI;
+	
+	@Value("${server.url}")
+	String serverUrl;
+	
+	@Value("${emailText}")
+	String emailText;
+	
+	@Value("${from.address}")
+	String fromAddress;
+	
+	@Autowired
+	protected ApplicationContext context;
+	
 	Logger logger= Logger.getLogger(AdminController.class);
 	
 	@RequestMapping("/adminHome")
 	public ModelAndView adminHome(HttpServletRequest request,HttpServletResponse response) throws Exception {
 
 		ModelAndView model = new ModelAndView("adminHome");
-		logger.debug("Inside adminHome function");
-		model.addObject("message", "Custom message from Admin Controller");
 		return model;
 	}
 	@RequestMapping("/enterUpdateCourse")
@@ -71,7 +84,7 @@ public class AdminController {
 	public ModelAndView viewAllCourse(HttpServletRequest request,HttpServletResponse response, Model modelObj) throws Exception {
 
 		ModelAndView model = new ModelAndView("viewAllCourseScreen");
-		ArrayList<Course> courseList= xmlDbDao.getAllCourses();
+		ArrayList<Course> courseList= xmlDbDao.getAllUnarchivedCourses();
 		if(courseList!=null)
 			modelObj.addAttribute("courseList", courseList);
 		else
@@ -81,8 +94,28 @@ public class AdminController {
 	@RequestMapping("/saveCourse")
 	public ModelAndView saveCourse(HttpServletRequest request,HttpServletResponse response, Model modelObj,@ModelAttribute("courseForm") Course course) throws Exception {
 
-		xmlDbDao.saveCourse(course);
 		ModelAndView model = new ModelAndView("redirect:/viewAllCourse");
+		String status = xmlDbDao.saveCourse(course,false);
+		modelObj.addAttribute("status", status);
+		if(status.equalsIgnoreCase(CourseBookMessages.COURSE_INFO_ALREADY_FILLED.toString()) || status.equalsIgnoreCase(CourseBookMessages.FAILED_TRANSACTION.toString()))
+		{
+			modelObj.addAttribute("courseForm", new Course());
+			return new ModelAndView("editCourse");
+		}
+		return model;
+	}
+	
+	@RequestMapping("/saveEditedCourse")
+	public ModelAndView saveEditedCourse(HttpServletRequest request,HttpServletResponse response, Model modelObj,@ModelAttribute("courseForm") Course course) throws Exception {
+
+		ModelAndView model = new ModelAndView("redirect:/viewAllCourse");
+		String status = xmlDbDao.saveCourse(course, true);
+		modelObj.addAttribute("status", status);
+		if(status.equalsIgnoreCase(CourseBookMessages.COURSE_INFO_ALREADY_FILLED.toString()) || status.equalsIgnoreCase(CourseBookMessages.FAILED_TRANSACTION.toString()))
+		{
+			modelObj.addAttribute("courseForm", new Course());
+			return new ModelAndView("editCourse");
+		}
 		return model;
 	}
 	
@@ -90,7 +123,6 @@ public class AdminController {
 	public ModelAndView adminScreen(HttpServletRequest request,HttpServletResponse response) throws Exception {
 
 		ModelAndView model = new ModelAndView("adminScreen");
-		logger.debug("Inside adminHome function");
 		return model;
 	}
 	
@@ -98,8 +130,13 @@ public class AdminController {
 	public ModelAndView enterEditInstructorDetails(HttpServletRequest request,HttpServletResponse response, Model modelObj) throws Exception {
 
 		ModelAndView model = new ModelAndView("viewInstrCoursAssign");
-		ArrayList<Course> courseList= xmlDbDao.getAllCourses();
+		ArrayList<Course> courseList= xmlDbDao.getAllUnarchivedCourses();
 		Map<String,String> courseNumNameMap=new HashMap<String,String>();
+		if(courseList==null || courseList.isEmpty())
+		{
+			modelObj.addAttribute("noData", true);
+			return model;
+		}
 		for(Course course : courseList)
 		{
 			courseNumNameMap.put(course.getCourseNumber(), course.getCourseName());
@@ -116,7 +153,6 @@ public class AdminController {
 			modelObj.addAttribute("instructorAssignment", instructorList);
 		else
 			modelObj.addAttribute("noData", true);
-		logger.debug("Inside adminHome function");
 		return model;
 	}
 	
@@ -125,37 +161,48 @@ public class AdminController {
 
 		ModelAndView model = new ModelAndView("enterInstrCoursAssign");
 		try{
-		
-		ArrayList<Course> courseList= xmlDbDao.getAllCourses();
-		Map<String,String> courseNameList = new HashMap<String,String>();
-		for(Course course: courseList)
-			courseNameList.put(course.getCourseNumber(),course.getCourseName());
-		if(!courseNameList.isEmpty())	
-			modelObj.addAttribute("courseNameList",courseNameList);
-		//modelObj.addAttribute("courseList", courseList);
-		
-		ArrayList<User> userList= xmlDbDao.getAllUsers();
-		ArrayList<String> userNameList = new ArrayList<String>();
-		for(User user: userList)
-			userNameList.add(user.getName());
-		if(!userNameList.isEmpty())	
-			modelObj.addAttribute("userNameList",userNameList);
-		
-		
-		if(course_id==null)
-		{
-			modelObj.addAttribute("instructorForm", new Instructor());
-		}
-		else
-		{
-			Instructor instructorObj= xmlDbDao.getInstructorCourseAssignment(course_id);
-			if(instructorObj!=null)
-				modelObj.addAttribute("instructorForm", instructorObj);
-			else
+
+			ArrayList<Course> courseList= xmlDbDao.getAllUnAssignedCourses();
+			Map<String,String> courseNameList = new HashMap<String,String>();
+			if((course_id == null || course_id.isEmpty()) && (courseList == null || courseList.isEmpty()))
+			{
+				modelObj.addAttribute("status", CourseBookMessages.NO_COURSE_ASSIGNED.toString());
 				modelObj.addAttribute("instructorForm", new Instructor());
+				return model;
+			}
+			for(Course course: courseList)
+				courseNameList.put(course.getCourseNumber(),course.getCourseName());
+			if(!courseNameList.isEmpty())	
+				modelObj.addAttribute("courseNameList",courseNameList);
+			//modelObj.addAttribute("courseList", courseList);
+
+			ArrayList<User> userList= xmlDbDao.getAllUsers();
+			ArrayList<String> userNameList = new ArrayList<String>();
+			for(User user: userList)
+				userNameList.add(user.getName());
+			if(!userNameList.isEmpty())	
+				modelObj.addAttribute("userNameList",userNameList);
+
+
+			if(course_id==null)
+			{
+				if(courseNameList.isEmpty())
+					modelObj.addAttribute("status", CourseBookMessages.ALL_COURSE_ASSIGNED.toString());
+				modelObj.addAttribute("instructorForm", new Instructor());
+			}
+			else
+			{
+				Instructor instructorObj= xmlDbDao.getInstructorCourseAssignment(course_id);
+				if(instructorObj!=null)
+					{
+					modelObj.addAttribute("instructorForm", instructorObj);
+					modelObj.addAttribute("selectedIns", instructorObj.getName());
+					}
 				
-		}
-		logger.debug("Inside adminHome function");
+				else
+					modelObj.addAttribute("instructorForm", new Instructor());
+
+			}
 		}
 		catch(Exception e)
 		{
@@ -169,7 +216,45 @@ public class AdminController {
 
 		ModelAndView model = new ModelAndView("redirect:/viewInstructorDetails");
 		Boolean isSaved= xmlDbDao.saveEditInstructorData(instructorForm);
-		logger.debug("Inside adminHome function");
+		logger.debug("Inside saveEditInstructor. Value of isSaved is : " + isSaved);
+		return model;
+	}
+	
+	@RequestMapping("/sendReminderEmail")
+	public ModelAndView sendReminderEmail(HttpServletRequest request,HttpServletResponse response, Model modelObj, RedirectAttributes redir) throws Exception {
+
+		ModelAndView model = new ModelAndView("redirect:/adminScreen");
+		/*
+		String toAddr = "dipanjan@iastate.edu";
+		String fromAddr = "dipanjan@iastate.edu";
+		// email subject
+		String subject = "Reminder: Please fill the course book in the system";
+		// email body
+		String body = "There you go.. You got an email.. Let's understand details on how Spring MVC works -- By Dipanjan Email Admin";
+		emailAPI.adminReadyToSendEmail(toAddr, null ,fromAddr, subject, body);
+		*/
+		
+		boolean emailSent = true;
+		String netIdToEmail[] = null;
+		try{
+		netIdToEmail = xmlDbDao.getUsersToEmail();
+		if(netIdToEmail == null || netIdToEmail.length < 1)
+			{
+				redir.addFlashAttribute("status", "Email not sent. Please check!");
+				return model;
+			}
+		String emailMessage = context.getMessage("email.text", new Object[] {serverUrl}, StringUtils.parseLocaleString("en")); 
+		String emailSubject = context.getMessage("email.subject", null, StringUtils.parseLocaleString("en")); 
+		logger.debug("Email text : " + emailMessage);
+			emailAPI.adminReadyToSendEmail(netIdToEmail, fromAddress ,fromAddress, emailSubject, emailMessage);
+		}
+		catch(Exception e)
+		{
+			logger.error("Error while sending reminder email " + e.getMessage() , e);
+			emailSent = false;
+		}
+		if(netIdToEmail!=null && netIdToEmail.length > 0 && emailSent)
+			redir.addFlashAttribute("status", "Email sent successfully");
 		return model;
 	}
 
