@@ -242,12 +242,23 @@ body {
 				<!--[if lt IE 9]>
         <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
 <![endif]-->
-
-				<div id="login" style="padding:30px; width:80%">
-
+				
+				<div style="padding: 10px 20px 0 0; background-color: #ddd ; height: 60px">
+					<tiles:insertAttribute name="logout" />
+				</div>
+				<div style="padding: 0 0 0 30px; width: 100%" id="login">
 					<div id="container">
 						<tiles:insertAttribute name="body" />
 					</div>
+					
+					
+					<!-- Main contents of the page, commented by Dipanjan -->
+					<!-- Main contents of the page, commented by Dipanjan -->
+				</div>
+				<!-- end of the content of this page -->
+
+				<!-- common footer part -->
+
 			</div>
 		</div>
 	</div>
@@ -271,6 +282,7 @@ body {
 				</p>
 				<p>Copyright &copy; 1995-2014, Iowa State University of Science
 					and Technology. All rights reserved.</p>
+				<!-- Design by Ian McDowell (ijm@iastate.edu) -->
 			</div>
 		</div>
 	</div>
