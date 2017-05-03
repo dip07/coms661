@@ -59,6 +59,7 @@ public class LoggingInterceptor extends HandlerInterceptorAdapter
 		}
 		logger.warn("UserId " + userNetId + " url visited : " + url);
 		request.getSession().setMaxInactiveInterval(sessionTimeOut*60);
+		//request.getSession().setMaxInactiveInterval(30);
 		return true;
 	}
 

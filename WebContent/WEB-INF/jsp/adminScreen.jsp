@@ -11,7 +11,7 @@
 		<div id="popupMessageDiv" style="font-weight: bold  ; text-align:center ; font-size: 16px ; color: red">Successfully archived all courses</div>
 	</c:if>
 	<%-- <p>status : ${status}</p> --%>
-	<c:if test="${(not empty status) && (status == 'Email sent successfully')}">
-		<div id="popupMessageDiv" style="font-weight: bold  ; text-align:center ; font-size: 16px ; color: red">Successfully sent reminder email</div>
+	<c:if test="${(not empty status)}">
+		<div id="popupMessageDiv" style="font-weight: bold  ; text-align:center ; font-size: 16px ; color: red">${status}</div>
 	</c:if>
 </div>

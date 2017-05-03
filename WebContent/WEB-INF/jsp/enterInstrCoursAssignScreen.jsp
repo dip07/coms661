@@ -49,7 +49,7 @@
 	</form:form>
 	</c:when>
 	<c:otherwise>
-		<p align="center"><span style="color: red; font-size: 16px ; font-weight: bold">All courses already assigned.</span></p>
+		<p align="center"><span style="color: red; font-size: 16px ; font-weight: bold">All courses already assigned or no course info.</span></p>
 	</c:otherwise>
 	</c:choose>
 </div>

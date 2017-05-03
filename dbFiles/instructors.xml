@@ -1,21 +1,27 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <instructors>
     <instructor>
+        <instructorForCourse>511</instructorForCourse>
+        <isArchived>false</isArchived>
+        <name>David Fernandez-Baca</name>
+        <netId>fernande</netId>
+    </instructor>
+    <instructor>
+        <instructorForCourse>611</instructorForCourse>
+        <isArchived>false</isArchived>
+        <name>Shashi Gadia</name>
+        <netId>gadia</netId>
+    </instructor>
+    <instructor>
         <instructorForCourse>535</instructorForCourse>
         <isArchived>false</isArchived>
-        <name>dipanjan</name>
-        <netId>dipanjan</netId>
+        <name>Pavan Aduri</name>
+        <netId>pavan</netId>
     </instructor>
     <instructor>
-        <instructorForCourse>511</instructorForCourse>
-        <isArchived>false</isArchived>
-        <name>dipanjan</name>
-        <netId>dipanjan</netId>
-    </instructor>
-    <instructor>
-        <instructorForCourse>511</instructorForCourse>
+        <instructorForCourse>710</instructorForCourse>
         <isArchived>true</isArchived>
-        <name>dipanjan</name>
+        <name>Dipanjan Karmakar</name>
         <netId>dipanjan</netId>
     </instructor>
 </instructors>

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <courses>
     <course>
-        <courseName>Algorithm</courseName>
+        <courseName>Introduction to Algorithm</courseName>
         <courseNumber>511</courseNumber>
         <isArchived>false</isArchived>
     </course>
@@ -9,5 +9,15 @@
         <courseName>Big Data Algo</courseName>
         <courseNumber>535</courseNumber>
         <isArchived>false</isArchived>
+    </course>
+    <course>
+        <courseName>Advanced Database</courseName>
+        <courseNumber>611</courseNumber>
+        <isArchived>false</isArchived>
+    </course>
+    <course>
+        <courseName>Introduction to Swimming</courseName>
+        <courseNumber>710</courseNumber>
+        <isArchived>true</isArchived>
     </course>
 </courses>

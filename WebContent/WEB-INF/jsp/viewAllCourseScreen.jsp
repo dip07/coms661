@@ -27,7 +27,7 @@
 			</table>
 		</c:when>
 		<c:otherwise>
-			<p align="center"><a href="${pageContext.request.contextPath}/enterUpdateCourse" class="mainPageButton">No Information Present</a></p>
+			<p align="center"><span style="color: red; font-size: 16px; font-weight: bold;">No Information Present</span></p>
 		</c:otherwise>
 	</c:choose>
 	<br>

@@ -1,23 +1,34 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <books>
     <book>
+        <author>Shashi Gadia</author>
+        <bookName>Advanced DB</bookName>
+        <comments>Book info to be shared in class</comments>
+        <courseNumber>611</courseNumber>
+        <ISBN>1010</ISBN>
+        <instructorName>Shashi Gadia</instructorName>
+        <isArchived>true</isArchived>
+        <session>Spring</session>
+        <year>2017</year>
+    </book>
+    <book>
         <author>NA</author>
-        <bookName>-NA-</bookName>
+        <bookName>NA</bookName>
         <comments>Notes will be provided in class</comments>
         <courseNumber>535</courseNumber>
         <ISBN>NA</ISBN>
-        <instructorName>dipanjan</instructorName>
+        <instructorName>Pavan Aduri</instructorName>
         <isArchived>true</isArchived>
         <session>Fall</session>
-        <year>2016</year>
+        <year>2017</year>
     </book>
     <book>
         <author>Coremen</author>
-        <bookName>Introduction to Algorithm</bookName>
-        <comments>Course materials also provided in class</comments>
+        <bookName>Intro to Algo</bookName>
+        <comments>Great book!</comments>
         <courseNumber>511</courseNumber>
-        <ISBN>100100100</ISBN>
-        <instructorName>true</instructorName>
+        <ISBN>10000</ISBN>
+        <instructorName>David Fernandez-Baca</instructorName>
         <isArchived>true</isArchived>
         <session>Spring</session>
         <year>2017</year>

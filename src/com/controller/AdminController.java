@@ -132,6 +132,11 @@ public class AdminController {
 		ModelAndView model = new ModelAndView("viewInstrCoursAssign");
 		ArrayList<Course> courseList= xmlDbDao.getAllUnarchivedCourses();
 		Map<String,String> courseNumNameMap=new HashMap<String,String>();
+		if(courseList==null || courseList.isEmpty())
+		{
+			modelObj.addAttribute("noData", true);
+			return model;
+		}
 		for(Course course : courseList)
 		{
 			courseNumNameMap.put(course.getCourseNumber(), course.getCourseName());
@@ -159,6 +164,12 @@ public class AdminController {
 
 			ArrayList<Course> courseList= xmlDbDao.getAllUnAssignedCourses();
 			Map<String,String> courseNameList = new HashMap<String,String>();
+			if((course_id == null || course_id.isEmpty()) && (courseList == null || courseList.isEmpty()))
+			{
+				modelObj.addAttribute("status", CourseBookMessages.NO_COURSE_ASSIGNED.toString());
+				modelObj.addAttribute("instructorForm", new Instructor());
+				return model;
+			}
 			for(Course course: courseList)
 				courseNameList.put(course.getCourseNumber(),course.getCourseName());
 			if(!courseNameList.isEmpty())	
@@ -183,7 +194,11 @@ public class AdminController {
 			{
 				Instructor instructorObj= xmlDbDao.getInstructorCourseAssignment(course_id);
 				if(instructorObj!=null)
+					{
 					modelObj.addAttribute("instructorForm", instructorObj);
+					modelObj.addAttribute("selectedIns", instructorObj.getName());
+					}
+				
 				else
 					modelObj.addAttribute("instructorForm", new Instructor());
 
@@ -223,10 +238,15 @@ public class AdminController {
 		String netIdToEmail[] = null;
 		try{
 		netIdToEmail = xmlDbDao.getUsersToEmail();
+		if(netIdToEmail == null || netIdToEmail.length < 1)
+			{
+				redir.addFlashAttribute("status", "Email not sent. Please check!");
+				return model;
+			}
 		String emailMessage = context.getMessage("email.text", new Object[] {serverUrl}, StringUtils.parseLocaleString("en")); 
 		String emailSubject = context.getMessage("email.subject", null, StringUtils.parseLocaleString("en")); 
 		logger.debug("Email text : " + emailMessage);
-			emailAPI.adminReadyToSendEmail(netIdToEmail, null ,fromAddress, emailSubject, emailMessage);
+			emailAPI.adminReadyToSendEmail(netIdToEmail, fromAddress ,fromAddress, emailSubject, emailMessage);
 		}
 		catch(Exception e)
 		{

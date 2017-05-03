@@ -160,10 +160,10 @@ public class BookXmlDbDao {
 	}
 
 	/**
-	 * @param net_id
+	 * @param course_id
 	 * @return
 	 */
-	public Instructor getInstructorCourseAssignment(String net_id) {
+	public Instructor getInstructorCourseAssignment(String course_id) {
 		Instructors instructors= null;
 		try{
 		JAXBContext jaxbContext = JAXBContext.newInstance(Instructors.class);
@@ -183,7 +183,7 @@ public class BookXmlDbDao {
 			return null;
 		for(Instructor item : instructors.getInstructorList())
 		{
-			if(!item.getIsArchived() && item.getNetId().equals(net_id))
+			if(!item.getIsArchived() && item.getInstructorForCourse().equals(course_id))
 				return item;
 		}
 		return null;
@@ -613,13 +613,18 @@ public class BookXmlDbDao {
 			return CourseBookMessages.NO_INSTRUCTOR_INFO_ASSIGNED.toString();
 		}
 		ArrayList<String> courseNoList=null;
-		for(Instructor  instr : instructorList.getInstructorList())
+		if(instructorList!=null)
 		{
-			if(instr.getNetId().compareToIgnoreCase(userNetId) == 0)
+			for(Instructor  instr : instructorList.getInstructorList())
 			{
-				if(courseNoList==null)
-					courseNoList = new ArrayList<String>();
-				courseNoList.add(instr.getInstructorForCourse());
+				if(instr.getIsArchived())
+					continue;
+				if(instr.getNetId().compareToIgnoreCase(userNetId) == 0)
+				{
+					if(courseNoList==null)
+						courseNoList = new ArrayList<String>();
+					courseNoList.add(instr.getInstructorForCourse());
+				}
 			}
 		}
 		if(courseNoList == null)
@@ -736,6 +741,8 @@ public class BookXmlDbDao {
 	public String[] getUsersToEmail() 
 	{
 		ArrayList<Instructor> instructorList = getInstructorCourseAssignment(); 
+		if(instructorList == null || instructorList.isEmpty())
+			return null;
 		ArrayList<Instructor> instructorToEmail = new ArrayList<Instructor>(instructorList);
 		ArrayList<Book> unarchivedBooks = getAllBookDetails();
 		ArrayList<String> courseNumList = null;
@@ -758,7 +765,7 @@ public class BookXmlDbDao {
 		ArrayList<String> emailIds = new ArrayList<String>();
 		for(Instructor ins : instructorList)
 		{
-			emailIds.add(ins.getNetId() + "@iastate.edu");
+			emailIds.add(ins.getNetId() + "@iastate123.edu");
 		}
 		return emailIds.toArray(new String[1]);
 	}
