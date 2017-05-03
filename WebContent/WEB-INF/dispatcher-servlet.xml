@@ -12,6 +12,7 @@
 	<context:component-scan base-package="com.controller" />
 	
 	<bean id="xmlDbDao" class="com.dao.BookXmlDbDao"/>
+	<bean id="voteDbDao" class="com.dao.VoteXmlDbDao"/>
  
 	<!-- <bean id="viewResolver"
 		class="org.springframework.web.servlet.view.UrlBasedViewResolver">

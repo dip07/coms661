@@ -262,7 +262,7 @@ body {
         <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
 <![endif]-->
 
-				<div id="login">
+				<div id="login" style="padding:30px; width:80%">
 					<div id="container">
 						<tiles:insertAttribute name="body" />
 					</div>

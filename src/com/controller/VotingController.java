@@ -1,6 +1,7 @@
 package com.controller;
 
 import java.util.ArrayList;
+import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -14,13 +15,17 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.dao.BookXmlDbDao;
+import com.dao.VoteXmlDbDao;
+import com.models.Course;
 import com.models.Vote;
+import com.models.VoteForms;
+import com.models.VoteForms.VoteForm;
 
 @Controller
 public class VotingController 
 {
 	@Autowired
-	BookXmlDbDao xmlDbDao;
+	VoteXmlDbDao voteDbDao;
 	
 	Logger logger= Logger.getLogger(VotingController.class);
 
@@ -29,8 +34,8 @@ public class VotingController
 	{
 		try{
 		logger.warn("Inside myVote");
-		ModelAndView modelObj = new ModelAndView("vote");
-		
+		ModelAndView modelObj = new ModelAndView("getVotes");
+		request.getSession().setAttribute("voteUserID", "gbhatt@iastate.edu");
 		return modelObj;
 		}
 		catch(Exception e)
@@ -46,7 +51,6 @@ public class VotingController
 		try{
 		logger.warn("Inside myVoteAdmin");
 		ModelAndView modelObj = new ModelAndView("voteAdmin");
-		
 		return modelObj;
 		}
 		catch(Exception e)
@@ -57,12 +61,68 @@ public class VotingController
 	}
 	
 	@RequestMapping("/newVote")
-	public ModelAndView createVote(@ModelAttribute("Topic") Vote newVote , HttpServletRequest request,HttpServletResponse response,Model model) throws Exception 
+	public ModelAndView createVote(HttpServletRequest request,HttpServletResponse response,Model modelobject) throws Exception 
 	{
 		try{
 		logger.warn("Inside newVote");
-		ModelAndView modelObj = new ModelAndView("newVote");
+		ModelAndView model = new ModelAndView("newVoteView");
+		modelobject.addAttribute("voteForm", new VoteForms.VoteForm());
 		
+		return model;
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+			return null;
+		}
+	}
+	
+	@RequestMapping("/saveVote")
+	public ModelAndView saveVoteDetail(@ModelAttribute("voteForm") VoteForm newVoteForm , HttpServletRequest request,HttpServletResponse response,Model modelobject) throws Exception 
+	{
+		System.out.println("Data: "+newVoteForm.toString());
+		ModelAndView model = new ModelAndView("redirect:/newVote");
+		newVoteForm.setVoteID(UUID.randomUUID().toString());
+		voteDbDao.saveAdminVoteData(newVoteForm);
+		return model;
+	}
+	
+	@RequestMapping("/getVotes")
+	public ModelAndView getVoteDetail(@ModelAttribute("voteForm") VoteForms newVoteForm , HttpServletRequest request,HttpServletResponse response,Model modelobject) throws Exception 
+	{
+		try{
+		logger.warn("Inside getVotes");
+		ModelAndView model = new ModelAndView("newGetVotes");
+		modelobject.addAttribute("voteForm", new VoteForms());
+		voteDbDao.getAllVotes(newVoteForm);
+		
+		String []voteUUIDs=null;
+		ArrayList<VoteForm> votes = new ArrayList<VoteForm>();
+		votes = newVoteForm.getVoteFormList();
+		int i=0;
+		for(VoteForm v: votes){
+			if(v.getParticipants().contains((CharSequence) request.getSession().getAttribute("voteUserID"))){
+				voteUUIDs[i] = v.getVoteID();
+				i++;
+			}		
+			System.out.println("YO-"+voteUUIDs[i]);
+		}
+		System.out.println();
+		return model;
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+			return null;
+		}
+	}
+	
+	@RequestMapping("/myVotingDetails")
+	public ModelAndView myVoteData(HttpServletRequest request,HttpServletResponse response,Model model) throws Exception 
+	{
+		try{
+		logger.warn("Inside myVoteAdmin");
+		ModelAndView modelObj = new ModelAndView("myVotingDetails");
 		return modelObj;
 		}
 		catch(Exception e)
@@ -71,4 +131,5 @@ public class VotingController
 			return null;
 		}
 	}
+	
 }
