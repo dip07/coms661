@@ -31,26 +31,6 @@ body {
 </c:forEach>
 </head>
 
-<%-- <body>
-	<table border="1" style="width: 100%; border-collapse: separate; ">
-		<tr>
-			<td height="30" colspan="2" style="background-image:url('${pageContext.request.contextPath}/images/web-header.jpg')"/>
-			<td  colspan="2" class="layout_header"/>
-			<tiles:insertAttribute name="header" />
-		</tr>
-		<tr>
-			<td height="40%"  style="background: #16A085; width:30%;align:left;valign:top; " ><tiles:insertAttribute name="menu" /></td>
-			<td style="width:70%"><tiles:insertAttribute name="body" /></td>
-		</tr>
-		<tr>
-			<!--  <td colspan ="2" class="layout_header"><tiles:insertAttribute name="footer" />
-			</td>-->
-		</tr>
-	</table>
-	   
-    
-</body> --%>
-
 <body>
 	<div class="skip">
 		<a accesskey="2" href="#container">Skip Navigation</a>
@@ -270,79 +250,6 @@ body {
 					<div id="container">
 						<tiles:insertAttribute name="body" />
 					</div>
-					
-					
-					<!-- Main contents of the page, commented by Dipanjan -->
-
-					<%-- <div id="container">
-						<div id="content">
-							<div id="title">
-								<h1>TA Application System</h1>
-								<h2>Department of Computer Science</h2>
-							</div>
-						</div>
-						<div id="form">
-							<div id="padding">
-
-								<form method=POST action=login>
-
-									<div class="controls">
-										<input id="net_id" class="half" placeholder="Net-ID" type=text
-											autofocus name=form_param_user_net_id />
-										<div class="tagline">@iastate.edu</div>
-									</div>
-
-									<div class="controls">
-										<input id="password" class="full" placeholder="Password"
-											type=password name=form_param_password />
-									</div>
-
-
-
-									<div class="controls">
-										<select class='half' name='form_param_year'>
-											<option value=2012>2012</option>
-											<option value=2013>2013</option>
-											<option value=2014>2014</option>
-											<option value=2015>2015</option>
-											<option value=2016>2016</option>
-											<option value=2017 selected>2017</option>
-											<option value=2018>2018</option>
-											<option value=2019>2019</option>
-											<option value=2020>2020</option>
-											<option value=2021>2021</option>
-											<option value=2022>2022</option>
-											<option value=2023>2023</option>
-											<option value=2024>2024</option>
-											<option value=2025>2025</option>
-											<option value=2026>2026</option>
-											<option value=2027>2027</option>
-											<option value=2028>2028</option>
-											<option value=2029>2029</option>
-											<option value=2030>2030</option>
-										</select> <select class='half' name='form_param_term'>
-											<option value=1 selected>Spring</option>
-											<option value=2>Summer</option>
-											<option value=3>Fall</option>
-										</select>
-
-									</div>
-
-									<div class="controls">
-										<input class="primary" style="width: 220px;" type=submit
-											value="Login" />
-									</div>
-
-								</form>
-							</div>
-						</div>
-					</div> --%>
-					<!-- Main contents of the page, commented by Dipanjan -->
-				</div>
-				<!-- end of the content of this page -->
-
-				<!-- common footer part -->
-
 			</div>
 		</div>
 	</div>
@@ -366,7 +273,6 @@ body {
 				</p>
 				<p>Copyright &copy; 1995-2014, Iowa State University of Science
 					and Technology. All rights reserved.</p>
-				<!-- Design by Ian McDowell (ijm@iastate.edu) -->
 			</div>
 		</div>
 	</div>
