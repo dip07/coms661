@@ -24,7 +24,11 @@ import com.models.Users;
 import com.models.Users.User;
 import com.models.VoteForms;
 import com.models.VoteForms.VoteForm;
-
+/**
+ * 
+ * @author gbhatt
+ *
+ */
 public class VoteXmlDbDao {
 	
 	@Value("${dbFiles.location}")
@@ -68,7 +72,11 @@ public class VoteXmlDbDao {
 		return null;
 	}
 	
-	
+	/**
+	 * Function to get details of all Votes
+	 * @param voteForm
+	 * @return
+	 */
 	public ArrayList<VoteForm> getAllVotes(VoteForms voteForm) {
 		
 		VoteForms voteForms= null;

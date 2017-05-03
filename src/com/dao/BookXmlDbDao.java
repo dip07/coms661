@@ -33,6 +33,11 @@ public class BookXmlDbDao {
 	
 	Logger logger= Logger.getLogger(BookXmlDbDao.class);
 	
+	/**
+	 * Function to get Book related data from db.
+	 * @param book : Object of Class BookOld
+	 * @return
+	 */
 	public ArrayList<BookOld> getBookDataFromDb(BookOld book)
 	{
 
@@ -43,12 +48,14 @@ public class BookXmlDbDao {
 		book.setYear(2017);
 		book.setInstructor("Proff Baca");
 		bookList.add(book);
-		
-		
-		
+			
 		return bookList;
 	}
 	
+	/**
+	 * Function to get the course details from the XML file in the resource.
+	 * @return
+	 */
 	public CourseList getCoursesDetails()
 	{
 		CourseList courseList= null;
@@ -69,8 +76,9 @@ public class BookXmlDbDao {
 	}
 
 	/**
-	 * @param netId
-	 * @param password
+	 * Function which returns object of Role for a user
+	 * @param netId : email in String format
+	 * @param password : Password in String format
 	 * @return
 	 */
 	public Role getRoleForValidUser(String netId, String password) {
@@ -100,6 +108,7 @@ public class BookXmlDbDao {
 	}
 
 	/**
+	 * Function to retrieve all non archived courses.
 	 * @return
 	 */
 	public ArrayList<Course> getAllUnarchivedCourses() {
@@ -131,6 +140,7 @@ public class BookXmlDbDao {
 	}
 
 	/**
+	 * Function to get the list of instructors and his courses.
 	 * @return
 	 */
 	public ArrayList<Instructor> getInstructorCourseAssignment() {
@@ -160,7 +170,8 @@ public class BookXmlDbDao {
 	}
 
 	/**
-	 * @param course_id
+	 * Get instructor's detail for each course ID
+	 * @param course_id : course ID as a string
 	 * @return
 	 */
 	public Instructor getInstructorCourseAssignment(String course_id) {
@@ -190,6 +201,7 @@ public class BookXmlDbDao {
 	}
 
 	/**
+	 * Function to get list of all users
 	 * @return
 	 */
 	public ArrayList<User> getAllUsers() {
@@ -213,6 +225,7 @@ public class BookXmlDbDao {
 	}
 
 	/**
+	 * Function which saves data entered by the instructor to the xml database
 	 * @param instructorForm
 	 * @return
 	 */
@@ -274,8 +287,9 @@ public class BookXmlDbDao {
 	}
 
 	/**
-	 * @param course
-	 * @param allowSaving 
+	 * Function which saves all the courses and its details as it is entered by the instructor
+	 * @param course : object of class Course
+	 * @param allowSaving : boolean
 	 */
 	public String saveCourse(Course course, boolean allowOverwrite) {
 		try{
@@ -329,6 +343,7 @@ public class BookXmlDbDao {
 	}
 
 	/**
+	 * Function to get all course related details.
 	 * @param course_number
 	 * @return
 	 */
@@ -358,6 +373,7 @@ public class BookXmlDbDao {
 	}
 
 	/**
+	 * Function to retrieve all book details
 	 * @return
 	 */
 	public ArrayList<Book> getAllBookDetails() {
@@ -390,6 +406,7 @@ public class BookXmlDbDao {
 	}
 
 	/**
+	 * function to save all book related info
 	 * @param book
 	 */
 	public void saveCourseBookInfo(Book book) {
@@ -449,6 +466,7 @@ public class BookXmlDbDao {
 	}
 
 	/**
+	 * Function to retrieve book related info to the XML DB
 	 * @param courseNumber
 	 * @return
 	 */
@@ -482,7 +500,8 @@ public class BookXmlDbDao {
 	}
 
 	/**
-	 * @param parseInt
+	 * Function to get book details of previous sessions 
+	 * @param year
 	 * @param session
 	 * @return
 	 */
@@ -521,6 +540,7 @@ public class BookXmlDbDao {
 	}
 
 	/**
+	 * Function to get the netID of the user
 	 * @param netId
 	 * @return
 	 */
@@ -550,6 +570,7 @@ public class BookXmlDbDao {
 	}
 
 	/**
+	 * Function to archive all course book related details
 	 * @return
 	 */
 	public Boolean archiveAllCourseBook() {
@@ -589,6 +610,8 @@ public class BookXmlDbDao {
 	}
 
 	/**
+	 * Function to get details of courses for an instructor for which he/she is 
+	 * authorized(assigned)
 	 * @param userNetId
 	 * @param userName
 	 * @return
@@ -670,6 +693,7 @@ public class BookXmlDbDao {
 	}
 
 	/**
+	 * Function to get a list of all unassigned courses
 	 * @return
 	 */
 	public ArrayList<Course> getAllUnAssignedCourses() {
@@ -736,6 +760,7 @@ public class BookXmlDbDao {
 	}
 
 	/**
+	 * Function to get email IDs of users for all the courses
 	 * @return
 	 */
 	public String[] getUsersToEmail() 

@@ -9,7 +9,7 @@
         <h2>Admin</h2>
     </div>
     <div class="right"> 
-    	<a href="voteAdmin">Logout</a>
+    	<a href="logout">Logout</a>
 	</div>         
 
 </div>

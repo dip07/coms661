@@ -20,7 +20,11 @@ import com.models.Course;
 import com.models.Vote;
 import com.models.VoteForms;
 import com.models.VoteForms.VoteForm;
-
+/**
+ * 
+ * @author gbhatt
+ *
+ */
 @Controller
 public class VotingController 
 {
@@ -29,6 +33,15 @@ public class VotingController
 	
 	Logger logger= Logger.getLogger(VotingController.class);
 
+	/**
+	 * 
+	 * @param vote : Object of class Vote
+	 * @param request : HTTP servlet request 
+	 * @param response : HTTP servlet response
+	 * @param modelObj : Interface that defines a holder for model attribute
+	 * @return
+	 * @throws Exception : Any exception that may occur.
+	 */
 	@RequestMapping("/myVote")
 	public ModelAndView myVote(@ModelAttribute("Topic") Vote vote , HttpServletRequest request,HttpServletResponse response,Model model) throws Exception 
 	{
@@ -45,6 +58,15 @@ public class VotingController
 		}
 	}
 	
+	/**
+	 * 
+	 * @param voteAdmin : object of Class Vote
+	 * @param request : HTTP servlet request 
+	 * @param response : HTTP servlet response
+	 * @param modelObj : Interface that defines a holder for model attribute
+	 * @return
+	 * @throws Exception : Any exception that may occur.
+	 */
 	@RequestMapping("/voteAdmin")
 	public ModelAndView voteAdmin(@ModelAttribute("Topic") Vote voteAdmin , HttpServletRequest request,HttpServletResponse response,Model model) throws Exception 
 	{
@@ -60,6 +82,15 @@ public class VotingController
 		}
 	}
 	
+	
+	/**
+	 * 
+	 * @param request : HTTP servlet request 
+	 * @param response : HTTP servlet response
+	 * @param modelObj : Interface that defines a holder for model attribute
+	 * @return
+	 * @throws Exception : Any exception that may occur.
+	 */
 	@RequestMapping("/newVote")
 	public ModelAndView createVote(HttpServletRequest request,HttpServletResponse response,Model modelobject) throws Exception 
 	{
@@ -77,6 +108,15 @@ public class VotingController
 		}
 	}
 	
+	/**
+	 * 
+	 * @param newVoteForm : object of Class VoteFrom
+	 * @param request : HTTP servlet request 
+	 * @param response : HTTP servlet response
+	 * @param modelObj : Interface that defines a holder for model attribute
+	 * @return
+	 * @throws Exception : Any exception that may occur.
+	 */
 	@RequestMapping("/saveVote")
 	public ModelAndView saveVoteDetail(@ModelAttribute("voteForm") VoteForm newVoteForm , HttpServletRequest request,HttpServletResponse response,Model modelobject) throws Exception 
 	{
@@ -87,6 +127,15 @@ public class VotingController
 		return model;
 	}
 	
+	/**
+	 * 
+	 * @param newVoteForm : Object of Class VoteForms
+	 * @param request : HTTP servlet request 
+	 * @param response : HTTP servlet response
+	 * @param modelObj : Interface that defines a holder for model attribute
+	 * @return
+	 * @throws Exception : Any exception that may occur.
+	 */
 	@RequestMapping("/getVotes")
 	public ModelAndView getVoteDetail(@ModelAttribute("voteForm") VoteForms newVoteForm , HttpServletRequest request,HttpServletResponse response,Model modelobject) throws Exception 
 	{
@@ -117,6 +166,14 @@ public class VotingController
 		}
 	}
 	
+	/**
+	 * 
+	 * @param request : HTTP servlet request 
+	 * @param response : HTTP servlet response
+	 * @param modelObj : Interface that defines a holder for model attribute
+	 * @return
+	 * @throws Exception : Any exception that may occur.
+	 */
 	@RequestMapping("/myVotingDetails")
 	public ModelAndView myVoteData(HttpServletRequest request,HttpServletResponse response,Model model) throws Exception 
 	{

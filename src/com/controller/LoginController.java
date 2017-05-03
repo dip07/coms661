@@ -30,7 +30,14 @@ public class LoginController {
 	
 	@Autowired
 	BookXmlDbDao xmlDbDao;
-	
+	/**
+	 * 
+	 * @param request : HTTP servlet request 
+	 * @param response : HTTP servlet response
+	 * @param modelObj : Interface that defines a holder for model attribute
+	 * @return
+	 * @throws Exception : Any exception that may occur.
+	 */
 	@RequestMapping("/login")
 	public ModelAndView login(HttpServletRequest request,HttpServletResponse response, Model modelObj) throws Exception {
 
@@ -40,6 +47,15 @@ public class LoginController {
 		return model;
 	}
 	
+	/**
+	 * 
+	 * @param loginForm : Object of class LoginForm
+	 * @param request : HTTP servlet request 
+	 * @param response : HTTP servlet response
+	 * @param modelObj : Interface that defines a holder for model attribute
+	 * @return
+	 * @throws Exception : Any exception that may occur.
+	 */
 	@RequestMapping("/checkLogin")
 	public ModelAndView checkLogin(@ModelAttribute("loginForm") LoginForm loginForm,HttpServletRequest request,HttpServletResponse response, Model modelObj) throws Exception {
 
@@ -74,6 +90,14 @@ public class LoginController {
 		}
 	}
 	
+	/**
+	 * 
+	 * @param request : HTTP servlet request 
+	 * @param response : HTTP servlet response
+	 * @param modelObj : Interface that defines a holder for model attribute
+	 * @return
+	 * @throws Exception : Any exception that may occur.
+	 */
 	@RequestMapping("/logout")
 	public ModelAndView logout(HttpServletRequest request,HttpServletResponse response, Model modelObj) throws Exception {
 
